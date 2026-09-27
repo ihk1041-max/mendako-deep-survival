@@ -1,4 +1,4 @@
-const CACHE_NAME = "mendako-deep-survival-v19-pwa-1";
+const CACHE_NAME = "mendako-deep-survival-v20-pwa-1";
 const PRECACHE = [
   "./",
   "./index.html",

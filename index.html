@@ -13,7 +13,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="メンダコ">
 
-<title>メンダコ・ディープサバイバル v19 PWA</title>
+<title>メンダコ・ディープサバイバル v20 PWA</title>
 <style>
 :root{--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
@@ -213,6 +213,13 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
 @media(max-width:520px){.shopWelcome{grid-template-columns:auto minmax(0,1fr) auto;padding:7px 8px}.shopWelcomeText small{display:none}.pearlWallet{grid-column:auto;justify-self:auto;padding:6px 8px}}
 @media(orientation:landscape) and (max-height:620px){.buffHud{right:max(8px,var(--safe-right));max-width:38vw}}
 
+
+/* v20: local family profiles + period leaderboards */
+.profileBar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px;margin:0 0 10px}.profileMain,.rankingOpenBtn{border:1px solid #cfe5ed;background:linear-gradient(180deg,#f8fdff,#eef9fc);border-radius:14px;color:#345064;font:inherit;font-weight:1000;cursor:pointer;touch-action:manipulation}.profileMain{min-width:0;display:flex;align-items:center;gap:9px;padding:8px 10px;text-align:left}.profileAvatar{width:36px;height:36px;flex:0 0 auto;display:grid;place-items:center;border-radius:50%;background:#dff5fb;font-size:20px}.profileText{min-width:0}.profileText small{display:block;font-size:8px;color:#71818a}.profileText strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;color:#287fa6}.profileText em{display:block;margin-top:1px;font-size:8px;font-style:normal;color:#71818a}.rankingOpenBtn{padding:7px 11px;font-size:10px;white-space:nowrap}.profileMain:active,.rankingOpenBtn:active{transform:translateY(1px)}
+.profileNote{font-size:10px;line-height:1.45;color:#647984;background:#f4fafc;border:1px solid #dcecf1;border-radius:12px;padding:8px 9px;margin:0 0 9px}.profileList{display:grid;gap:7px}.profileRow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px;align-items:center;border:1px solid #dce9ed;border-radius:14px;background:#f9fcfd;padding:9px}.profileRow.active{border-color:#70bed5;background:#eefaff;box-shadow:inset 0 0 0 1px #70bed5}.profileRowInfo{min-width:0}.profileRowInfo strong{display:block;font-size:13px;color:#345064;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.profileRowInfo small{display:block;margin-top:2px;font-size:9px;color:#72838b}.profileRowBtns{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}.profileMiniBtn{border:1px solid #cfe1e7;border-radius:9px;background:#fff;color:#3d7084;padding:6px 7px;font:inherit;font-size:9px;font-weight:1000;cursor:pointer}.profileMiniBtn.primary{background:#55b5cf;border-color:#55b5cf;color:#fff}.profileMiniBtn.danger{color:#a65b62;border-color:#e8c9cd}.profileActions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}.profileActionBtn{border:1px solid #cfe1e7;border-radius:12px;background:#fff;color:#3d7084;padding:9px;font:inherit;font-size:10px;font-weight:1000;cursor:pointer}.profileActionBtn.add{background:#eefaf5;border-color:#b8e2cc;color:#36765a}
+.rankTabs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:0 0 10px}.rankTab{border:1px solid #d4e6ec;border-radius:11px;background:#f7fbfc;color:#56717f;padding:8px 4px;font:inherit;font-size:10px;font-weight:1000;cursor:pointer}.rankTab.selected{background:#e9f8fd;border-color:#65b9d2;color:#26718c;box-shadow:inset 0 0 0 1px #65b9d2}.rankSummary{font-size:9px;color:#6c7f88;font-weight:800;margin:0 0 8px;line-height:1.45}.rankList{display:grid;gap:6px}.rankRow{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:7px;align-items:center;padding:9px;border:1px solid #dde9ed;border-radius:13px;background:#fbfdfe}.rankRow.me{border-color:#71bfd6;background:#edfaff}.rankPos{font-size:18px;font-weight:1000;text-align:center;color:#497386}.rankRow:nth-child(1) .rankPos{font-size:22px}.rankWho{min-width:0}.rankWho strong{display:block;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#345064}.rankWho small{display:block;margin-top:2px;font-size:8px;color:#78878e}.rankScore{text-align:right;font-size:14px;font-weight:1000;color:#287fa6;white-space:nowrap}.rankEmpty{padding:24px 10px;text-align:center;border:1px dashed #cbdfe6;border-radius:14px;color:#70828a;font-size:11px;font-weight:900}.resultPlayer{display:inline-block;margin:2px auto 2px;padding:4px 9px;border-radius:999px;background:#edf9fc;color:#3e7488;font-size:10px;font-weight:1000}.resultRank{display:block;margin-top:5px;color:#3d7488;font-size:10px;font-weight:1000;line-height:1.5}
+@media(max-width:520px){.profileBar{grid-template-columns:minmax(0,1fr) 92px}.profileMain{padding:7px 8px}.profileAvatar{width:32px;height:32px;font-size:18px}.profileText strong{font-size:12px}.rankingOpenBtn{font-size:9px;padding:6px}.profileRow{grid-template-columns:1fr}.profileRowBtns{justify-content:stretch}.profileMiniBtn{flex:1}.rankRow{grid-template-columns:32px minmax(0,1fr) auto;padding:8px 7px}.rankScore{font-size:12px}}
+@media(orientation:landscape) and (max-height:620px){.profileBar{margin-bottom:6px}.profileMain{padding:5px 8px}.profileAvatar{width:30px;height:30px;font-size:17px}.profileText strong{font-size:11px}.profileText em{display:none}.rankingOpenBtn{padding:5px 8px}.profileList{gap:4px}.profileRow{padding:6px}.rankRow{padding:6px}.profileNote{padding:6px;font-size:8px;margin-bottom:6px}}
 </style>
 </head>
 <body>
@@ -256,6 +263,13 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
     </section>
 
     <section class="startConfig">
+
+      <div class="profileBar">
+        <button class="profileMain" id="profileBtn" type="button" aria-label="プレイヤーを切り替える">
+          <span class="profileAvatar">👤</span><span class="profileText"><small>プレイヤー</small><strong id="activeProfileName">プレイヤー1</strong><em id="activeProfileStats">しんじゅ 0個</em></span>
+        </button>
+        <button class="rankingOpenBtn" id="rankingBtn" type="button">🏆<br>ランキング</button>
+      </div>
 
       <div class="resumeBox" id="resumeBox">
         <div class="resumeHead"><span>💾 前回のプレイを復元できます</span><small id="resumeSavedAt"></small></div>
@@ -371,6 +385,24 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
 </div>
 
 
+
+<div class="bookOverlay hidden" id="profileOverlay">
+  <div class="bookPanel">
+    <div class="bookHead"><h2>👥 プレイヤー</h2><button class="closeBtn" id="profileClose" type="button" aria-label="閉じる">×</button></div>
+    <div class="profileNote">この端末・このブラウザ内のプロフィールです。しんじゅ、研究、お守り、図鑑、実績、ベストスコア、途中保存はプロフィールごとに別々になります。パスワード式のオンラインアカウントではありません。</div>
+    <div class="profileList" id="profileList"></div>
+    <div class="profileActions"><button class="profileActionBtn add" id="profileAddBtn" type="button">＋ 新しいプレイヤー</button><button class="profileActionBtn" id="profileRenameBtn" type="button">✏️ 名前を変更</button></div>
+  </div>
+</div>
+<div class="bookOverlay hidden" id="rankingOverlay">
+  <div class="bookPanel">
+    <div class="bookHead"><h2>🏆 家族ランキング</h2><button class="closeBtn" id="rankingClose" type="button" aria-label="閉じる">×</button></div>
+    <div class="rankTabs"><button class="rankTab selected" type="button" data-rank-period="today">今日</button><button class="rankTab" type="button" data-rank-period="week">1週間</button><button class="rankTab" type="button" data-rank-period="all">総合</button></div>
+    <div class="rankSummary" id="rankSummary">各プレイヤーの期間内ベストスコアで順位を決めます。</div>
+    <div class="rankList" id="rankList"></div>
+  </div>
+</div>
+
 <div class="pauseOverlay hidden" id="pauseOverlay">
   <div class="pausePanel">
     <h2>☰ ゲームメニュー</h2>
@@ -388,13 +420,14 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
     <img class="heroImg" id="resultImg" alt="メンダコ" style="width:115px;margin-top:0">
     <h1 id="resultTitle" style="font-size:32px">深海チャレンジ終了！</h1>
     <div id="record"></div>
+    <div class="resultPlayer" id="resultPlayer">👤 プレイヤー1</div>
     <div class="resultScore" id="finalScore">0</div>
     <div style="font-weight:900;line-height:1.7;margin-bottom:18px">
       到達：<span id="finalStage"></span><br>
       深度：<span id="finalZone"></span><br>
       ベスト：<span id="best">0</span> 点<br>プレイ時間：<span id="resultTime">0:00</span>
     </div>
-    <div class="resultMeta">最大コンボ：<span id="resultCombo">0</span> ／ ニアミス：<span id="resultNearMiss">0</span><br>図鑑：<span id="resultDex">0/0</span> ／ ボス撃退：<span id="resultBosses">0</span> ／ 無傷ボス：<span id="resultPerfectBosses">0</span><br>🦪 しんじゅ獲得：<span id="resultPearls">0</span> <span id="resultRoutes"></span></div>
+    <div class="resultMeta">最大コンボ：<span id="resultCombo">0</span> ／ ニアミス：<span id="resultNearMiss">0</span><br>図鑑：<span id="resultDex">0/0</span> ／ ボス撃退：<span id="resultBosses">0</span> ／ 無傷ボス：<span id="resultPerfectBosses">0</span><br>🦪 しんじゅ獲得：<span id="resultPearls">0</span> <span id="resultRoutes"></span><span class="resultRank" id="resultRank"></span></div>
     <div class="resultActions">
       <button class="btn" id="retryBtn">🔄 もう一度あそぶ！</button>
       <button class="btn secondaryBtn" id="resultHomeBtn" type="button">🏠 タイトルへ戻る</button>
@@ -441,6 +474,10 @@ const resumeSavedAt=document.getElementById("resumeSavedAt");
 const continueBtn=document.getElementById("continueBtn");
 const discardBtn=document.getElementById("discardBtn");
 const startPanel=document.querySelector(".startPanel");
+const profileBtn=document.getElementById("profileBtn"),rankingBtn=document.getElementById("rankingBtn"),activeProfileNameEl=document.getElementById("activeProfileName"),activeProfileStatsEl=document.getElementById("activeProfileStats");
+const profileOverlay=document.getElementById("profileOverlay"),profileList=document.getElementById("profileList"),profileClose=document.getElementById("profileClose"),profileAddBtn=document.getElementById("profileAddBtn"),profileRenameBtn=document.getElementById("profileRenameBtn");
+const rankingOverlay=document.getElementById("rankingOverlay"),rankingClose=document.getElementById("rankingClose"),rankList=document.getElementById("rankList"),rankSummary=document.getElementById("rankSummary"),resultRank=document.getElementById("resultRank"),resultPlayer=document.getElementById("resultPlayer");
+let rankingPeriod="today";
 const RUN_SAVE_KEY="mendako_current_run_v12";
 const RUN_SAVE_VERSION=12;
 const RUN_SAVE_MAX_AGE=24*60*60*1000;
@@ -451,6 +488,41 @@ try{musicEnabled=localStorage.getItem("mendako_bgm_v11")!=="off"}catch{}
 let musicTimer=null,musicStep=0;
 let manualPaused=false;
 let lastLandscape=innerWidth>innerHeight;
+
+const PROFILE_STORE_KEY="mendako_profiles_v20";
+const RANKING_KEY="mendako_rankings_v20";
+const PROFILE_LIMIT=8;
+function makeProfileId(){return `p_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,8)}`}
+function cleanProfileName(v){return String(v??"").replace(/[<>]/g,"").replace(/\s+/g," ").trim().slice(0,12)}
+function profileScopedKey(base,id){return `${base}__${id}`}
+function safeParse(raw,fallback=null){try{return raw?JSON.parse(raw):fallback}catch{return fallback}}
+function writeProfileStore(){try{localStorage.setItem(PROFILE_STORE_KEY,JSON.stringify(profileStore))}catch{}}
+function loadRankingEntries(){try{const v=JSON.parse(localStorage.getItem(RANKING_KEY)||"[]");return Array.isArray(v)?v:[]}catch{return []}}
+function saveRankingEntries(v){try{localStorage.setItem(RANKING_KEY,JSON.stringify(v))}catch{}}
+function migrateLegacyIntoProfile(id){
+ try{
+  const copy=(src,dst)=>{if(localStorage.getItem(dst)==null&&localStorage.getItem(src)!=null)localStorage.setItem(dst,localStorage.getItem(src))};
+  if(localStorage.getItem(profileScopedKey("mendako_meta_v9",id))==null){const raw=localStorage.getItem("mendako_meta_v9")||localStorage.getItem("mendako_meta_v8");if(raw)localStorage.setItem(profileScopedKey("mendako_meta_v9",id),raw)}
+  if(localStorage.getItem(profileScopedKey("mendako_dex_v8",id))==null){const raw=localStorage.getItem("mendako_dex_v8")||localStorage.getItem("mendako_dex_v7");if(raw)localStorage.setItem(profileScopedKey("mendako_dex_v8",id),raw)}
+  copy("mendako_current_run_v12",profileScopedKey("mendako_current_run_v12",id));
+  copy("mendako_deep_best_v3",profileScopedKey("mendako_deep_best_v3",id));
+  const m=safeParse(localStorage.getItem(profileScopedKey("mendako_meta_v9",id)),{}),legacyBest=Math.max(Number(m?.stats?.bestScore)||0,Number(localStorage.getItem("mendako_deep_best_v3"))||0);
+  if(legacyBest>0){const ranks=loadRankingEntries();if(!ranks.some(r=>r.profileId===id)){ranks.push({id:`legacy_${id}`,profileId:id,score:legacyBest,cleared:Number(m?.stats?.clears||0)>0,playedAt:0,legacy:true,difficulty:"normal",maxCombo:Number(m?.stats?.maxCombo)||0,perfectBosses:0});saveRankingEntries(ranks)}}
+ }catch{}
+}
+function initProfileStore(){
+ let st=safeParse(localStorage.getItem(PROFILE_STORE_KEY),null),created=false;
+ if(!st||!Array.isArray(st.profiles)||!st.profiles.length){const id=makeProfileId();st={version:1,activeId:id,profiles:[{id,name:"プレイヤー1",createdAt:Date.now()}]};created=true}
+ st.profiles=st.profiles.filter(p=>p&&typeof p.id==="string").slice(0,PROFILE_LIMIT).map((p,i)=>({id:p.id,name:cleanProfileName(p.name)||`プレイヤー${i+1}`,createdAt:Number(p.createdAt)||Date.now()}));
+ if(!st.profiles.some(p=>p.id===st.activeId))st.activeId=st.profiles[0].id;
+ try{localStorage.setItem(PROFILE_STORE_KEY,JSON.stringify(st))}catch{}
+ if(created)migrateLegacyIntoProfile(st.activeId);
+ return st;
+}
+let profileStore=initProfileStore();
+let activeProfileId=profileStore.activeId;
+function activeProfile(){return profileStore.profiles.find(p=>p.id===activeProfileId)||profileStore.profiles[0]}
+function activeProfileName(){return activeProfile()?.name||"プレイヤー"}
 
 const STAGES=[
  {name:"ちびメンダコ",need:0,size:22,zone:0},
@@ -484,8 +556,8 @@ const SPECIES_INFO={
 };
 const SPECIES_NAMES=Object.fromEntries(Object.entries(SPECIES_INFO).map(([k,v])=>[k,v.name]));
 const DEX_TYPES=Object.keys(SPECIES_INFO);
-let discovered=new Set();
-try{discovered=new Set(JSON.parse(localStorage.getItem("mendako_dex_v8")||localStorage.getItem("mendako_dex_v7")||"[]"))}catch{discovered=new Set()}
+function loadProfileDex(id=activeProfileId){try{const v=JSON.parse(localStorage.getItem(profileScopedKey("mendako_dex_v8",id))||"[]");return new Set(Array.isArray(v)?v:[])}catch{return new Set()}}
+let discovered=loadProfileDex();
 const UPGRADE_POOL=[
  {id:"speed",icon:"💨",name:"すいすいヒレ",desc:"移動速度 +15%"},
  {id:"appetite",icon:"🍽️",name:"おおぐち",desc:"少し大きい相手も食べられる"},
@@ -549,15 +621,18 @@ const RESEARCH_INFO={
  fins:{icon:"💨",name:"ヒレ研究",max:20,desc:"移動速度"},dash:{icon:"🌀",name:"ダッシュ研究",max:20,desc:"ダッシュ回復"},
  combo:{icon:"🎵",name:"コンボ研究",max:20,desc:"コンボ猶予"},rare:{icon:"✨",name:"発見研究",max:20,desc:"レア率"}
 };
-let meta={pearls:0,charms:{bubble:false,current:false,star:false,rhythm:false,treasure:false,gourmet:false,coral:false},research:{fins:0,dash:0,combo:0,rare:0},selectedStyle:"swift",selectedEquip:"none",selectedDifficulty:"normal",speciesCounts:{},achievements:[],stats:{runs:0,clears:0,bosses:0,totalEaten:0,maxCombo:0,nearMisses:0,missions:0,bestScore:0}};
-try{
- const raw=localStorage.getItem(META_KEY)||localStorage.getItem("mendako_meta_v8")||"null",m=JSON.parse(raw);
- if(m&&typeof m==="object")meta={...meta,...m,charms:{...meta.charms,...(m.charms||{})},research:{...meta.research,...(m.research||{})},speciesCounts:{...(m.speciesCounts||{})},achievements:[...(m.achievements||[])],stats:{...meta.stats,...(m.stats||{})}};
-}catch{}
-for(const id of Object.keys(RESEARCH_INFO))meta.research[id]=clamp(Number(meta.research[id])||0,0,RESEARCH_INFO[id].max);
-if(!STYLE_INFO[meta.selectedStyle])meta.selectedStyle="swift";
-if(meta.selectedEquip!=="none"&&!meta.charms[meta.selectedEquip])meta.selectedEquip="none";
-if(!DIFFICULTY_INFO[meta.selectedDifficulty])meta.selectedDifficulty="normal";
+function defaultMeta(){return {pearls:0,charms:{bubble:false,current:false,star:false,rhythm:false,treasure:false,gourmet:false,coral:false},research:{fins:0,dash:0,combo:0,rare:0},selectedStyle:"swift",selectedEquip:"none",selectedDifficulty:"normal",speciesCounts:{},achievements:[],stats:{runs:0,clears:0,bosses:0,totalEaten:0,maxCombo:0,nearMisses:0,missions:0,bestScore:0}}}
+function normalizeMeta(m){
+ let base=defaultMeta();
+ if(m&&typeof m==="object")base={...base,...m,charms:{...base.charms,...(m.charms||{})},research:{...base.research,...(m.research||{})},speciesCounts:{...(m.speciesCounts||{})},achievements:[...(m.achievements||[])],stats:{...base.stats,...(m.stats||{})}};
+ for(const id of Object.keys(RESEARCH_INFO))base.research[id]=clamp(Number(base.research[id])||0,0,RESEARCH_INFO[id].max);
+ if(!STYLE_INFO[base.selectedStyle])base.selectedStyle="swift";
+ if(base.selectedEquip!=="none"&&!base.charms[base.selectedEquip])base.selectedEquip="none";
+ if(!DIFFICULTY_INFO[base.selectedDifficulty])base.selectedDifficulty="normal";
+ return base;
+}
+function loadProfileMeta(id=activeProfileId){try{return normalizeMeta(JSON.parse(localStorage.getItem(profileScopedKey(META_KEY,id))||"null"))}catch{return normalizeMeta(null)}}
+let meta=loadProfileMeta();
 let selectedStyle=meta.selectedStyle,selectedEquip=meta.selectedEquip,selectedDifficulty=meta.selectedDifficulty;
 function difficulty(){return DIFFICULTY_INFO[selectedDifficulty]||DIFFICULTY_INFO.normal}
 function maxLife(){return difficulty().maxLife}
@@ -617,8 +692,8 @@ addEventListener("resize",resize); resize();
 function rand(a,b){return Math.random()*(b-a)+a}
 function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
 function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
-function bestScore(){try{return +(localStorage.getItem("mendako_deep_best_v3")||0)}catch{return 0}}
-function saveBest(v){try{localStorage.setItem("mendako_deep_best_v3",String(v))}catch{}}
+function bestScore(){try{return Math.max(Number(meta?.stats?.bestScore)||0,+(localStorage.getItem(profileScopedKey("mendako_deep_best_v3",activeProfileId))||0))}catch{return Number(meta?.stats?.bestScore)||0}}
+function saveBest(v){try{localStorage.setItem(profileScopedKey("mendako_deep_best_v3",activeProfileId),String(v))}catch{}}
 
 function initAudio(){
  if(!audio){const A=window.AudioContext||window.webkitAudioContext;if(A)audio=new A()}
@@ -687,14 +762,14 @@ function transformEntity(e,sx,sy,sr){
 }
 function getRunSave(){
  try{
-  const raw=localStorage.getItem(RUN_SAVE_KEY);if(!raw)return null;
+  const raw=localStorage.getItem(profileScopedKey(RUN_SAVE_KEY,activeProfileId));if(!raw)return null;
   const s=JSON.parse(raw),age=Date.now()-(Number(s?.savedAt)||0);
-  if(!s||s.version!==RUN_SAVE_VERSION||!Number.isFinite(age)||age<0||age>RUN_SAVE_MAX_AGE||s.finished||Number(s.lives)<=0){localStorage.removeItem(RUN_SAVE_KEY);return null}
+  if(!s||s.version!==RUN_SAVE_VERSION||!Number.isFinite(age)||age<0||age>RUN_SAVE_MAX_AGE||s.finished||Number(s.lives)<=0){localStorage.removeItem(profileScopedKey(RUN_SAVE_KEY,activeProfileId));return null}
   return s;
- }catch{try{localStorage.removeItem(RUN_SAVE_KEY)}catch{};return null}
+ }catch{try{localStorage.removeItem(profileScopedKey(RUN_SAVE_KEY,activeProfileId))}catch{};return null}
 }
 function clearRunSave(){
- try{localStorage.removeItem(RUN_SAVE_KEY)}catch{}
+ try{localStorage.removeItem(profileScopedKey(RUN_SAVE_KEY,activeProfileId))}catch{}
  cachedRunSave=null;refreshResumeBox(null);
 }
 function resumeSummary(s){
@@ -724,7 +799,7 @@ function saveRunState(reason="auto"){
   boss:cloneData(boss),bossTriggered,bossCooldown,bossCount,perfectBosses,nextBossIndex,runTime,runCleared,runMoodId:runMood?.id||null,
   player:cloneData(player),creatures:cloneData(creatures),pickups:cloneData(pickups),hazards:cloneData(hazards),ambient:cloneData(ambient)
  };
- try{localStorage.setItem(RUN_SAVE_KEY,JSON.stringify(state));cachedRunSave=state;saveMeta();saveDex();return true}catch{return false}
+ try{localStorage.setItem(profileScopedKey(RUN_SAVE_KEY,activeProfileId),JSON.stringify(state));cachedRunSave=state;saveMeta();saveDex();return true}catch{return false}
 }
 function restoreRunState(s){
  if(!s)return false;
@@ -777,7 +852,78 @@ function showToast(text,ms=1100){
  toastTimer=setTimeout(()=>ui.toast.classList.remove("show"),ms);
 }
 
-function saveMeta(){try{localStorage.setItem(META_KEY,JSON.stringify(meta))}catch{}}
+function profileBestLabel(id){
+ try{const m=normalizeMeta(JSON.parse(localStorage.getItem(profileScopedKey(META_KEY,id))||"null"));return `🦪 ${Number(m.pearls)||0} ・ BEST ${(Number(m.stats?.bestScore)||0).toLocaleString("ja-JP")}` }catch{return "データなし"}
+}
+function refreshProfileHeader(){
+ if(activeProfileNameEl)activeProfileNameEl.textContent=activeProfileName();
+ if(activeProfileStatsEl)activeProfileStatsEl.textContent=`しんじゅ ${Number(meta.pearls)||0}個 ・ BEST ${bestScore().toLocaleString("ja-JP")}`;
+ if(resultPlayer)resultPlayer.textContent=`👤 ${activeProfileName()}`;
+}
+function renderProfileList(){
+ if(!profileList)return;profileList.innerHTML="";
+ for(const p of profileStore.profiles){
+  const row=document.createElement("div");row.className=`profileRow ${p.id===activeProfileId?"active":""}`;
+  row.innerHTML=`<div class="profileRowInfo"><strong>${escapeHtml(p.name)}${p.id===activeProfileId?"　● 使用中":""}</strong><small>${profileBestLabel(p.id)}</small></div><div class="profileRowBtns">${p.id===activeProfileId?"":`<button class="profileMiniBtn primary" type="button" data-profile-switch="${p.id}">この人で遊ぶ</button>`}${profileStore.profiles.length>1?`<button class="profileMiniBtn danger" type="button" data-profile-delete="${p.id}">削除</button>`:""}</div>`;
+  profileList.appendChild(row);
+ }
+ profileList.querySelectorAll("[data-profile-switch]").forEach(b=>b.addEventListener("click",()=>switchProfile(b.dataset.profileSwitch)));
+ profileList.querySelectorAll("[data-profile-delete]").forEach(b=>b.addEventListener("click",()=>deleteProfile(b.dataset.profileDelete)));
+}
+function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function openProfiles(){if(playing)return;renderProfileList();profileOverlay.classList.remove("hidden")}
+function closeProfiles(){profileOverlay.classList.add("hidden")}
+function switchProfile(id){
+ if(playing||id===activeProfileId||!profileStore.profiles.some(p=>p.id===id))return;
+ saveMeta();saveDex();activeProfileId=id;profileStore.activeId=id;writeProfileStore();
+ meta=loadProfileMeta(id);discovered=loadProfileDex(id);selectedStyle=meta.selectedStyle;selectedEquip=meta.selectedEquip;selectedDifficulty=meta.selectedDifficulty;lives=maxLife();cachedRunSave=null;
+ refreshMetaUI();refreshLoadoutUI();refreshProfileHeader();refreshResumeBox();renderProfileList();closeProfiles();render(performance.now());showToast(`👤 ${activeProfileName()} に切り替えました`,1100);
+}
+function createProfile(){
+ if(profileStore.profiles.length>=PROFILE_LIMIT){showToast(`プロフィールは${PROFILE_LIMIT}人までです`,1200);return}
+ const raw=prompt("新しいプレイヤーの名前（12文字まで）",`プレイヤー${profileStore.profiles.length+1}`);if(raw===null)return;const name=cleanProfileName(raw);if(!name){showToast("名前を入力してください",1000);return}
+ if(profileStore.profiles.some(p=>p.name.toLowerCase()===name.toLowerCase())){showToast("同じ名前のプレイヤーがいます",1100);return}
+ const id=makeProfileId();profileStore.profiles.push({id,name,createdAt:Date.now()});writeProfileStore();switchProfile(id);renderProfileList();
+}
+function renameActiveProfile(){
+ const p=activeProfile(),raw=prompt("プレイヤー名を変更（12文字まで）",p.name);if(raw===null)return;const name=cleanProfileName(raw);if(!name)return;if(profileStore.profiles.some(x=>x.id!==p.id&&x.name.toLowerCase()===name.toLowerCase())){showToast("同じ名前のプレイヤーがいます",1100);return}p.name=name;writeProfileStore();refreshProfileHeader();renderProfileList();renderRanking(rankingPeriod);
+}
+function deleteProfile(id){
+ if(profileStore.profiles.length<=1)return;const p=profileStore.profiles.find(x=>x.id===id);if(!p)return;
+ if(!confirm(`「${p.name}」を削除しますか？\nしんじゅ・研究・図鑑・実績・途中保存・ランキング記録も削除されます。`))return;
+ for(const base of [META_KEY,"mendako_dex_v8",RUN_SAVE_KEY,"mendako_deep_best_v3"])try{localStorage.removeItem(profileScopedKey(base,id))}catch{}
+ saveRankingEntries(loadRankingEntries().filter(r=>r.profileId!==id));profileStore.profiles=profileStore.profiles.filter(x=>x.id!==id);
+ if(id===activeProfileId){activeProfileId=profileStore.profiles[0].id;profileStore.activeId=activeProfileId;meta=loadProfileMeta();discovered=loadProfileDex();selectedStyle=meta.selectedStyle;selectedEquip=meta.selectedEquip;selectedDifficulty=meta.selectedDifficulty;lives=maxLife();cachedRunSave=null}
+ writeProfileStore();refreshMetaUI();refreshLoadoutUI();refreshProfileHeader();refreshResumeBox();renderProfileList();renderRanking(rankingPeriod);
+}
+function rankPeriodStart(period){const d=new Date(),today=new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime();if(period==="today")return today;if(period==="week")return new Date(d.getFullYear(),d.getMonth(),d.getDate()-6).getTime();return -Infinity}
+function leaderboard(period="all"){
+ const start=rankPeriodStart(period),validIds=new Set(profileStore.profiles.map(p=>p.id)),best=new Map();
+ for(const r of loadRankingEntries()){
+  if(!r||!validIds.has(r.profileId)||!Number.isFinite(Number(r.score))||Number(r.score)<=0)continue;
+  const ts=Number(r.playedAt)||0;if(period!=="all"&&ts<start)continue;
+  const prev=best.get(r.profileId);if(!prev||Number(r.score)>Number(prev.score)||(Number(r.score)===Number(prev.score)&&ts>Number(prev.playedAt||0)))best.set(r.profileId,r);
+ }
+ if(period==="all")for(const p of profileStore.profiles){try{const m=normalizeMeta(JSON.parse(localStorage.getItem(profileScopedKey(META_KEY,p.id))||"null")),s=Number(m.stats?.bestScore)||0,prev=best.get(p.id);if(s>0&&(!prev||s>Number(prev.score)))best.set(p.id,{id:`best_${p.id}`,profileId:p.id,score:s,cleared:Number(m.stats?.clears||0)>0,playedAt:0,legacy:true})}catch{}}
+ return [...best.values()].sort((a,b)=>Number(b.score)-Number(a.score)||Number(!!b.cleared)-Number(!!a.cleared)||Number(b.playedAt||0)-Number(a.playedAt||0));
+}
+function renderRanking(period=rankingPeriod){
+ rankingPeriod=period;document.querySelectorAll(".rankTab").forEach(b=>b.classList.toggle("selected",b.dataset.rankPeriod===period));
+ const labels={today:"今日",week:"過去7日",all:"総合"},rows=leaderboard(period);if(rankSummary)rankSummary.textContent=`${labels[period]}：各プレイヤーの期間内ベストスコアで順位を決めます。`;
+ if(!rankList)return;rankList.innerHTML="";if(!rows.length){rankList.innerHTML='<div class="rankEmpty">まだランキング記録がありません。<br>ゲームを1回遊ぶとここに記録されます。</div>';return}
+ rows.slice(0,10).forEach((r,i)=>{const p=profileStore.profiles.find(x=>x.id===r.profileId),d=document.createElement("div"),medal=i===0?"🥇":i===1?"🥈":i===2?"🥉":`${i+1}`;d.className=`rankRow ${r.profileId===activeProfileId?"me":""}`;const when=r.legacy?"以前のベスト":r.playedAt?new Date(r.playedAt).toLocaleString("ja-JP",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}):"";d.innerHTML=`<div class="rankPos">${medal}</div><div class="rankWho"><strong>${escapeHtml(p?.name||"プレイヤー")}${r.profileId===activeProfileId?"（あなた）":""}</strong><small>${r.cleared?"🏆 CLEAR ・ ":""}${when}</small></div><div class="rankScore">${Number(r.score).toLocaleString("ja-JP")}<small style="display:block;font-size:7px;color:#7a898f">pt</small></div>`;rankList.appendChild(d)});
+}
+function openRanking(){if(playing)return;renderRanking(rankingPeriod);rankingOverlay.classList.remove("hidden")}
+function closeRanking(){rankingOverlay.classList.add("hidden")}
+function recordRankingScore(cleared){
+ if(score<=0)return;let rows=loadRankingEntries();rows.push({id:`r_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,7)}`,profileId:activeProfileId,score:Math.round(score),cleared:!!cleared,playedAt:Date.now(),difficulty:selectedDifficulty,maxCombo,perfectBosses});
+ if(rows.length>1500){const preserve=new Map();for(const r of rows){const p=preserve.get(r.profileId);if(!p||Number(r.score)>Number(p.score))preserve.set(r.profileId,r)}const recent=[...rows].sort((a,b)=>Number(b.playedAt||0)-Number(a.playedAt||0)).slice(0,1200);rows=[...new Map([...preserve.values(),...recent].map(r=>[r.id,r])).values()]}
+ saveRankingEntries(rows);
+}
+function profileRank(period,id=activeProfileId){const a=leaderboard(period),i=a.findIndex(r=>r.profileId===id);return i<0?"-":`${i+1}位`}
+function updateResultRank(){if(resultRank)resultRank.textContent=`🏆 今日 ${profileRank("today")} ／ 1週間 ${profileRank("week")} ／ 総合 ${profileRank("all")}`}
+
+function saveMeta(){try{localStorage.setItem(profileScopedKey(META_KEY,activeProfileId),JSON.stringify(meta))}catch{}}
 function researchLevel(id){return clamp(Number(meta.research?.[id])||0,0,RESEARCH_INFO[id]?.max||0)}
 function researchCost(id){const lv=researchLevel(id);return 8+lv*3}
 function researchEffectText(id,lv=researchLevel(id)){
@@ -805,6 +951,7 @@ function refreshMetaUI(){
   if(level)level.textContent=maxed?`Lv.${lv} MAX`:`Lv.${lv}/${info.max}`;if(effectEl)effectEl.textContent=effect;if(next)next.textContent=maxed?"研究完了":`次 🦪${cost}`;if(price)price.textContent=maxed?"✓ MAX":`🦪 ${cost}個`;if(bar)bar.style.width=`${clamp(lv/info.max*100,0,100)}%`;
   btn.textContent=maxed?"研究完了":"研究する";btn.disabled=maxed;
  });
+ refreshProfileHeader();
  refreshLoadoutUI();
 }
 
@@ -868,7 +1015,7 @@ function mergeRouteMods(mods){for(const [k,v] of Object.entries(mods||{}))routeM
 function offerRoute(){pausedForRoute=false;ui.routeOverlay.classList.add("hidden")}
 function selectRoute(){pausedForRoute=false;ui.routeOverlay.classList.add("hidden")}
 
-function saveDex(){try{localStorage.setItem("mendako_dex_v8",JSON.stringify([...discovered]))}catch{}}
+function saveDex(){try{localStorage.setItem(profileScopedKey("mendako_dex_v8",activeProfileId),JSON.stringify([...discovered]))}catch{}}
 function discoverType(type){
  if(!SPECIES_NAMES[type]||discovered.has(type))return;
  discovered.add(type);sessionDiscoveries++;score+=300;saveDex();
@@ -1550,7 +1697,7 @@ function endGame(cleared=false){
  meta.stats.runs++;if(cleared)meta.stats.clears++;meta.stats.bestScore=Math.max(meta.stats.bestScore,score);meta.stats.maxCombo=Math.max(meta.stats.maxCombo,maxCombo);checkAchievements();
  const old=bestScore(),isNew=score>old,best=Math.max(old,score);if(isNew)saveBest(score);
  ui.finalScore.textContent=score.toLocaleString("ja-JP");ui.finalStage.textContent=`${STAGES[stageIdx].name} Lv.${stageIdx+1}`;ui.finalZone.textContent=ZONES[currentZone()].short;ui.best.textContent=best.toLocaleString("ja-JP");ui.resultTime.textContent=fmtTime(runTime);
- const earnedPearls=Math.max(0,Math.floor(score/4500)+bossCount*2+perfectBosses+missionsCompleted+Math.floor(nearMisses/5)+(cleared?8:0));meta.pearls+=earnedPearls;saveMeta();refreshMetaUI();
+ const earnedPearls=Math.max(0,Math.floor(score/4500)+bossCount*2+perfectBosses+missionsCompleted+Math.floor(nearMisses/5)+(cleared?8:0));meta.pearls+=earnedPearls;saveMeta();recordRankingScore(cleared);refreshMetaUI();updateResultRank();
  ui.resultCombo.textContent=maxCombo;ui.resultNearMiss.textContent=nearMisses;ui.resultDex.textContent=`${discovered.size}/${DEX_TYPES.length}`;ui.resultBosses.textContent=bossCount;ui.resultPerfectBosses.textContent=perfectBosses;ui.resultPearls.textContent=earnedPearls;ui.resultTitle.textContent=cleared?`🎉 深海クリア！ (${difficulty().name})`:`深海チャレンジ終了！ (${difficulty().name})`;
  ui.resultRoutes.innerHTML="";
  ui.record.innerHTML=(cleared?'<div class="clearBadge">🏆 ラスボス突破！ CLEAR</div>':"")+(isNew&&score>0?'<div class="badge">🏆 NEW RECORD!</div>':"");
@@ -1579,6 +1726,7 @@ canvas.addEventListener("pointerleave",e=>{if(e.pointerType!=="mouse")pointer.ac
 document.querySelectorAll(".difficultyBtn").forEach(b=>b.addEventListener("click",()=>selectDifficulty(b.dataset.difficulty)));
 document.querySelectorAll(".styleBtn").forEach(b=>b.addEventListener("click",()=>selectStyle(b.dataset.style)));
 document.querySelectorAll(".equipBtn").forEach(b=>b.addEventListener("click",()=>selectEquip(b.dataset.equip)));
+profileBtn.addEventListener("click",openProfiles);rankingBtn.addEventListener("click",openRanking);profileClose.addEventListener("click",closeProfiles);rankingClose.addEventListener("click",closeRanking);profileAddBtn.addEventListener("click",createProfile);profileRenameBtn.addEventListener("click",renameActiveProfile);profileOverlay.addEventListener("click",e=>{if(e.target===profileOverlay)closeProfiles()});rankingOverlay.addEventListener("click",e=>{if(e.target===rankingOverlay)closeRanking()});document.querySelectorAll(".rankTab").forEach(b=>b.addEventListener("click",()=>renderRanking(b.dataset.rankPeriod)));
 ui.dexBtn.addEventListener("click",()=>openBook("dex"));ui.achBtn.addEventListener("click",()=>openBook("ach"));
 document.getElementById("dexClose").addEventListener("click",closeBooks);document.getElementById("achClose").addEventListener("click",closeBooks);
 ui.dexOverlay.addEventListener("click",e=>{if(e.target===ui.dexOverlay)closeBooks()});ui.achOverlay.addEventListener("click",e=>{if(e.target===ui.achOverlay)closeBooks()});
@@ -1611,7 +1759,7 @@ document.addEventListener("visibilitychange",()=>{
 setInterval(()=>{if(playing)saveRunState("auto")},1500);
 
 updateMusicButtons();
-seedBubbles();updateUI();refreshMetaUI();refreshLoadoutUI();updateDashUI();updateRunTimer();checkAchievements();refreshResumeBox();
+seedBubbles();updateUI();refreshMetaUI();refreshLoadoutUI();refreshProfileHeader();updateDashUI();updateRunTimer();checkAchievements();refreshResumeBox();renderRanking("today");
 mendakoImg.onload=()=>render(performance.now());
 render(performance.now());
 })();
