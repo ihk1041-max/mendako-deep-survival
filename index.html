@@ -13,7 +13,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="メンダコ">
 
-<title>メンダコ・ディープサバイバル v15 PWA</title>
+<title>メンダコ・ディープサバイバル v16 PWA</title>
 <style>
 :root{--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
@@ -139,6 +139,18 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
 
 
 
+/* v16: thumb-friendly dash + uninterrupted run flow */
+.routeOverlay{display:none!important}
+@media (pointer:coarse), (max-width:760px){
+ .dashBtn{right:calc(max(12px,var(--safe-right)) + 8px);top:62%;bottom:auto;width:70px;height:70px;transform:translateY(-50%);box-shadow:0 9px 24px rgba(0,0,0,.2),0 0 0 4px rgba(255,255,255,.2)}
+ .dashBtn:active{transform:translateY(-50%) scale(.92)}
+ .dashBtn span{font-size:27px;line-height:27px}.dashBtn small{font-size:9px;line-height:11px}
+}
+@media (pointer:coarse) and (orientation:landscape), (orientation:landscape) and (max-height:620px){
+ .dashBtn{right:calc(max(14px,var(--safe-right)) + 10px);top:58%;bottom:auto;width:68px;height:68px}
+ .dashBtn:active{transform:translateY(-50%) scale(.92)}
+}
+
 /* v15: selectable game level + compact mobile balancing */
 .difficultyBox{margin:0 0 9px;padding:9px;border-radius:15px;background:#f7fbff;border:1px solid #d6eaf3}
 .difficultyTitle{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:1000;text-align:left;margin:0 2px 7px}
@@ -190,7 +202,7 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
 <div class="zone" id="zone">☀️ 浅い海</div>
 <div class="runTimer" id="runTimer">⏱ 02:45 ⚠</div>
 <div class="toast" id="toast"></div>
-<div class="tip" id="tip">♥ 食べられる　! にげて　スマホは指の少し上を泳ぎます</div>
+<div class="tip" id="tip">♥ 食べられる　! にげて　スマホ：右の💨 または素早く2回タップでダッシュ</div>
 <div class="comboHud" id="comboHud">🔥 1 COMBO</div>
 <div class="missionHud" id="missionHud">🎯 ミッション準備中</div>
 <div class="buffHud" id="buffHud"></div>
@@ -213,7 +225,7 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
       <div class="lead">約3分でラスボスを目指すショートラン。<br>食べる・避ける・育てるをテンポよく楽しもう。</div>
       <div class="rules">
         <div><b>💨</b>ダッシュで<br>ギリギリ回避</div>
-        <div><b>🗺️</b>海域を選んで<br>ルート分岐</div>
+        <div><b>🐟</b>魚群やイベントで<br>毎回ちがう展開</div>
         <div><b>🦈</b>ボスの攻撃を<br>見切って回避</div>
       </div>
     </section>
@@ -273,7 +285,7 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
       </details>
 
       <button class="btn" id="startBtn">海へもぐる！</button>
-      <div class="note">スマホは画面をなぞって移動。横向きでは視野が広くなります。</div>
+      <div class="note">スマホは画面をなぞって移動。💨は右中央、素早い2回タップでもダッシュできます。</div>
     </section>
   </div>
 </div>
@@ -287,12 +299,8 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
   </div>
 </div>
 
-<div class="routeOverlay hidden" id="routeOverlay">
-  <div class="routePanel">
-    <h2>🗺️ 次の海域を選ぼう</h2>
-    <p>ルートによって出会う生き物や遊び方が変わります。</p>
-    <div class="routeChoices" id="routeChoices"></div>
-  </div>
+<div class="routeOverlay hidden" id="routeOverlay" aria-hidden="true">
+  <div id="routeChoices"></div>
 </div>
 
 
@@ -405,11 +413,11 @@ let creatures=[],particles=[],bubbles=[],ambient=[],pickups=[];
 let boss=null,bossTriggered=false,bossCooldown=0,bossCount=0,nextBossIndex=0,runTime=0,runCleared=false;
 let hazards=[];
 let combo=0,maxCombo=0,comboTimer=0,fever=0,magnet=0,shield=0;
-let itemTimer=10,eventTimer=18,eventState=null,eventElapsed=0;
+let itemTimer=10,eventTimer=18,eventState=null,eventElapsed=0,lastEventKind="";
 let pausedForUpgrade=false,pausedForRoute=false,upgradeMilestones=new Set(),sessionDiscoveries=0;
 let mission=null,missionId=0,missionNoDamage=0,lastMissionType="",missionsCompleted=0;
 let upgrades={speed:0,appetite:0,lucky:0,treasure:0,agility:0,rhythm:0};
-let dashCooldown=0,dashActive=0,nearMisses=0,chestsOpened=0;
+let dashCooldown=0,dashActive=0,nearMisses=0,chestsOpened=0,lastTouchTapAt=0,lastTouchTapX=0,lastTouchTapY=0;
 let currentRoute=null,routeHistory=[],routeMods={smallBias:0,rareBonus:0,dangerBias:0,itemBonus:0,chestBonus:0,speedBonus:0,comboBonus:0},pendingUpgradeReason=null;
 const SPECIES_INFO={
  shrimp:{name:"エビ",icon:"🦐",rarity:1,desc:"ちょこちょこ泳ぐ小さなエビ。"},clownfish:{name:"クマノミ",icon:"🐠",rarity:1,desc:"しま模様がかわいいサンゴ礁の魚。"},bluefish:{name:"青い魚",icon:"🐟",rarity:1,desc:"すばやく泳ぐ青い小魚。"},jelly:{name:"クラゲ",icon:"🪼",rarity:1,desc:"ぷかぷか漂うやさしいクラゲ。"},crab:{name:"カニ",icon:"🦀",rarity:1,desc:"海底を元気に横歩きするカニ。"},seahorse:{name:"タツノオトシゴ",icon:"🌊",rarity:2,desc:"くるんとした尾がかわいい海の生き物。"},angelfish:{name:"エンゼルフィッシュ",icon:"🐠",rarity:2,desc:"ひらひら泳ぐおしゃれな魚。"},lantern:{name:"ヒカリ魚",icon:"✨",rarity:2,desc:"暗い海で淡く光る小さな魚。"},puffer:{name:"フグ",icon:"🐡",rarity:2,desc:"まんまるな体がチャームポイント。"},anglerSmall:{name:"チョウチンアンコウ",icon:"💡",rarity:3,desc:"光るちょうちんで深海を照らす魚。"},squid:{name:"イカ",icon:"🦑",rarity:2,desc:"すいすい泳ぐ小さなイカ。"},seaAngel:{name:"クリオネ",icon:"🪽",rarity:3,desc:"透明な翼のような腕で泳ぐ海の天使。"},starJelly:{name:"ほしクラゲ",icon:"⭐",rarity:5,desc:"きらきら光る、とても珍しいクラゲ。"},barracuda:{name:"カマス",icon:"🐟",rarity:2,desc:"細長い体で素早く泳ぐハンター。"},shark:{name:"サメ",icon:"🦈",rarity:3,desc:"迫力はあるけど、どこかかわいいサメ。"},orca:{name:"シャチ",icon:"🐋",rarity:4,desc:"白黒模様のパワフルな海の王者。"},giantSquid:{name:"ダイオウイカ",icon:"🦑",rarity:4,desc:"深海にひそむ巨大なイカ。"}
@@ -433,19 +441,11 @@ const MISSION_POOL=[
  {type:"combo",target:10,label:"10コンボを達成"},
  {type:"items",target:2,label:"アイテムを2個取る"},
  {type:"rare",target:2,label:"レア生物を2匹食べる"},
- {type:"survive",target:14,label:"14秒ノーダメージ"}
+ {type:"survive",target:14,label:"14秒ノーダメージ"},
+ {type:"dash",target:3,label:"ダッシュを3回使う"},
+ {type:"near",target:2,label:"ニアミスを2回決める"}
 ];
-const ROUTE_OPTIONS={
- 1:[
-  {id:"coral",icon:"🪸",name:"サンゴの森",desc:"小さい生物が多い。コンボ猶予 +0.4秒",mods:{smallBias:.12,comboBonus:.4}},
-  {id:"jelly",icon:"🪼",name:"クラゲ回廊",desc:"レア率アップ。ただし危険生物も少し増える",mods:{rareBonus:.035,dangerBias:.045}}
- ],
- 2:[
-  {id:"wreck",icon:"⚓",name:"沈没船",desc:"アイテムと宝箱が増える。危険生物も増える",mods:{itemBonus:.35,chestBonus:.5,dangerBias:.055}},
-  {id:"glow",icon:"✨",name:"発光深海",desc:"レア率アップ。泳ぐ速度も +8%",mods:{rareBonus:.045,speedBonus:.08}}
- ]
-};
-
+const ROUTE_OPTIONS={}; // v16: 手動ルート分岐は廃止
 const RUN_SECONDS=165;
 const BOSS_SCHEDULE=[
  {at:40,kind:"shark",name:"ホホジロザメ",icon:"🦈",total:13,reward:3200},
@@ -658,7 +658,7 @@ function restoreRunState(s){
  itemTimer=Math.max(.1,Number(s.itemTimer)||8);eventTimer=Math.max(.1,Number(s.eventTimer)||12);eventState=cloneData(s.eventState);eventElapsed=Math.max(0,Number(s.eventElapsed)||0);sessionDiscoveries=Math.max(0,Number(s.sessionDiscoveries)||0);
  upgradeMilestones=new Set(Array.isArray(s.upgradeMilestones)?s.upgradeMilestones:[]);mission=cloneData(s.mission);missionId=Math.max(0,Number(s.missionId)||0);missionNoDamage=Math.max(0,Number(s.missionNoDamage)||0);lastMissionType=String(s.lastMissionType||"");missionsCompleted=Math.max(0,Number(s.missionsCompleted)||0);
  upgrades={speed:0,appetite:0,lucky:0,treasure:0,agility:0,rhythm:0,...(s.upgrades||{})};dashCooldown=Math.max(0,Number(s.dashCooldown)||0);dashActive=0;nearMisses=Math.max(0,Number(s.nearMisses)||0);chestsOpened=Math.max(0,Number(s.chestsOpened)||0);
- currentRoute=cloneData(s.currentRoute);routeHistory=Array.isArray(s.routeHistory)?cloneData(s.routeHistory):[];routeMods={smallBias:0,rareBonus:0,dangerBias:0,itemBonus:0,chestBonus:0,speedBonus:0,comboBonus:0,...(s.routeMods||{})};pendingUpgradeReason=s.pendingUpgradeReason||null;
+ currentRoute=null;routeHistory=[];routeMods={smallBias:0,rareBonus:0,dangerBias:0,itemBonus:0,chestBonus:0,speedBonus:0,comboBonus:0};pendingUpgradeReason=s.pendingUpgradeReason||null;
  boss=transformEntity(s.boss,sx,sy,sr);bossTriggered=!!s.bossTriggered||!!boss;bossCooldown=Math.max(0,Number(s.bossCooldown)||0);bossCount=Math.max(0,Number(s.bossCount)||0);nextBossIndex=clamp(Number(s.nextBossIndex)||0,0,BOSS_SCHEDULE.length);runTime=clamp(Number(s.runTime)||0,0,RUN_SECONDS+60);runCleared=false;
  Object.assign(player,transformEntity(s.player,sx,sy,sr)||{});player.r=playerRadiusForStage(stageIdx);player.x=clamp(Number(player.x)||W*.5,player.r,W-player.r);player.y=clamp(Number(player.y)||H*.6,gameTop()+player.r,gameBottom()-player.r);player.inv=Math.max(Number(player.inv)||0,1.8);
  creatures=(Array.isArray(s.creatures)?s.creatures:[]).map(e=>{const c=transformEntity(e,sx,sy,sr);if(c&&Number.isFinite(c.ratio))c.r=player.r*c.ratio;return c}).filter(Boolean).slice(0,40);
@@ -675,7 +675,7 @@ function restoreRunState(s){
  initAudio();if(musicEnabled)startAmbientMusic();armBackGuard();
  showToast("💾 続きから再開しました。2秒間は安全です",1700);
  raf=requestAnimationFrame(loop);
- if(s.decision==="route"&&ROUTE_OPTIONS[currentZone()])setTimeout(()=>{if(playing)offerRoute(currentZone())},220);
+ if(s.decision==="route"&&s.pendingUpgradeReason)setTimeout(()=>{if(playing)offerUpgrade(s.pendingUpgradeReason)},220);
  else if(s.decision==="upgrade")setTimeout(()=>{if(playing)offerUpgrade(s.pendingUpgradeReason||"再開した進化ボーナス")},220);
  saveRunState("restored");return true;
 }
@@ -748,6 +748,7 @@ function updateDashUI(){
 }
 function triggerDash(){
  if(!playing||pausedForUpgrade||pausedForRoute||manualPaused||dashCooldown>0)return;
+ missionProgress("dash",1);
  const fingerOffset=touchFingerOffset();
  const tx=pointer.x,ty=clamp(pointer.y-fingerOffset,gameTop()+player.r,gameBottom()-player.r);
  let dx=tx-player.x,dy=ty-player.y,d=Math.hypot(dx,dy);
@@ -757,26 +758,12 @@ function triggerDash(){
  burst(player.x,player.y,"💨",5);beep(760,.055,"sine",.045);updateDashUI();
 }
 function registerNearMiss(x,y){
- nearMisses++;meta.stats.nearMisses++;checkAchievements();const reward=160+stageIdx*35;score+=reward;comboTimer=Math.max(comboTimer,1.35);dashCooldown=Math.max(0,dashCooldown-.65);
+ nearMisses++;meta.stats.nearMisses++;missionProgress("near",1);checkAchievements();const reward=160+stageIdx*35;score+=reward;comboTimer=Math.max(comboTimer,1.35);dashCooldown=Math.max(0,dashCooldown-.65);
  showFloatText(x,y,`NICE! +${reward}`);beep(980,.045,"sine",.035);updateUI();
 }
 function mergeRouteMods(mods){for(const [k,v] of Object.entries(mods||{}))routeMods[k]=(routeMods[k]||0)+v}
-function offerRoute(zone){
- if(pausedForRoute||!playing||!ROUTE_OPTIONS[zone])return;
- pausedForRoute=true;player.vx=player.vy=0;ui.routeChoices.innerHTML="";
- for(const route of ROUTE_OPTIONS[zone]){
-  const b=document.createElement("button");b.type="button";b.className="routeChoice";
-  b.innerHTML=`<span class="icon">${route.icon}</span><strong>${route.name}</strong><small>${route.desc}</small>`;
-  b.addEventListener("click",()=>selectRoute(route));ui.routeChoices.appendChild(b);
- }
- ui.routeOverlay.classList.remove("hidden");updateDashUI();
-}
-function selectRoute(route){
- currentRoute=route;routeHistory.push(route);mergeRouteMods(route.mods);pausedForRoute=false;ui.routeOverlay.classList.add("hidden");
- showToast(`${route.icon} ${route.name}へ！`,1300);beep(830,.08,"sine",.05);updateDashUI();
- if(pendingUpgradeReason){const r=pendingUpgradeReason;pendingUpgradeReason=null;setTimeout(()=>offerUpgrade(r),280)}
- saveRunState("route");
-}
+function offerRoute(){pausedForRoute=false;ui.routeOverlay.classList.add("hidden")}
+function selectRoute(){pausedForRoute=false;ui.routeOverlay.classList.add("hidden")}
 
 function saveDex(){try{localStorage.setItem("mendako_dex_v8",JSON.stringify([...discovered]))}catch{}}
 function discoverType(type){
@@ -786,12 +773,13 @@ function discoverType(type){
 }
 function comboMultiplier(){return 1+Math.min(2,Math.floor(Math.max(0,combo-1)/5)*.25)}
 function registerEat(c,basePts){
- combo=comboTimer>0?combo+1:1;comboTimer=1.95+routeMods.comboBonus+(upgrades.rhythm||0)*.35;maxCombo=Math.max(maxCombo,combo);
+ combo=comboTimer>0?combo+1:1;comboTimer=1.95+(upgrades.rhythm||0)*.35;maxCombo=Math.max(maxCombo,combo);
  let mult=comboMultiplier();if(fever>0)mult*=2;if(eventState?.kind==="sparkle")mult*=1.25;
  const gained=Math.round(basePts*mult);score+=gained;
  if(combo>1)showFloatText(c.x,c.y-c.r*.9,`+${gained}  x${mult.toFixed(mult%1?2:0)}`);
  if(combo===5||combo===10||combo===20)burst(player.x,player.y,"💗",combo===20?7:4);
  if(combo>0&&combo%12===0){fever=Math.max(fever,7);showToast("🔥 きらきらラッシュ！ 7秒スコア2倍",1400);beep(1050,.1,"sine",.06)}
+ if(c.bonus){const bonus=1200+stageIdx*300;score+=bonus;dashCooldown=Math.max(0,dashCooldown-1.25);burst(c.x,c.y,"🌟",8);showToast(`🌟 ラッキー生物！ +${bonus} / ダッシュ回復`,1250)}
  missionProgress("eat",1);if(c.rare)missionProgress("rare",1);missionProgress("combo",combo,true);
  discoverType(c.type);recordSpecies(c.type);meta.stats.maxCombo=Math.max(meta.stats.maxCombo,maxCombo);checkAchievements();
 }
@@ -810,7 +798,7 @@ function newMission(){
 }
 function completeMission(){
  if(!mission)return;
- const reward=1000+stageIdx*250;score+=reward;missionsCompleted++;meta.stats.missions++;checkAchievements();showToast(`🎯 ミッション達成！ +${reward}`,1500);beep(820,.09,"sine",.055);
+ const chain=Math.min(5,missionsCompleted+1),reward=1000+stageIdx*250+(chain-1)*180;score+=reward;missionsCompleted++;meta.stats.missions++;checkAchievements();showToast(`🎯 ミッション ${chain}連続！ +${reward}`,1500);beep(820,.09,"sine",.055);
  mission=null;updateMissionUI();setTimeout(()=>{if(playing&&!mission)newMission()},900);
 }
 function updateMissionUI(){
@@ -845,21 +833,35 @@ function applyPickup(p){
  } else {fever=Math.max(fever,6);showToast("⭐ スター！ 6秒スコア2倍")}
  missionProgress("items",1);beep(900,.08,"sine",.055);updateUI();
 }
+function spawnBonusCreature(){
+ if(boss||creatures.length>(compactViewport()?16:27))return;
+ const z=currentZone(),small=z===0?["shrimp","clownfish","bluefish","jelly","seahorse"]:z===1?["angelfish","bluefish","jelly","lantern","puffer"]:["lantern","jelly","anglerSmall","squid","seaAngel"];
+ const type=small[Math.floor(rand(0,small.length))],ratio=.40,r=player.r*ratio,fromLeft=Math.random()<.5;
+ const x=fromLeft?-r-18:W+r+18,y=rand(gameTop()+55,gameBottom()-55),a=Math.atan2(H*.52-y,W*.5-x)+rand(-.25,.25),speed=rand(42,62);
+ creatures.push({x,y,r,ratio,rare:false,bonus:true,type,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,phase:rand(0,6.28),dead:false,nearMiss:false});
+}
+function spawnSchool(count=6){for(let i=0;i<count;i++)spawnCreature()}
 function startRandomEvent(){
+ if(eventState||boss)return;
  const events=[
   {kind:"plankton",icon:"🦐",name:"プランクトン大発生",time:8},
   {kind:"treasure",icon:"🎁",name:"お宝潮流",time:8},
   {kind:"sparkle",icon:"✨",name:"きらめく海",time:9},
   {kind:"current",icon:"🌊",name:"追い潮フィーバー",time:7},
   {kind:"parade",icon:"🐟",name:"おさかなパレード",time:7},
+  {kind:"school",icon:"🐠",name:"おさかなの群れ",time:7},
+  {kind:"bonus",icon:"🌟",name:"ラッキー生物を追え！",time:9}
  ];
- if(currentZone()>=1){events.push({kind:"chest",icon:"🧰",name:"海底のお宝",time:12});if(routeMods.chestBonus>.2)events.push({kind:"chest",icon:"🧰",name:"沈没船のお宝",time:12})}
- eventState={...events[Math.floor(Math.random()*events.length)]};eventElapsed=0;
+ if(currentZone()>=1)events.push({kind:"chest",icon:"🧰",name:"海底のお宝",time:12});
+ const choices=events.filter(e=>e.kind!==lastEventKind),picked=choices[Math.floor(Math.random()*choices.length)];
+ eventState={...picked};lastEventKind=eventState.kind;eventElapsed=0;
  if(eventState.kind==="chest")spawnPickup("chest");
+ if(eventState.kind==="school")spawnSchool(compactViewport()?5:7);
+ if(eventState.kind==="bonus")spawnBonusCreature();
  ui.eventBanner.textContent=`${eventState.icon} ${eventState.name}`;ui.eventBanner.classList.add("show");
  showToast(`${eventState.icon} ${eventState.name}！`,1300);
 }
-function endRandomEvent(){eventState=null;ui.eventBanner.classList.remove("show");eventTimer=rand(16,23)}
+function endRandomEvent(){eventState=null;ui.eventBanner.classList.remove("show");eventTimer=rand(14,20)}
 function offerUpgrade(reason="成長ボーナス"){
  if(pausedForUpgrade||pausedForRoute||!playing)return;
  pausedForUpgrade=true;player.vx=player.vy=0;
@@ -898,8 +900,8 @@ function seedBubbles(){
 function reset(){
  cancelAnimationFrame(raf);creatures=[];particles=[];pickups=[];hazards=[];boss=null;bossTriggered=false;bossCooldown=0;bossCount=0;nextBossIndex=0;runTime=0;runCleared=false;
  score=0;eaten=0;stageIdx=0;lives=maxLife();spawnAcc=0;combo=0;maxCombo=0;comboTimer=0;fever=0;magnet=0;shield=selectedEquip==="bubble"?1:0;
- itemTimer=rand(10,15);eventTimer=rand(12,18);eventState=null;sessionDiscoveries=0;pausedForUpgrade=false;pausedForRoute=false;upgradeMilestones=new Set();
- upgrades={speed:0,appetite:0,lucky:0,treasure:0,agility:0,rhythm:0};mission=null;missionNoDamage=0;missionsCompleted=0;dashCooldown=0;dashActive=0;nearMisses=0;chestsOpened=0;currentRoute=null;routeHistory=[];routeMods={smallBias:0,rareBonus:0,dangerBias:0,itemBonus:0,chestBonus:0,speedBonus:0,comboBonus:0};pendingUpgradeReason=null;
+ itemTimer=rand(10,15);eventTimer=rand(11,16);eventState=null;eventElapsed=0;lastEventKind="";sessionDiscoveries=0;pausedForUpgrade=false;pausedForRoute=false;upgradeMilestones=new Set();
+ upgrades={speed:0,appetite:0,lucky:0,treasure:0,agility:0,rhythm:0};mission=null;missionNoDamage=0;missionsCompleted=0;dashCooldown=0;dashActive=0;nearMisses=0;chestsOpened=0;lastTouchTapAt=0;currentRoute=null;routeHistory=[];routeMods={smallBias:0,rareBonus:0,dangerBias:0,itemBonus:0,chestBonus:0,speedBonus:0,comboBonus:0};pendingUpgradeReason=null;
  player.x=W*.5;player.y=Math.max(gameTop()+60,H*.60);player.vx=player.vy=0;player.r=playerRadiusForStage(0);player.inv=0;
  pointer.x=W*.63;pointer.y=player.y;pointer.active=false;pointer.kind="mouse";
  ui.bossbar.classList.remove("show");ui.upgradeOverlay.classList.add("hidden");ui.routeOverlay.classList.add("hidden");ui.eventBanner.classList.remove("show");seedBubbles();updateUI();updateComboUI();updateBuffUI();updateDashUI();newMission();
@@ -919,11 +921,11 @@ function spawnCreature(){
  const z=currentZone(),roll=Math.random(),pressure=clamp(runTime/RUN_SECONDS,0,1);
  let ratio;
  if(eventState?.kind==="plankton")ratio=rand(.22,.58);
- else if(eventState?.kind==="parade")ratio=rand(.34,.82);
+ else if(eventState?.kind==="parade"||eventState?.kind==="school")ratio=rand(.30,.78);
  else{
-  const smallCut=clamp(.58-pressure*.07+routeMods.smallBias,.42,.76);
-  const midCut=clamp(.79-pressure*.05+routeMods.smallBias*.22,.66,.88);
-  const dangerCut=clamp(.93-pressure*.025-routeMods.dangerBias,.84,.95);
+  const smallCut=clamp(.58-pressure*.07,.42,.76);
+  const midCut=clamp(.79-pressure*.05,.66,.88);
+  const dangerCut=clamp(.93-pressure*.025,.84,.95);
   if(roll<smallCut)ratio=rand(.24,.62);
   else if(roll<midCut)ratio=rand(.64,.96);
   else if(roll<dangerCut)ratio=rand(1.12,1.5);
@@ -931,7 +933,7 @@ function spawnCreature(){
  }
  if((performance.now()-started)<4000&&ratio>1.35)ratio=rand(.3,.9);
 
- const rare=Math.random()<(.045+upgrades.lucky*.025+routeMods.rareBonus+(selectedEquip==="star"?.018:0)+STYLE_INFO[selectedStyle].rare)*(eventState?.kind==="sparkle"?3:1);
+ const rare=Math.random()<(.045+upgrades.lucky*.025+(selectedEquip==="star"?.018:0)+STYLE_INFO[selectedStyle].rare)*(eventState?.kind==="sparkle"?3:1);
  if(rare)ratio=.42;
  // やさしいモードは危険な敵を同時に複数出さず、挟み撃ちを防ぐ。
  if(difficulty().noPincer&&ratio>=1.06&&creatures.some(c=>!c.dead&&isDangerous(c)))ratio=rand(.28,.72);
@@ -1035,15 +1037,15 @@ function update(dt){
  if(bossCooldown>0)bossCooldown=Math.max(0,bossCooldown-dt);
  if(mission?.type==="survive"){mission.progress+=dt;updateMissionUI();if(mission.progress>=mission.target)completeMission()}
  eventTimer-=dt;if(!eventState&&eventTimer<=0&&!boss)startRandomEvent();
- if(eventState){eventState.time-=dt;eventElapsed+=dt;if(eventState.kind==="treasure"&&eventElapsed>2.2){eventElapsed=0;spawnPickup()}if(eventState.time<=0)endRandomEvent()}
- itemTimer-=dt;if(itemTimer<=0){if(Math.random()<clamp(.58+upgrades.treasure*.12+routeMods.itemBonus*.18+STYLE_INFO[selectedStyle].treasure,.18,.95))spawnPickup();itemTimer=rand(12,18)/(1+upgrades.treasure*.25+routeMods.itemBonus)}
+ if(eventState){eventState.time-=dt;eventElapsed+=dt;if(eventState.kind==="treasure"&&eventElapsed>2.2){eventElapsed=0;spawnPickup()}else if(eventState.kind==="school"&&eventElapsed>2.35){eventElapsed=0;spawnSchool(compactViewport()?2:3)}if(eventState.time<=0)endRandomEvent()}
+ itemTimer-=dt;if(itemTimer<=0){if(Math.random()<clamp(.58+upgrades.treasure*.12+STYLE_INFO[selectedStyle].treasure,.18,.95))spawnPickup();itemTimer=rand(12,18)/(1+upgrades.treasure*.25)}
  updateComboUI();updateBuffUI();
 
  const targetX=pointer.x;
  const fingerOffset=touchFingerOffset();
  const targetY=clamp(pointer.y-fingerOffset,gameTop()+player.r,gameBottom()-player.r);
  const dx=targetX-player.x,dy=targetY-player.y,dd=Math.hypot(dx,dy);
- const maxSpeed=(195+stageIdx*8)*moveViewportFactor()*(1+upgrades.speed*.15)*(1+routeMods.speedBonus)*(1+STYLE_INFO[selectedStyle].speed)*(fever>0?1.12:1)*(eventState?.kind==="current"?1.10:1);
+ const maxSpeed=(195+stageIdx*8)*moveViewportFactor()*(1+upgrades.speed*.15)*(1+STYLE_INFO[selectedStyle].speed)*(fever>0?1.12:1)*(eventState?.kind==="current"?1.10:1);
  if(dashActive<=0){
   if(dd>4){
    const desired=Math.min(maxSpeed,dd*3.3);
@@ -1061,7 +1063,7 @@ function update(dt){
 
  if(!boss){
   spawnAcc+=dt;
-  const every=Math.max(.23,.54-(now-started)/1000*.0040)*(compactViewport()?1.10:1)*(eventState?.kind==="plankton"?.55:eventState?.kind==="parade"?.72:1);
+  const every=Math.max(.23,.54-(now-started)/1000*.0040)*(compactViewport()?1.10:1)*(eventState?.kind==="plankton"?.55:eventState?.kind==="parade"?.72:eventState?.kind==="school"?.62:1);
   while(spawnAcc>every){spawnAcc-=every;spawnCreature()}
  }
 
@@ -1142,8 +1144,7 @@ function checkGrowth(){
   showToast(z!==oldZone?`${ZONES[z].name}へ到達！`:`成長！ ${STAGES[stageIdx].name}！`,1400);
   const milestone=(stageIdx===2||stageIdx===4)&&!upgradeMilestones.has(stageIdx);
   if(milestone)upgradeMilestones.add(stageIdx);
-  if(z!==oldZone&&z>0&&ROUTE_OPTIONS[z]){pendingUpgradeReason=milestone?"成長ボーナス":null;setTimeout(()=>offerRoute(z),480)}
-  else if(milestone)setTimeout(()=>offerUpgrade("成長ボーナス"),550)
+  if(milestone)setTimeout(()=>offerUpgrade("成長ボーナス"),550)
  }
  updateUI();
 }
@@ -1348,13 +1349,13 @@ function drawHazards(){
 function drawStatusCue(c,t){
  const near=Math.hypot(c.x-player.x,c.y-player.y);
  const cueRange=Math.min(W,H)*(compactViewport()?.50:.60);
- if(!c.rare&&near>cueRange&&!(isDangerous(c)&&near<cueRange*1.18))return;
+ if(!c.rare&&!c.bonus&&near>cueRange&&!(isDangerous(c)&&near<cueRange*1.18))return;
  const bob=Math.sin(t*.006+c.phase)*2;
  ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";
  if(isEdible(c)){
   const y=c.y-c.r*.95-9+bob;
-  ctx.globalAlpha=.95;ctx.fillStyle=c.rare?"#ffd95f":"#effff7";ctx.strokeStyle=c.rare?"#d9a827":"#77c9a5";ctx.lineWidth=1.4;
-  ctx.beginPath();ctx.roundRect(c.x-10,y-9,20,18,9);ctx.fill();ctx.stroke();ctx.fillStyle=c.rare?"#b88011":"#45a77e";ctx.font="bold 13px sans-serif";ctx.fillText(c.rare?"★":"♥",c.x,y+.5);
+  ctx.globalAlpha=.95;ctx.fillStyle=(c.rare||c.bonus)?"#fff0a8":"#effff7";ctx.strokeStyle=(c.rare||c.bonus)?"#d9a827":"#77c9a5";ctx.lineWidth=1.4;
+  ctx.beginPath();ctx.roundRect(c.x-10,y-9,20,18,9);ctx.fill();ctx.stroke();ctx.fillStyle=(c.rare||c.bonus)?"#b88011":"#45a77e";ctx.font="bold 13px sans-serif";ctx.fillText(c.bonus?"✦":c.rare?"★":"♥",c.x,y+.5);
  }else{
   const y=c.y-c.r*.95-9+bob;ctx.globalAlpha=.96;ctx.fillStyle="#fff0f2";ctx.strokeStyle="#e56f7b";ctx.lineWidth=1.5;ctx.beginPath();ctx.roundRect(c.x-9,y-9,18,18,9);ctx.fill();ctx.stroke();ctx.fillStyle="#d95061";ctx.font="bold 14px sans-serif";ctx.fillText("!",c.x,y+.5);
  }
@@ -1422,7 +1423,7 @@ function endGame(cleared=false){
  ui.finalScore.textContent=score.toLocaleString("ja-JP");ui.finalStage.textContent=`${STAGES[stageIdx].name} Lv.${stageIdx+1}`;ui.finalZone.textContent=ZONES[currentZone()].short;ui.best.textContent=best.toLocaleString("ja-JP");ui.resultTime.textContent=fmtTime(runTime);
  const earnedPearls=Math.max(0,Math.floor(score/4500)+bossCount*2+missionsCompleted+Math.floor(nearMisses/5)+(cleared?8:0));meta.pearls+=earnedPearls;saveMeta();refreshMetaUI();
  ui.resultCombo.textContent=maxCombo;ui.resultNearMiss.textContent=nearMisses;ui.resultDex.textContent=`${discovered.size}/${DEX_TYPES.length}`;ui.resultBosses.textContent=bossCount;ui.resultPearls.textContent=earnedPearls;ui.resultTitle.textContent=cleared?`🎉 深海クリア！ (${difficulty().name})`:`深海チャレンジ終了！ (${difficulty().name})`;
- ui.resultRoutes.innerHTML=routeHistory.length?`<br>${routeHistory.map(r=>`<span class="routeTag">${r.icon}${r.name}</span>`).join("")}`:"";
+ ui.resultRoutes.innerHTML="";
  ui.record.innerHTML=(cleared?'<div class="clearBadge">🏆 ラスボス突破！ CLEAR</div>':"")+(isNew&&score>0?'<div class="badge">🏆 NEW RECORD!</div>':"");
  pausedForUpgrade=false;pausedForRoute=false;ui.upgradeOverlay.classList.add("hidden");ui.routeOverlay.classList.add("hidden");updateDashUI();updateRunTimer();
  setTimeout(()=>ui.result.classList.remove("hidden"),280);
@@ -1432,7 +1433,15 @@ function setPointer(e){
  if(pausedForUpgrade||pausedForRoute)return;
  const r=canvas.getBoundingClientRect();pointer.x=e.clientX-r.left;pointer.y=e.clientY-r.top;pointer.active=true;pointer.kind=e.pointerType||"mouse";
 }
-canvas.addEventListener("pointerdown",e=>{e.preventDefault();setPointer(e);try{canvas.setPointerCapture(e.pointerId)}catch{}});
+canvas.addEventListener("pointerdown",e=>{
+ e.preventDefault();setPointer(e);
+ if(e.pointerType==="touch"&&playing&&!pausedForUpgrade&&!pausedForRoute&&!manualPaused){
+  const now=performance.now(),close=Math.hypot(e.clientX-lastTouchTapX,e.clientY-lastTouchTapY)<90;
+  if(now-lastTouchTapAt<285&&close){lastTouchTapAt=0;triggerDash()}
+  else{lastTouchTapAt=now;lastTouchTapX=e.clientX;lastTouchTapY=e.clientY}
+ }
+ try{canvas.setPointerCapture(e.pointerId)}catch{}
+});
 canvas.addEventListener("pointermove",e=>{if(e.pointerType==="mouse"||pointer.active){e.preventDefault();setPointer(e)}});
 canvas.addEventListener("pointerup",()=>pointer.active=false);
 canvas.addEventListener("pointercancel",()=>pointer.active=false);
