@@ -13,7 +13,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="メンダコ">
 
-<title>メンダコ・ディープサバイバル v17 PWA</title>
+<title>メンダコ・ディープサバイバル v18 PWA</title>
 <style>
 :root{--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
@@ -192,6 +192,18 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
   .pwaOnlyHint{display:block}
 }
 
+
+/* v18: shop UI + explicit title navigation */
+.metaDetails.shopDetails{background:linear-gradient(180deg,#fffaf2 0%,#f4fbfd 100%);border-color:#eddcc4;box-shadow:0 8px 24px rgba(92,70,44,.08)}
+.metaDetails.shopDetails summary{background:linear-gradient(90deg,#fff4df,#f6fcff);color:#425b68}
+.shopWelcome{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:9px;margin:0 0 10px;padding:9px 10px;border:1px solid #eddcc4;border-radius:15px;background:rgba(255,255,255,.92)}
+.shopKeeper{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#fff3d7;font-size:25px;border:1px solid #efd7a8}.shopWelcomeText{min-width:0}.shopWelcomeText strong{display:block;font-size:13px;color:#6f573d}.shopWelcomeText small{display:block;margin-top:2px;font-size:9px;line-height:1.35;color:#73838b}.pearlWallet{white-space:nowrap;border-radius:999px;background:#eefaff;border:1px solid #cde8f1;padding:7px 9px;font-size:10px;font-weight:1000;color:#33738b}.pearlWallet b{font-size:14px;color:#256b86}
+.shopGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.shopItem{min-width:0;border:1px solid #d9e7eb;border-radius:14px;background:#fff;padding:8px;box-shadow:0 3px 10px rgba(36,78,94,.05);transition:.16s}.shopItem.owned{border-color:#9bd8be;background:#f3fcf7}.shopItem.equipped{border-color:#64bcd5;background:#edfaff;box-shadow:inset 0 0 0 1px #64bcd5}.shopItem.maxed{border-color:#e2c57a;background:#fffaf0}.shopItem.cantAfford:not(.owned){opacity:.78}.shopItemTop{display:flex;align-items:flex-start;justify-content:space-between;gap:5px}.shopItemIcon{font-size:25px;line-height:1}.shopStatus{display:inline-flex;align-items:center;min-height:20px;padding:3px 6px;border-radius:999px;background:#f2f5f6;color:#71818a;font-size:7.5px;font-weight:1000;white-space:nowrap}.shopItem.owned .shopStatus{background:#dff5e9;color:#2d7758}.shopItem.equipped .shopStatus{background:#d9f2fa;color:#21708b}.shopItem.maxed .shopStatus{background:#fff0bf;color:#7b6325}.shopItemName{display:block;margin-top:5px;font-size:11px;color:#345064}.shopItemDesc{min-height:27px;margin:4px 0 7px;font-size:8.5px;line-height:1.35;color:#6f7e86}.shopBuyRow{display:flex;align-items:center;justify-content:space-between;gap:5px;border-top:1px dashed #dce9ed;padding-top:6px}.shopPrice{font-size:9px;font-weight:1000;color:#6d5a4b;white-space:nowrap}.shopPrice.ownedPrice{color:#2d7758}.shopAction{min-height:0!important;height:auto;line-height:1;border:0;border-radius:9px;background:#f0a85d;color:#fff;padding:7px 9px;font:inherit;font-size:9px;font-weight:1000;cursor:pointer;touch-action:manipulation;box-shadow:0 2px 5px rgba(136,83,34,.15)}.shopAction:active{transform:translateY(1px)}.shopAction.equipAction{background:#53aeca}.shopAction.activeAction{background:#75b999}.shopAction:disabled{opacity:.62;cursor:default;box-shadow:none}.shopItem.cantAfford .shopAction:not(:disabled){background:#b9a99e}
+.researchCard .shopItemDesc{min-height:0}.researchMeta{display:flex;justify-content:space-between;gap:4px;margin:4px 0 5px;font-size:8px;font-weight:900;color:#60757f}.researchTrack{height:5px;border-radius:999px;background:#e6eef0;overflow:hidden;margin-bottom:7px}.researchTrack i{display:block;height:100%;width:0;background:#69bad1;border-radius:inherit;transition:.2s}.researchCard.maxed .researchTrack i{background:#d9b553}.researchBtn{border:0!important;border-radius:9px!important;background:#69abc2!important;color:#fff!important;padding:7px 9px!important;text-align:center!important;font:inherit!important;font-size:9px!important;font-weight:1000!important;line-height:1!important;min-height:auto!important;box-shadow:0 2px 5px rgba(43,93,110,.13)}.researchBtn:disabled{background:#c5b67f!important;color:#fff!important;opacity:.8!important}.researchBtn span,.researchBtn b,.researchBtn small{display:none!important}
+.pauseActions,.resultActions{display:grid;grid-template-columns:1fr;gap:8px}.pauseActions .btn,.resultActions .btn{width:100%;margin:0}.btn.secondaryBtn{background:#fff;color:#39758c;border:2px solid #a9d3e1;box-shadow:none}.btn.secondaryBtn:hover{filter:none}.btn.saveTitleBtn{background:#eef9fc;color:#31758c;border:2px solid #a9d3e1;box-shadow:none}.pauseSaveNote{margin:8px 0 0!important;font-size:10px!important;color:#6c7f88;font-weight:800!important}.pauseBtn{line-height:1}.pauseBtn small{display:block;font-size:6.5px;line-height:1;margin-top:-4px}.resultActions{margin-top:4px}.upgradeHomeBtn{margin-top:10px;border:0;background:transparent;color:#4d7d90;font:inherit;font-size:10px;font-weight:1000;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:7px 10px}
+@media(max-width:520px){.shopGrid{grid-template-columns:1fr}.shopWelcome{grid-template-columns:auto 1fr}.pearlWallet{grid-column:1/-1;justify-self:stretch;text-align:center;padding:6px}.shopItem{padding:9px}.shopItemIcon{font-size:28px}.shopItemName{font-size:13px}.shopItemDesc{font-size:10px;min-height:0}.shopStatus{font-size:9px}.shopPrice{font-size:11px}.shopAction,.researchBtn{font-size:11px!important;padding:9px 11px!important}.researchMeta{font-size:9.5px}}
+@media(orientation:landscape) and (max-height:620px){.shopGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.shopWelcome{padding:6px 8px;margin-bottom:6px}.shopKeeper{width:34px;height:34px;font-size:20px}.shopWelcomeText strong{font-size:11px}.shopWelcomeText small{font-size:8px}.shopItem{padding:6px}.shopItemIcon{font-size:19px}.shopItemName{font-size:9px}.shopItemDesc{min-height:20px;font-size:7px;margin:2px 0 5px}.shopAction,.researchBtn{font-size:8px!important;padding:6px 7px!important}.shopStatus{font-size:6.5px;min-height:17px}.shopPrice{font-size:8px}.researchMeta{font-size:7px}.researchTrack{margin-bottom:5px}}
+
 </style>
 </head>
 <body>
@@ -214,7 +226,7 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
 <div class="eventBanner" id="eventBanner"></div>
 <button class="dashBtn ready" id="dashBtn" type="button" aria-label="ダッシュ"><span>💨</span><small id="dashCd">DASH</small></button>
 <button class="musicGameBtn" id="musicGameBtn" type="button" aria-label="BGM切替"><span>🎵</span><small>BGM</small></button>
-<button class="pauseBtn" id="pauseBtn" type="button" aria-label="一時停止"><span>⏸</span></button>
+<button class="pauseBtn" id="pauseBtn" type="button" aria-label="メニューを開く"><span>☰</span><small>MENU</small></button>
 
 <div class="bossbar" id="bossbar">
   <div class="row"><span>🦈 巨大サメから逃げ切れ！</span><span id="bossTime">12.0s</span></div>
@@ -281,30 +293,35 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
         <button class="toolBtn installMenuBtn" id="installBtn" type="button">📲<br><span>ホームに追加</span></button>
       </div>
 
-      <details class="metaDetails">
-        <summary>🦪 しんじゅ交換所 <span>現在 <b id="pearlCount">0</b>個</span></summary>
+      <details class="metaDetails shopDetails">
+        <summary>🛍️ しんじゅショップ <span>タップしてお店を開く</span></summary>
         <div class="metaBox">
+          <div class="shopWelcome">
+            <div class="shopKeeper">🐚</div>
+            <div class="shopWelcomeText"><strong>メンダコ商店へようこそ！</strong><small>しんじゅでお守りを買ったり、海の研究を進められます。</small></div>
+            <div class="pearlWallet">🦪 所持 <b id="pearlCount">0</b> 個</div>
+          </div>
           <div class="shopSection">
-            <div class="shopSectionTitle"><strong>🎒 お守り</strong><small>永久解放・1つ装備</small></div>
-            <div class="charmRow">
-              <button class="charmBtn" type="button" data-charm="bubble"><span>🫧</span><b>初期バリア</b><small>8個</small></button>
-              <button class="charmBtn" type="button" data-charm="current"><span>🌊</span><b>潮のお守り</b><small>12個</small></button>
-              <button class="charmBtn" type="button" data-charm="star"><span>⭐</span><b>星のお守り</b><small>16個</small></button>
-              <button class="charmBtn" type="button" data-charm="rhythm"><span>🎵</span><b>リズム貝</b><small>22個</small></button>
-              <button class="charmBtn" type="button" data-charm="treasure"><span>🎁</span><b>宝さがし貝</b><small>26個</small></button>
-              <button class="charmBtn" type="button" data-charm="gourmet"><span>🍽️</span><b>ぱくぱく貝</b><small>30個</small></button>
-              <button class="charmBtn" type="button" data-charm="coral"><span>🪸</span><b>サンゴのお守り</b><small>36個</small></button>
+            <div class="shopSectionTitle"><strong>🎒 お守り売り場</strong><small>永久購入・1つだけ装備</small></div>
+            <div class="shopGrid charmRow">
+              <article class="shopItem charmCard" data-charm-card="bubble"><div class="shopItemTop"><span class="shopItemIcon">🫧</span><span class="shopStatus" data-charm-status="bubble">未購入</span></div><b class="shopItemName">初期バリア</b><p class="shopItemDesc">ゲーム開始時にバリアを1回分つけます。</p><div class="shopBuyRow"><span class="shopPrice" data-charm-price="bubble">🦪 8個</span><button class="shopAction charmBtn" type="button" data-charm="bubble">購入する</button></div></article>
+              <article class="shopItem charmCard" data-charm-card="current"><div class="shopItemTop"><span class="shopItemIcon">🌊</span><span class="shopStatus" data-charm-status="current">未購入</span></div><b class="shopItemName">潮のお守り</b><p class="shopItemDesc">ダッシュのクールタイムを18%短縮します。</p><div class="shopBuyRow"><span class="shopPrice" data-charm-price="current">🦪 12個</span><button class="shopAction charmBtn" type="button" data-charm="current">購入する</button></div></article>
+              <article class="shopItem charmCard" data-charm-card="star"><div class="shopItemTop"><span class="shopItemIcon">⭐</span><span class="shopStatus" data-charm-status="star">未購入</span></div><b class="shopItemName">星のお守り</b><p class="shopItemDesc">珍しい生き物に出会える確率が少し上がります。</p><div class="shopBuyRow"><span class="shopPrice" data-charm-price="star">🦪 16個</span><button class="shopAction charmBtn" type="button" data-charm="star">購入する</button></div></article>
+              <article class="shopItem charmCard" data-charm-card="rhythm"><div class="shopItemTop"><span class="shopItemIcon">🎵</span><span class="shopStatus" data-charm-status="rhythm">未購入</span></div><b class="shopItemName">リズム貝</b><p class="shopItemDesc">コンボが切れるまでの猶予を0.45秒延ばします。</p><div class="shopBuyRow"><span class="shopPrice" data-charm-price="rhythm">🦪 22個</span><button class="shopAction charmBtn" type="button" data-charm="rhythm">購入する</button></div></article>
+              <article class="shopItem charmCard" data-charm-card="treasure"><div class="shopItemTop"><span class="shopItemIcon">🎁</span><span class="shopStatus" data-charm-status="treasure">未購入</span></div><b class="shopItemName">宝さがし貝</b><p class="shopItemDesc">プレイ中のアイテム出現率が上がります。</p><div class="shopBuyRow"><span class="shopPrice" data-charm-price="treasure">🦪 26個</span><button class="shopAction charmBtn" type="button" data-charm="treasure">購入する</button></div></article>
+              <article class="shopItem charmCard" data-charm-card="gourmet"><div class="shopItemTop"><span class="shopItemIcon">🍽️</span><span class="shopStatus" data-charm-status="gourmet">未購入</span></div><b class="shopItemName">ぱくぱく貝</b><p class="shopItemDesc">少し大きな相手でも捕食しやすくなります。</p><div class="shopBuyRow"><span class="shopPrice" data-charm-price="gourmet">🦪 30個</span><button class="shopAction charmBtn" type="button" data-charm="gourmet">購入する</button></div></article>
+              <article class="shopItem charmCard" data-charm-card="coral"><div class="shopItemTop"><span class="shopItemIcon">🪸</span><span class="shopStatus" data-charm-status="coral">未購入</span></div><b class="shopItemName">サンゴのお守り</b><p class="shopItemDesc">ボス攻撃の予告を0.16秒長く表示します。</p><div class="shopBuyRow"><span class="shopPrice" data-charm-price="coral">🦪 36個</span><button class="shopAction charmBtn" type="button" data-charm="coral">購入する</button></div></article>
             </div>
           </div>
           <div class="shopSection">
-            <div class="shopSectionTitle"><strong>🔬 海の研究</strong><small>各Lv.20まで永久強化</small></div>
-            <div class="researchRow">
-              <button class="researchBtn" type="button" data-research="fins"><span>💨</span><b>ヒレ研究</b><small>Lv.0/20</small></button>
-              <button class="researchBtn" type="button" data-research="dash"><span>🌀</span><b>ダッシュ研究</b><small>Lv.0/20</small></button>
-              <button class="researchBtn" type="button" data-research="combo"><span>🎵</span><b>コンボ研究</b><small>Lv.0/20</small></button>
-              <button class="researchBtn" type="button" data-research="rare"><span>✨</span><b>発見研究</b><small>Lv.0/20</small></button>
+            <div class="shopSectionTitle"><strong>🔬 海の研究所</strong><small>各Lv.20まで永久強化</small></div>
+            <div class="shopGrid researchRow">
+              <article class="shopItem researchCard" data-research-card="fins"><div class="shopItemTop"><span class="shopItemIcon">💨</span><span class="shopStatus" data-research-level="fins">Lv.0/20</span></div><b class="shopItemName">ヒレ研究</b><p class="shopItemDesc">メンダコの移動速度を少しずつ強化。</p><div class="researchMeta"><span data-research-effect="fins">速度 +0.0%</span><span data-research-next="fins">次 🦪8</span></div><div class="researchTrack"><i data-research-bar="fins"></i></div><div class="shopBuyRow"><span class="shopPrice" data-research-price="fins">🦪 8個</span><button class="researchBtn" type="button" data-research="fins">研究する</button></div></article>
+              <article class="shopItem researchCard" data-research-card="dash"><div class="shopItemTop"><span class="shopItemIcon">🌀</span><span class="shopStatus" data-research-level="dash">Lv.0/20</span></div><b class="shopItemName">ダッシュ研究</b><p class="shopItemDesc">ダッシュの待ち時間を少しずつ短縮。</p><div class="researchMeta"><span data-research-effect="dash">CT -0.0%</span><span data-research-next="dash">次 🦪8</span></div><div class="researchTrack"><i data-research-bar="dash"></i></div><div class="shopBuyRow"><span class="shopPrice" data-research-price="dash">🦪 8個</span><button class="researchBtn" type="button" data-research="dash">研究する</button></div></article>
+              <article class="shopItem researchCard" data-research-card="combo"><div class="shopItemTop"><span class="shopItemIcon">🎵</span><span class="shopStatus" data-research-level="combo">Lv.0/20</span></div><b class="shopItemName">コンボ研究</b><p class="shopItemDesc">コンボをつなげられる時間を少しずつ延長。</p><div class="researchMeta"><span data-research-effect="combo">猶予 +0.00秒</span><span data-research-next="combo">次 🦪8</span></div><div class="researchTrack"><i data-research-bar="combo"></i></div><div class="shopBuyRow"><span class="shopPrice" data-research-price="combo">🦪 8個</span><button class="researchBtn" type="button" data-research="combo">研究する</button></div></article>
+              <article class="shopItem researchCard" data-research-card="rare"><div class="shopItemTop"><span class="shopItemIcon">✨</span><span class="shopStatus" data-research-level="rare">Lv.0/20</span></div><b class="shopItemName">発見研究</b><p class="shopItemDesc">レアな生き物の出現率を少しずつ強化。</p><div class="researchMeta"><span data-research-effect="rare">レア +0.0%</span><span data-research-next="rare">次 🦪8</span></div><div class="researchTrack"><i data-research-bar="rare"></i></div><div class="shopBuyRow"><span class="shopPrice" data-research-price="rare">🦪 8個</span><button class="researchBtn" type="button" data-research="rare">研究する</button></div></article>
             </div>
-            <div class="shopHint">研究は1段階ずつ小さく強化。4系統をLv.20まで育てると合計2,920個のしんじゅを使えます。</div>
+            <div class="shopHint">研究は1段階ずつ小さく強化。しんじゅを長く使える育成要素です。</div>
           </div>
         </div>
       </details>
@@ -321,6 +338,7 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
     <h2>🧬 進化を1つ選ぼう</h2>
     <p>今回のプレイだけ有効。毎回ちがう育て方ができます。</p>
     <div class="upgradeChoices" id="upgradeChoices"></div>
+    <button class="upgradeHomeBtn" id="upgradeHomeBtn" type="button">💾 保存してタイトルへ</button>
   </div>
 </div>
 
@@ -347,9 +365,13 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
 
 <div class="pauseOverlay hidden" id="pauseOverlay">
   <div class="pausePanel">
-    <h2>⏸ PAUSE</h2>
-    <p id="pauseMessage">少し休憩。準備できたら海へ戻ろう。</p>
-    <button class="btn" id="resumeBtn" type="button">ゲームに戻る</button>
+    <h2>☰ ゲームメニュー</h2>
+    <p id="pauseMessage">ゲームを一時停止しています。</p>
+    <div class="pauseActions">
+      <button class="btn" id="resumeBtn" type="button">▶ ゲームに戻る</button>
+      <button class="btn saveTitleBtn" id="pauseHomeBtn" type="button">💾 保存してタイトルへ</button>
+    </div>
+    <p class="pauseSaveNote">タイトルへ戻っても「続きから」で再開できます。</p>
   </div>
 </div>
 
@@ -365,7 +387,10 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
       ベスト：<span id="best">0</span> 点<br>プレイ時間：<span id="resultTime">0:00</span>
     </div>
     <div class="resultMeta">最大コンボ：<span id="resultCombo">0</span> ／ ニアミス：<span id="resultNearMiss">0</span><br>図鑑：<span id="resultDex">0/0</span> ／ ボス撃退：<span id="resultBosses">0</span><br>🦪 しんじゅ獲得：<span id="resultPearls">0</span> <span id="resultRoutes"></span></div>
-    <button class="btn" id="retryBtn">もう一度あそぶ！</button>
+    <div class="resultActions">
+      <button class="btn" id="retryBtn">🔄 もう一度あそぶ！</button>
+      <button class="btn secondaryBtn" id="resultHomeBtn" type="button">🏠 タイトルへ戻る</button>
+    </div>
   </div>
 </div>
 </div>
@@ -387,7 +412,7 @@ const ui={
  toast:document.getElementById("toast"),tip:document.getElementById("tip"),
  bossbar:document.getElementById("bossbar"),bossTime:document.getElementById("bossTime"),bossMeter:document.getElementById("bossMeter"),
  start:document.getElementById("start"),result:document.getElementById("result"),
- startBtn:document.getElementById("startBtn"),retryBtn:document.getElementById("retryBtn"),
+ startBtn:document.getElementById("startBtn"),retryBtn:document.getElementById("retryBtn"),resultHomeBtn:document.getElementById("resultHomeBtn"),
  finalScore:document.getElementById("finalScore"),finalStage:document.getElementById("finalStage"),
  finalZone:document.getElementById("finalZone"),best:document.getElementById("best"),record:document.getElementById("record"),
  comboHud:document.getElementById("comboHud"),missionHud:document.getElementById("missionHud"),buffHud:document.getElementById("buffHud"),eventBanner:document.getElementById("eventBanner"),
@@ -400,6 +425,8 @@ const pauseBtn=document.getElementById("pauseBtn");
 const pauseOverlay=document.getElementById("pauseOverlay");
 const pauseMessage=document.getElementById("pauseMessage");
 const resumeBtn=document.getElementById("resumeBtn");
+const pauseHomeBtn=document.getElementById("pauseHomeBtn");
+const upgradeHomeBtn=document.getElementById("upgradeHomeBtn");
 const resumeBox=document.getElementById("resumeBox");
 const resumeInfo=document.getElementById("resumeInfo");
 const resumeSavedAt=document.getElementById("resumeSavedAt");
@@ -625,6 +652,13 @@ function updateMusicButtons(){
 }
 function pauseGame(message="少し休憩。準備できたら海へ戻ろう。"){if(!playing||pausedForUpgrade||pausedForRoute)return;manualPaused=true;player.vx=player.vy=0;pauseMessage.textContent=message;pauseOverlay.classList.remove("hidden");updateDashUI();saveRunState("pause")}
 function resumeGame(){if(!playing)return;manualPaused=false;pauseOverlay.classList.add("hidden");last=performance.now();pointer.x=player.x;pointer.y=player.y;player.inv=Math.max(player.inv,.9);updateDashUI();armBackGuard();saveRunState("resume")}
+function returnToTitleFromRun(){
+ if(!playing)return;saveRunState("title");const saved=cachedRunSave||getRunSave();playing=false;manualPaused=false;pausedForUpgrade=false;pausedForRoute=false;backGuardArmed=false;cancelAnimationFrame(raf);player.vx=player.vy=0;pointer.active=false;
+ pauseOverlay.classList.add("hidden");ui.upgradeOverlay.classList.add("hidden");ui.routeOverlay.classList.add("hidden");ui.bossbar.classList.remove("show");ui.eventBanner.classList.remove("show");ui.result.classList.add("hidden");ui.start.classList.remove("hidden");stopAmbientMusic();refreshMetaUI();refreshLoadoutUI();refreshResumeBox(saved);render(performance.now());
+}
+function returnToTitleAfterRun(){
+ playing=false;manualPaused=false;pausedForUpgrade=false;pausedForRoute=false;backGuardArmed=false;cancelAnimationFrame(raf);pauseOverlay.classList.add("hidden");ui.result.classList.add("hidden");ui.upgradeOverlay.classList.add("hidden");ui.routeOverlay.classList.add("hidden");ui.bossbar.classList.remove("show");ui.eventBanner.classList.remove("show");ui.start.classList.remove("hidden");stopAmbientMusic();refreshMetaUI();refreshLoadoutUI();refreshResumeBox();render(performance.now());
+}
 
 function cloneData(v){try{return JSON.parse(JSON.stringify(v))}catch{return null}}
 function transformEntity(e,sx,sy,sr){
@@ -741,14 +775,20 @@ function researchEffectText(id,lv=researchLevel(id)){
 function refreshMetaUI(){
  ui.pearlCount.textContent=meta.pearls;
  document.querySelectorAll(".charmBtn").forEach(btn=>{
-  const id=btn.dataset.charm,info=CHARM_INFO[id],owned=!!meta.charms[id];
-  btn.classList.toggle("unlocked",owned);btn.classList.toggle("selected",owned&&selectedEquip===id);btn.disabled=false;
-  const small=btn.querySelector("small");small.textContent=owned?(selectedEquip===id?`装備中 ・ ${info.desc}`:`${info.desc} ・ 装備する`):`${info.desc} ・ ${info.cost}個`;
+  const id=btn.dataset.charm,info=CHARM_INFO[id],owned=!!meta.charms[id],equipped=owned&&selectedEquip===id;
+  const card=document.querySelector(`[data-charm-card="${id}"]`),status=document.querySelector(`[data-charm-status="${id}"]`),price=document.querySelector(`[data-charm-price="${id}"]`);
+  card?.classList.toggle("owned",owned);card?.classList.toggle("equipped",equipped);card?.classList.toggle("cantAfford",!owned&&meta.pearls<info.cost);
+  if(status)status.textContent=equipped?"装備中":owned?"購入済み":"未購入";
+  if(price){price.textContent=owned?"✓ 購入済み":`🦪 ${info.cost}個`;price.classList.toggle("ownedPrice",owned)}
+  btn.textContent=equipped?"装備中":owned?"装備する":"購入する";
+  btn.classList.toggle("equipAction",owned&&!equipped);btn.classList.toggle("activeAction",equipped);btn.disabled=equipped;
  });
  document.querySelectorAll(".researchBtn").forEach(btn=>{
-  const id=btn.dataset.research,info=RESEARCH_INFO[id],lv=researchLevel(id),maxed=lv>=info.max,cost=researchCost(id);
-  btn.classList.toggle("maxed",maxed);btn.disabled=maxed;
-  const small=btn.querySelector("small"),effect=researchEffectText(id,lv);small.textContent=maxed?`${effect} ・ Lv.${lv} MAX`:`${effect} ・ Lv.${lv}/${info.max} ・ 次${cost}個`;
+  const id=btn.dataset.research,info=RESEARCH_INFO[id],lv=researchLevel(id),maxed=lv>=info.max,cost=researchCost(id),effect=researchEffectText(id,lv);
+  const card=document.querySelector(`[data-research-card="${id}"]`),level=document.querySelector(`[data-research-level="${id}"]`),effectEl=document.querySelector(`[data-research-effect="${id}"]`),next=document.querySelector(`[data-research-next="${id}"]`),price=document.querySelector(`[data-research-price="${id}"]`),bar=document.querySelector(`[data-research-bar="${id}"]`);
+  card?.classList.toggle("maxed",maxed);card?.classList.toggle("cantAfford",!maxed&&meta.pearls<cost);
+  if(level)level.textContent=maxed?`Lv.${lv} MAX`:`Lv.${lv}/${info.max}`;if(effectEl)effectEl.textContent=effect;if(next)next.textContent=maxed?"研究完了":`次 🦪${cost}`;if(price)price.textContent=maxed?"✓ MAX":`🦪 ${cost}個`;if(bar)bar.style.width=`${clamp(lv/info.max*100,0,100)}%`;
+  btn.textContent=maxed?"研究完了":"研究する";btn.disabled=maxed;
  });
  refreshLoadoutUI();
 }
@@ -1530,11 +1570,14 @@ document.getElementById("dexClose").addEventListener("click",closeBooks);documen
 ui.dexOverlay.addEventListener("click",e=>{if(e.target===ui.dexOverlay)closeBooks()});ui.achOverlay.addEventListener("click",e=>{if(e.target===ui.achOverlay)closeBooks()});
 ui.startBtn.addEventListener("click",startFreshGame);
 ui.retryBtn.addEventListener("click",startGame);
+ui.resultHomeBtn.addEventListener("click",returnToTitleAfterRun);
 ui.dashBtn.addEventListener("pointerdown",e=>{e.preventDefault();e.stopPropagation();triggerDash()});
 musicMenuBtn.addEventListener("click",()=>setMusicEnabled(!musicEnabled));
 musicGameBtn.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();setMusicEnabled(!musicEnabled)});
 pauseBtn.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();pauseGame()});
 resumeBtn.addEventListener("click",resumeGame);
+pauseHomeBtn.addEventListener("click",returnToTitleFromRun);
+upgradeHomeBtn.addEventListener("click",returnToTitleFromRun);
 document.querySelectorAll(".charmBtn").forEach(b=>b.addEventListener("click",()=>buyCharm(b.dataset.charm)));
 document.querySelectorAll(".researchBtn").forEach(b=>b.addEventListener("click",()=>buyResearch(b.dataset.research)));
 document.addEventListener("keydown",e=>{
