@@ -13,7 +13,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="メンダコ">
 
-<title>メンダコ・ディープサバイバル v14 PWA</title>
+<title>メンダコ・ディープサバイバル v15 PWA</title>
 <style>
 :root{--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
@@ -139,7 +139,7 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
 
 
 
-/* v14: selectable game level */
+/* v15: selectable game level + compact mobile balancing */
 .difficultyBox{margin:0 0 9px;padding:9px;border-radius:15px;background:#f7fbff;border:1px solid #d6eaf3}
 .difficultyTitle{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:1000;text-align:left;margin:0 2px 7px}
 .difficultyTitle small{font-size:10px;font-weight:900;color:#6e8793}
@@ -408,7 +408,7 @@ let combo=0,maxCombo=0,comboTimer=0,fever=0,magnet=0,shield=0;
 let itemTimer=10,eventTimer=18,eventState=null,eventElapsed=0;
 let pausedForUpgrade=false,pausedForRoute=false,upgradeMilestones=new Set(),sessionDiscoveries=0;
 let mission=null,missionId=0,missionNoDamage=0,lastMissionType="",missionsCompleted=0;
-let upgrades={speed:0,appetite:0,lucky:0,treasure:0};
+let upgrades={speed:0,appetite:0,lucky:0,treasure:0,agility:0,rhythm:0};
 let dashCooldown=0,dashActive=0,nearMisses=0,chestsOpened=0;
 let currentRoute=null,routeHistory=[],routeMods={smallBias:0,rareBonus:0,dangerBias:0,itemBonus:0,chestBonus:0,speedBonus:0,comboBonus:0},pendingUpgradeReason=null;
 const SPECIES_INFO={
@@ -424,7 +424,9 @@ const UPGRADE_POOL=[
  {id:"lucky",icon:"⭐",name:"きらきら体質",desc:"レア出現率アップ"},
  {id:"treasure",icon:"🎁",name:"お宝センサー",desc:"アイテム出現率アップ"},
  {id:"shield",icon:"🫧",name:"あわバリア",desc:"1回だけダメージ無効"},
- {id:"heart",icon:"💗",name:"げんき回復",desc:"ライフを1回復"}
+ {id:"heart",icon:"💗",name:"げんき回復",desc:"ライフを1回復"},
+ {id:"agility",icon:"🌀",name:"くるりヒレ",desc:"ダッシュのクールタイム -12%"},
+ {id:"rhythm",icon:"🎵",name:"もぐもぐリズム",desc:"コンボ猶予 +0.35秒"},
 ];
 const MISSION_POOL=[
  {type:"eat",target:10,label:"生き物を10匹食べる"},
@@ -484,6 +486,19 @@ if(!DIFFICULTY_INFO[meta.selectedDifficulty])meta.selectedDifficulty="normal";
 let selectedStyle=meta.selectedStyle,selectedEquip=meta.selectedEquip,selectedDifficulty=meta.selectedDifficulty;
 function difficulty(){return DIFFICULTY_INFO[selectedDifficulty]||DIFFICULTY_INFO.normal}
 function maxLife(){return difficulty().maxLife}
+function compactViewport(){return W<=600||(W>H&&H<620)}
+function playerStageScale(idx=stageIdx){
+ const factors=[1,.98,.95,.92,.88,.84];
+ return compactViewport()?(factors[clamp(idx,0,factors.length-1)]||.84):1;
+}
+function playerRadiusForStage(idx=stageIdx){return STAGES[idx].size*worldScale*playerStageScale(idx)}
+function playerHitRadius(){return player.r*(compactViewport()?.82:.9)}
+function touchFingerOffset(){
+ if(pointer.kind!=="touch")return 0;
+ return Math.min(84,Math.min(72,Math.max(44,H*.075))+Math.min(12,stageIdx*2.4));
+}
+function moveViewportFactor(){return compactViewport()?(boss?1.04:.97):1}
+function bossWarningDuration(final){return (final?.42:.64)+(selectedDifficulty==="easy"?.12:0)+(compactViewport()?.08:0)}
 
 const pointer={x:0,y:0,active:false,kind:"mouse"};
 const player={x:0,y:0,vx:0,vy:0,r:22,angle:0,inv:0};
@@ -495,7 +510,7 @@ function computeWorldScale(){
 }
 function gameTop(){return (W>H&&H<620)?66:(W<=600?78:105)}
 function gameBottom(){return H-Math.max(18,parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--safe-bottom"))||0)}
-function ambientTarget(){return (W<=600||(W>H&&H<620))?3:5}
+function ambientTarget(){return compactViewport()?3:5}
 function resize(){
  const oldScale=worldScale||1;
  const wasLandscape=lastLandscape;
@@ -507,11 +522,11 @@ function resize(){
  ctx.setTransform(dpr,0,0,dpr,0,0);
  const ratio=worldScale/oldScale;
  if(Number.isFinite(ratio)&&Math.abs(ratio-1)>.001){
-  player.r*=ratio;
-  for(const c of creatures)c.r*=ratio;
   for(const a of ambient)a.r*=ratio;
   if(boss)boss.r*=ratio;
  }
+ player.r=playerRadiusForStage(stageIdx);
+ for(const c of creatures){if(Number.isFinite(c.ratio))c.r=player.r*c.ratio;else c.r*=ratio}
  if(!pointer.x){pointer.x=W*.58;pointer.y=H*.62}
  player.x=clamp(player.x||W*.5,player.r,W-player.r);
  player.y=clamp(player.y||H*.6,gameTop()+player.r,gameBottom()-player.r);
@@ -642,11 +657,11 @@ function restoreRunState(s){
  fever=Math.max(0,Number(s.fever)||0);magnet=Math.max(0,Number(s.magnet)||0);shield=clamp(Number(s.shield)||0,0,2);
  itemTimer=Math.max(.1,Number(s.itemTimer)||8);eventTimer=Math.max(.1,Number(s.eventTimer)||12);eventState=cloneData(s.eventState);eventElapsed=Math.max(0,Number(s.eventElapsed)||0);sessionDiscoveries=Math.max(0,Number(s.sessionDiscoveries)||0);
  upgradeMilestones=new Set(Array.isArray(s.upgradeMilestones)?s.upgradeMilestones:[]);mission=cloneData(s.mission);missionId=Math.max(0,Number(s.missionId)||0);missionNoDamage=Math.max(0,Number(s.missionNoDamage)||0);lastMissionType=String(s.lastMissionType||"");missionsCompleted=Math.max(0,Number(s.missionsCompleted)||0);
- upgrades={speed:0,appetite:0,lucky:0,treasure:0,...(s.upgrades||{})};dashCooldown=Math.max(0,Number(s.dashCooldown)||0);dashActive=0;nearMisses=Math.max(0,Number(s.nearMisses)||0);chestsOpened=Math.max(0,Number(s.chestsOpened)||0);
+ upgrades={speed:0,appetite:0,lucky:0,treasure:0,agility:0,rhythm:0,...(s.upgrades||{})};dashCooldown=Math.max(0,Number(s.dashCooldown)||0);dashActive=0;nearMisses=Math.max(0,Number(s.nearMisses)||0);chestsOpened=Math.max(0,Number(s.chestsOpened)||0);
  currentRoute=cloneData(s.currentRoute);routeHistory=Array.isArray(s.routeHistory)?cloneData(s.routeHistory):[];routeMods={smallBias:0,rareBonus:0,dangerBias:0,itemBonus:0,chestBonus:0,speedBonus:0,comboBonus:0,...(s.routeMods||{})};pendingUpgradeReason=s.pendingUpgradeReason||null;
  boss=transformEntity(s.boss,sx,sy,sr);bossTriggered=!!s.bossTriggered||!!boss;bossCooldown=Math.max(0,Number(s.bossCooldown)||0);bossCount=Math.max(0,Number(s.bossCount)||0);nextBossIndex=clamp(Number(s.nextBossIndex)||0,0,BOSS_SCHEDULE.length);runTime=clamp(Number(s.runTime)||0,0,RUN_SECONDS+60);runCleared=false;
- Object.assign(player,transformEntity(s.player,sx,sy,sr)||{});player.x=clamp(Number(player.x)||W*.5,player.r,W-player.r);player.y=clamp(Number(player.y)||H*.6,gameTop()+player.r,gameBottom()-player.r);player.inv=Math.max(Number(player.inv)||0,1.8);
- creatures=(Array.isArray(s.creatures)?s.creatures:[]).map(e=>transformEntity(e,sx,sy,sr)).filter(Boolean).slice(0,40);
+ Object.assign(player,transformEntity(s.player,sx,sy,sr)||{});player.r=playerRadiusForStage(stageIdx);player.x=clamp(Number(player.x)||W*.5,player.r,W-player.r);player.y=clamp(Number(player.y)||H*.6,gameTop()+player.r,gameBottom()-player.r);player.inv=Math.max(Number(player.inv)||0,1.8);
+ creatures=(Array.isArray(s.creatures)?s.creatures:[]).map(e=>{const c=transformEntity(e,sx,sy,sr);if(c&&Number.isFinite(c.ratio))c.r=player.r*c.ratio;return c}).filter(Boolean).slice(0,40);
  pickups=(Array.isArray(s.pickups)?s.pickups:[]).map(e=>transformEntity(e,sx,sy,sr)).filter(Boolean).slice(0,6);
  hazards=(Array.isArray(s.hazards)?s.hazards:[]).map(e=>transformEntity(e,sx,sy,sr)).filter(Boolean).slice(0,12);
  ambient=(Array.isArray(s.ambient)?s.ambient:[]).map(e=>transformEntity(e,sx,sy,sr)).filter(Boolean).slice(0,6);if(!ambient.length)for(let i=0;i<ambientTarget();i++)ambient.push(makeAmbient(true));
@@ -724,7 +739,7 @@ function buyCharm(id){
  if(meta.pearls<cost){showToast(`🦪 しんじゅがあと${cost-meta.pearls}個必要`,1200);return}
  meta.pearls-=cost;meta.charms[id]=true;saveMeta();refreshMetaUI();showToast("✨ お守りを解放した！",1200);beep(880,.08,"sine",.05);
 }
-function dashCooldownMax(){return 4.9*(selectedEquip==="current"?.82:1)*(STYLE_INFO[selectedStyle].dashCd||1)}
+function dashCooldownMax(){return 4.9*(selectedEquip==="current"?.82:1)*(STYLE_INFO[selectedStyle].dashCd||1)*Math.pow(.88,upgrades.agility||0)}
 function updateDashUI(){
  const ready=dashCooldown<=0&&!pausedForUpgrade&&!pausedForRoute&&!manualPaused&&playing;
  ui.dashBtn.classList.toggle("ready",ready);ui.dashBtn.classList.toggle("cooling",!ready);
@@ -733,11 +748,11 @@ function updateDashUI(){
 }
 function triggerDash(){
  if(!playing||pausedForUpgrade||pausedForRoute||manualPaused||dashCooldown>0)return;
- const fingerOffset=pointer.kind==="touch"?Math.min(70,Math.max(42,H*.075)):0;
+ const fingerOffset=touchFingerOffset();
  const tx=pointer.x,ty=clamp(pointer.y-fingerOffset,gameTop()+player.r,gameBottom()-player.r);
  let dx=tx-player.x,dy=ty-player.y,d=Math.hypot(dx,dy);
  if(d<8){d=Math.hypot(player.vx,player.vy);dx=d>3?player.vx:1;dy=d>3?player.vy:0;d=Math.hypot(dx,dy)}
- const speed=(W<=600?500:570)*(1+upgrades.speed*.05);
+ const speed=(compactViewport()?520:570)*(1+upgrades.speed*.05);
  player.vx=dx/d*speed;player.vy=dy/d*speed;dashActive=.26;dashCooldown=dashCooldownMax();player.inv=Math.max(player.inv,.34);
  burst(player.x,player.y,"💨",5);beep(760,.055,"sine",.045);updateDashUI();
 }
@@ -771,10 +786,11 @@ function discoverType(type){
 }
 function comboMultiplier(){return 1+Math.min(2,Math.floor(Math.max(0,combo-1)/5)*.25)}
 function registerEat(c,basePts){
- combo=comboTimer>0?combo+1:1;comboTimer=1.95+routeMods.comboBonus;maxCombo=Math.max(maxCombo,combo);
+ combo=comboTimer>0?combo+1:1;comboTimer=1.95+routeMods.comboBonus+(upgrades.rhythm||0)*.35;maxCombo=Math.max(maxCombo,combo);
  let mult=comboMultiplier();if(fever>0)mult*=2;if(eventState?.kind==="sparkle")mult*=1.25;
  const gained=Math.round(basePts*mult);score+=gained;
  if(combo>1)showFloatText(c.x,c.y-c.r*.9,`+${gained}  x${mult.toFixed(mult%1?2:0)}`);
+ if(combo===5||combo===10||combo===20)burst(player.x,player.y,"💗",combo===20?7:4);
  if(combo>0&&combo%12===0){fever=Math.max(fever,7);showToast("🔥 きらきらラッシュ！ 7秒スコア2倍",1400);beep(1050,.1,"sine",.06)}
  missionProgress("eat",1);if(c.rare)missionProgress("rare",1);missionProgress("combo",combo,true);
  discoverType(c.type);recordSpecies(c.type);meta.stats.maxCombo=Math.max(meta.stats.maxCombo,maxCombo);checkAchievements();
@@ -833,7 +849,9 @@ function startRandomEvent(){
  const events=[
   {kind:"plankton",icon:"🦐",name:"プランクトン大発生",time:8},
   {kind:"treasure",icon:"🎁",name:"お宝潮流",time:8},
-  {kind:"sparkle",icon:"✨",name:"きらめく海",time:9}
+  {kind:"sparkle",icon:"✨",name:"きらめく海",time:9},
+  {kind:"current",icon:"🌊",name:"追い潮フィーバー",time:7},
+  {kind:"parade",icon:"🐟",name:"おさかなパレード",time:7},
  ];
  if(currentZone()>=1){events.push({kind:"chest",icon:"🧰",name:"海底のお宝",time:12});if(routeMods.chestBonus>.2)events.push({kind:"chest",icon:"🧰",name:"沈没船のお宝",time:12})}
  eventState={...events[Math.floor(Math.random()*events.length)]};eventElapsed=0;
@@ -845,7 +863,7 @@ function endRandomEvent(){eventState=null;ui.eventBanner.classList.remove("show"
 function offerUpgrade(reason="成長ボーナス"){
  if(pausedForUpgrade||pausedForRoute||!playing)return;
  pausedForUpgrade=true;player.vx=player.vy=0;
- const pool=[...UPGRADE_POOL].sort(()=>Math.random()-.5).slice(0,3);
+ const eligible=UPGRADE_POOL.filter(up=>!(up.id==="heart"&&lives>=maxLife())&&!(up.id==="shield"&&shield>=2));const pool=[...(eligible.length>=3?eligible:UPGRADE_POOL)].sort(()=>Math.random()-.5).slice(0,3);
  ui.upgradeChoices.innerHTML="";
  for(const up of pool){
   const b=document.createElement("button");b.type="button";b.className="upgradeChoice";
@@ -864,10 +882,10 @@ function selectUpgrade(up){
 
 function currentZone(){return STAGES[stageIdx].zone}
 function updateUI(){
- ui.score.textContent=(W<=600?"★ ":"")+score.toLocaleString("ja-JP");
+ ui.score.textContent=(compactViewport()?"★ ":"")+score.toLocaleString("ja-JP");
  ui.life.textContent="❤".repeat(lives)+"♡".repeat(Math.max(0,maxLife()-lives));
- ui.stage.textContent=W<=600?`Lv.${stageIdx+1} ${STAGES[stageIdx].name.replace("メンダコ","")}`:`${STAGES[stageIdx].name} Lv.${stageIdx+1}`;
- ui.zone.textContent=W<=600?ZONES[currentZone()].short:ZONES[currentZone()].name;
+ ui.stage.textContent=compactViewport()?`Lv.${stageIdx+1} ${STAGES[stageIdx].name.replace("メンダコ","")}`:`${STAGES[stageIdx].name} Lv.${stageIdx+1}`;
+ ui.zone.textContent=compactViewport()?ZONES[currentZone()].short:ZONES[currentZone()].name;
  const cur=STAGES[stageIdx].need,next=STAGES[Math.min(stageIdx+1,STAGES.length-1)].need;
  const p=stageIdx===STAGES.length-1?100:((eaten-cur)/(next-cur))*100;
  ui.bar.style.width=clamp(p,0,100)+"%";
@@ -881,8 +899,8 @@ function reset(){
  cancelAnimationFrame(raf);creatures=[];particles=[];pickups=[];hazards=[];boss=null;bossTriggered=false;bossCooldown=0;bossCount=0;nextBossIndex=0;runTime=0;runCleared=false;
  score=0;eaten=0;stageIdx=0;lives=maxLife();spawnAcc=0;combo=0;maxCombo=0;comboTimer=0;fever=0;magnet=0;shield=selectedEquip==="bubble"?1:0;
  itemTimer=rand(10,15);eventTimer=rand(12,18);eventState=null;sessionDiscoveries=0;pausedForUpgrade=false;pausedForRoute=false;upgradeMilestones=new Set();
- upgrades={speed:0,appetite:0,lucky:0,treasure:0};mission=null;missionNoDamage=0;missionsCompleted=0;dashCooldown=0;dashActive=0;nearMisses=0;chestsOpened=0;currentRoute=null;routeHistory=[];routeMods={smallBias:0,rareBonus:0,dangerBias:0,itemBonus:0,chestBonus:0,speedBonus:0,comboBonus:0};pendingUpgradeReason=null;
- player.x=W*.5;player.y=Math.max(gameTop()+60,H*.60);player.vx=player.vy=0;player.r=STAGES[0].size*worldScale;player.inv=0;
+ upgrades={speed:0,appetite:0,lucky:0,treasure:0,agility:0,rhythm:0};mission=null;missionNoDamage=0;missionsCompleted=0;dashCooldown=0;dashActive=0;nearMisses=0;chestsOpened=0;currentRoute=null;routeHistory=[];routeMods={smallBias:0,rareBonus:0,dangerBias:0,itemBonus:0,chestBonus:0,speedBonus:0,comboBonus:0};pendingUpgradeReason=null;
+ player.x=W*.5;player.y=Math.max(gameTop()+60,H*.60);player.vx=player.vy=0;player.r=playerRadiusForStage(0);player.inv=0;
  pointer.x=W*.63;pointer.y=player.y;pointer.active=false;pointer.kind="mouse";
  ui.bossbar.classList.remove("show");ui.upgradeOverlay.classList.add("hidden");ui.routeOverlay.classList.add("hidden");ui.eventBanner.classList.remove("show");seedBubbles();updateUI();updateComboUI();updateBuffUI();updateDashUI();newMission();
 }
@@ -897,10 +915,11 @@ function makeAmbient(initial=false){
 }
 
 function spawnCreature(){
- if(creatures.length>(W<=600?18:30)||boss)return;
+ if(creatures.length>(compactViewport()?18:30)||boss)return;
  const z=currentZone(),roll=Math.random(),pressure=clamp(runTime/RUN_SECONDS,0,1);
  let ratio;
  if(eventState?.kind==="plankton")ratio=rand(.22,.58);
+ else if(eventState?.kind==="parade")ratio=rand(.34,.82);
  else{
   const smallCut=clamp(.58-pressure*.07+routeMods.smallBias,.42,.76);
   const midCut=clamp(.79-pressure*.05+routeMods.smallBias*.22,.66,.88);
@@ -954,7 +973,7 @@ function spawnInkHazards(){
 }
 function spawnWave(x,y){hazards.push({type:"wave",x,y,r:8,maxR:175*worldScale,age:0,life:1.05,hit:false})}
 function updateHazards(dt){
- for(const h of hazards){h.age+=dt;h.life-=dt;if(h.type==="wave")h.r=h.maxR*clamp(h.age/1.05,0,1);if(h.hit||player.inv>0)continue;const d=Math.hypot(player.x-h.x,player.y-h.y);if(h.type==="ink"&&h.age>h.warn&&d<player.r+h.r*.74){h.hit=true;hurtFrom(h.x,h.y);if(!playing)return}if(h.type==="wave"&&h.age>.12&&Math.abs(d-h.r)<player.r+10*worldScale){h.hit=true;hurtFrom(h.x,h.y);if(!playing)return}}
+ for(const h of hazards){h.age+=dt;h.life-=dt;if(h.type==="wave")h.r=h.maxR*clamp(h.age/1.05,0,1);if(h.hit||player.inv>0)continue;const d=Math.hypot(player.x-h.x,player.y-h.y);if(h.type==="ink"&&h.age>h.warn&&d<playerHitRadius()+h.r*.74){h.hit=true;hurtFrom(h.x,h.y);if(!playing)return}if(h.type==="wave"&&h.age>.12&&Math.abs(d-h.r)<playerHitRadius()+10*worldScale){h.hit=true;hurtFrom(h.x,h.y);if(!playing)return}}
  hazards=hazards.filter(h=>h.life>0);
 }
 function finishBoss(){
@@ -981,16 +1000,16 @@ function updateBoss(dt){
   const final=boss.kind==="orca";
   if(boss.mode==="chase"){
    const a=Math.atan2(player.y-boss.y,player.x-boss.x);boss.vx+=Math.cos(a)*(final?90:64)*dt;boss.vy+=Math.sin(a)*(final?90:64)*dt;
-   if(boss.modeTimer<=0){boss.mode="warning";boss.modeTimer=final?.42:.64;boss.chargeAngle=Math.atan2(player.y-boss.y,player.x-boss.x);boss.vx*=.22;boss.vy*=.22;boss.nearMissReady=true;beep(185,.12,"sawtooth",.035)}
+   if(boss.modeTimer<=0){boss.mode="warning";boss.modeTimer=bossWarningDuration(final);boss.chargeAngle=Math.atan2(player.y-boss.y,player.x-boss.x);boss.vx*=.22;boss.vy*=.22;boss.nearMissReady=true;beep(185,.12,"sawtooth",.035)}
   }else if(boss.mode==="warning"){
-   boss.vx*=Math.pow(.08,dt);boss.vy*=Math.pow(.08,dt);if(boss.modeTimer<=0){boss.mode="charge";boss.modeTimer=final?.44:.55;const spd=(W<=600?(final?390:320):(final?460:380));boss.vx=Math.cos(boss.chargeAngle)*spd;boss.vy=Math.sin(boss.chargeAngle)*spd;beep(90,.11,"square",.045)}
+   boss.vx*=Math.pow(.08,dt);boss.vy*=Math.pow(.08,dt);if(boss.modeTimer<=0){boss.mode="charge";boss.modeTimer=final?.44:.55;const spd=(compactViewport()?(final?390:320):(final?460:380));boss.vx=Math.cos(boss.chargeAngle)*spd;boss.vy=Math.sin(boss.chargeAngle)*spd;beep(90,.11,"square",.045)}
   }else if(boss.mode==="charge"){
    if(boss.modeTimer<=0){if(final)spawnWave(boss.x,boss.y);boss.mode="rest";boss.modeTimer=final?.32:.55;boss.vx*=.25;boss.vy*=.25}
   }else{boss.vx*=Math.pow(.18,dt);boss.vy*=Math.pow(.18,dt);if(boss.modeTimer<=0){boss.mode="chase";boss.modeTimer=final?.72:rand(1.2,1.65)}}
-  const cap=boss.mode==="charge"?500:(W<=600?(final?165:135):(final?195:155)),sp=Math.hypot(boss.vx,boss.vy);if(sp>cap){boss.vx=boss.vx/sp*cap;boss.vy=boss.vy/sp*cap}
+  const cap=boss.mode==="charge"?500:(compactViewport()?(final?165:135):(final?195:155)),sp=Math.hypot(boss.vx,boss.vy);if(sp>cap){boss.vx=boss.vx/sp*cap;boss.vy=boss.vy/sp*cap}
  }
  boss.x=clamp(boss.x+boss.vx*dt,-boss.r,W+boss.r);boss.y=clamp(boss.y+boss.vy*dt,gameTop()+boss.r*.55,gameBottom()-boss.r*.55);
- const d=Math.hypot(player.x-boss.x,player.y-boss.y),contact=player.r*.9+boss.r*.66;
+ const d=Math.hypot(player.x-boss.x,player.y-boss.y),contact=playerHitRadius()+boss.r*.66;
  if(boss.mode==="charge"&&dashActive>0&&boss.nearMissReady&&d<contact+38*worldScale&&d>contact+4*worldScale){boss.nearMissReady=false;registerNearMiss(player.x,player.y-20)}
  if(d<contact&&player.inv<=0){hurtFrom(boss.x,boss.y);boss.vx*=-.25;boss.vy*=-.25;if(!playing)return}
  ui.bossTime.textContent=Math.max(0,boss.time).toFixed(1)+"s";ui.bossMeter.style.width=clamp((boss.time/boss.total)*100,0,100)+"%";
@@ -1010,7 +1029,7 @@ function update(dt){
  if(pausedForUpgrade||pausedForRoute){updateBuffUI();updateDashUI();return}
  runTime+=dt;updateRunTimer();
  if(player.inv>0)player.inv=Math.max(0,player.inv-dt);
- if(dashCooldown>0)dashCooldown=Math.max(0,dashCooldown-dt);if(dashActive>0)dashActive=Math.max(0,dashActive-dt);updateDashUI();
+ if(dashCooldown>0)dashCooldown=Math.max(0,dashCooldown-dt*(eventState?.kind==="current"?1.45:1));if(dashActive>0)dashActive=Math.max(0,dashActive-dt);updateDashUI();
  if(comboTimer>0){comboTimer=Math.max(0,comboTimer-dt);if(comboTimer===0)combo=0}
  if(fever>0)fever=Math.max(0,fever-dt);if(magnet>0)magnet=Math.max(0,magnet-dt);
  if(bossCooldown>0)bossCooldown=Math.max(0,bossCooldown-dt);
@@ -1021,10 +1040,10 @@ function update(dt){
  updateComboUI();updateBuffUI();
 
  const targetX=pointer.x;
- const fingerOffset=pointer.kind==="touch"?Math.min(70,Math.max(42,H*.075)):0;
+ const fingerOffset=touchFingerOffset();
  const targetY=clamp(pointer.y-fingerOffset,gameTop()+player.r,gameBottom()-player.r);
  const dx=targetX-player.x,dy=targetY-player.y,dd=Math.hypot(dx,dy);
- const maxSpeed=(195+stageIdx*8)*(W<=600?.92:1)*(1+upgrades.speed*.15)*(1+routeMods.speedBonus)*(1+STYLE_INFO[selectedStyle].speed)*(fever>0?1.12:1);
+ const maxSpeed=(195+stageIdx*8)*moveViewportFactor()*(1+upgrades.speed*.15)*(1+routeMods.speedBonus)*(1+STYLE_INFO[selectedStyle].speed)*(fever>0?1.12:1)*(eventState?.kind==="current"?1.10:1);
  if(dashActive<=0){
   if(dd>4){
    const desired=Math.min(maxSpeed,dd*3.3);
@@ -1035,10 +1054,14 @@ function update(dt){
  player.x=clamp(player.x+player.vx*dt,player.r,W-player.r);
  player.y=clamp(player.y+player.vy*dt,gameTop()+player.r,gameBottom()-player.r);
  if(dashActive<=0&&Math.hypot(player.vx,player.vy)>maxSpeed*1.25){player.vx*=.72;player.vy*=.72}
+ const swimSpeed=Math.hypot(player.vx,player.vy);
+ if(swimSpeed>75&&Math.random()<dt*(dashActive>0?8:2.2)){
+  const a=Math.atan2(player.vy,player.vx);particles.push({kind:"swimBubble",x:player.x-Math.cos(a)*player.r*.45+rand(-4,4),y:player.y-Math.sin(a)*player.r*.35+rand(-4,4),vx:-Math.cos(a)*rand(8,18)+rand(-5,5),vy:rand(-22,-10),life:rand(.45,.8),size:rand(2.5,4.5)});
+ }
 
  if(!boss){
   spawnAcc+=dt;
-  const every=Math.max(.23,.54-(now-started)/1000*.0040)*(W<=600?1.10:1)*(eventState?.kind==="plankton"?.55:1);
+  const every=Math.max(.23,.54-(now-started)/1000*.0040)*(compactViewport()?1.10:1)*(eventState?.kind==="plankton"?.55:eventState?.kind==="parade"?.72:1);
   while(spawnAcc>every){spawnAcc-=every;spawnCreature()}
  }
 
@@ -1057,7 +1080,7 @@ function update(dt){
   if(sp>cap){c.vx=c.vx/sp*cap;c.vy=c.vy/sp*cap}
   c.x+=c.vx*dt;c.y+=c.vy*dt;
 
-  const contactR=player.r*.9+c.r*.7;
+  const contactR=playerHitRadius()+c.r*.7;
   if(dashActive>0&&isDangerous(c)&&!c.nearMiss&&d<contactR+26*worldScale&&d>contactR+3*worldScale){c.nearMiss=true;registerNearMiss(c.x,c.y)}
   if(!c.dead&&d<contactR){
    if(isEdible(c)){
@@ -1092,7 +1115,7 @@ function update(dt){
  if(boss)updateBoss(dt);
  updateHazards(dt);if(!playing)return;
 
- for(const p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=14*dt;p.life-=dt}
+ for(const p of particles){if(p.kind==="swimBubble"){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy-=4*dt;p.life-=dt}else{p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=14*dt;p.life-=dt}}
  particles=particles.filter(p=>p.life>0);
  for(const b of bubbles){b.y-=b.s*dt;b.x+=Math.sin((b.y+b.r)*.02)*2.5*dt;if(b.y<-10){b.y=H+10;b.x=rand(0,W)}}
 }
@@ -1113,7 +1136,7 @@ function checkGrowth(){
  for(let i=STAGES.length-1;i>=0;i--)if(eaten>=STAGES[i].need){idx=i;break}
  if(idx>stageIdx){
   const oldZone=currentZone();
-  stageIdx=idx;player.r=STAGES[stageIdx].size*worldScale;
+  stageIdx=idx;player.r=playerRadiusForStage(stageIdx);
   burst(player.x,player.y,"✨",15);beep(760,.1,"sine",.07);setTimeout(()=>beep(980,.13,"sine",.06),70);
   const z=currentZone();
   showToast(z!==oldZone?`${ZONES[z].name}へ到達！`:`成長！ ${STAGES[stageIdx].name}！`,1400);
@@ -1324,7 +1347,7 @@ function drawHazards(){
 
 function drawStatusCue(c,t){
  const near=Math.hypot(c.x-player.x,c.y-player.y);
- const cueRange=Math.min(W,H)*(W<=600?.50:.60);
+ const cueRange=Math.min(W,H)*(compactViewport()?.50:.60);
  if(!c.rare&&near>cueRange&&!(isDangerous(c)&&near<cueRange*1.18))return;
  const bob=Math.sin(t*.006+c.phase)*2;
  ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";
@@ -1346,7 +1369,7 @@ function drawMendakoFlippers(w,h,t,speed){
 }
 function drawPlayer(){
  const blink=player.inv>0&&Math.floor(player.inv*10)%2===0;if(blink||!mendakoImg.complete)return;
- const t=performance.now(),speed=Math.hypot(player.vx,player.vy),scale=player.r/(22*worldScale),w=(W<=600?54:66)*worldScale*scale,h=w*(mendakoImg.height/mendakoImg.width);
+ const t=performance.now(),speed=Math.hypot(player.vx,player.vy),scale=player.r/(22*worldScale),w=(compactViewport()?54:66)*worldScale*scale,h=w*(mendakoImg.height/mendakoImg.width);
  const swim=Math.min(1,speed/150),squash=1+Math.sin(t*.009)*.018*swim;
  ctx.save();ctx.translate(player.x,player.y+Math.sin(t*.004)*1.6);ctx.rotate(Math.sin(t*.003)*.025);ctx.scale(squash,1/squash);
  drawMendakoFlippers(w,h,t,speed);ctx.globalAlpha=player.inv>0?.75:1;ctx.shadowColor="rgba(0,0,0,.17)";ctx.shadowBlur=7;ctx.drawImage(mendakoImg,-w/2,-h/2,w,h);ctx.restore();
@@ -1370,6 +1393,7 @@ function render(t){
  drawPickups(t);drawHazards();drawBossWarning();drawBoss();drawPlayer();
 
  for(const p of particles){
+  if(p.kind==="swimBubble"){ctx.globalAlpha=clamp(p.life*1.6,0,.7);ctx.strokeStyle="rgba(255,255,255,.92)";ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.stroke();continue}
   ctx.globalAlpha=clamp(p.life*1.5,0,1);ctx.font=`${p.text?"bold ":""}${p.size}px sans-serif`;ctx.textAlign="center";if(p.text){ctx.lineWidth=3;ctx.strokeStyle="rgba(255,255,255,.9)";ctx.strokeText(p.symbol,p.x,p.y);ctx.fillStyle="#d95f7e"}ctx.fillText(p.symbol,p.x,p.y);
  }
  ctx.globalAlpha=1;
