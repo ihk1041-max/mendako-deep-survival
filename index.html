@@ -220,6 +220,16 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
 .rankTabs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:0 0 10px}.rankTab{border:1px solid #d4e6ec;border-radius:11px;background:#f7fbfc;color:#56717f;padding:8px 4px;font:inherit;font-size:10px;font-weight:1000;cursor:pointer}.rankTab.selected{background:#e9f8fd;border-color:#65b9d2;color:#26718c;box-shadow:inset 0 0 0 1px #65b9d2}.rankSummary{font-size:9px;color:#6c7f88;font-weight:800;margin:0 0 8px;line-height:1.45}.rankList{display:grid;gap:6px}.rankRow{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:7px;align-items:center;padding:9px;border:1px solid #dde9ed;border-radius:13px;background:#fbfdfe}.rankRow.me{border-color:#71bfd6;background:#edfaff}.rankPos{font-size:18px;font-weight:1000;text-align:center;color:#497386}.rankRow:nth-child(1) .rankPos{font-size:22px}.rankWho{min-width:0}.rankWho strong{display:block;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#345064}.rankWho small{display:block;margin-top:2px;font-size:8px;color:#78878e}.rankScore{text-align:right;font-size:14px;font-weight:1000;color:#287fa6;white-space:nowrap}.rankEmpty{padding:24px 10px;text-align:center;border:1px dashed #cbdfe6;border-radius:14px;color:#70828a;font-size:11px;font-weight:900}.resultPlayer{display:inline-block;margin:2px auto 2px;padding:4px 9px;border-radius:999px;background:#edf9fc;color:#3e7488;font-size:10px;font-weight:1000}.resultRank{display:block;margin-top:5px;color:#3d7488;font-size:10px;font-weight:1000;line-height:1.5}
 @media(max-width:520px){.profileBar{grid-template-columns:minmax(0,1fr) 92px}.profileMain{padding:7px 8px}.profileAvatar{width:32px;height:32px;font-size:18px}.profileText strong{font-size:12px}.rankingOpenBtn{font-size:9px;padding:6px}.profileRow{grid-template-columns:1fr}.profileRowBtns{justify-content:stretch}.profileMiniBtn{flex:1}.rankRow{grid-template-columns:32px minmax(0,1fr) auto;padding:8px 7px}.rankScore{font-size:12px}}
 @media(orientation:landscape) and (max-height:620px){.profileBar{margin-bottom:6px}.profileMain{padding:5px 8px}.profileAvatar{width:30px;height:30px;font-size:17px}.profileText strong{font-size:11px}.profileText em{display:none}.rankingOpenBtn{padding:5px 8px}.profileList{gap:4px}.profileRow{padding:6px}.rankRow{padding:6px}.profileNote{padding:6px;font-size:8px;margin-bottom:6px}}
+
+/* v21: battle mode */
+.modeBox{margin:0 0 9px;padding:8px;border:1px solid #d6e8ee;border-radius:14px;background:rgba(247,252,254,.94)}
+.modeTitle{display:flex;justify-content:space-between;align-items:center;gap:7px;margin:0 1px 6px;font-size:10px;font-weight:1000;color:#476572}.modeTitle small{font-size:8px;color:#7a8990}
+.modeRow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.modeBtn,.attackBtn{border:1px solid #d4e5ea;border-radius:12px;background:#fff;color:#466472;padding:8px 5px;font:inherit;font-weight:1000;cursor:pointer;touch-action:manipulation}.modeBtn span,.attackBtn span{display:block;font-size:20px}.modeBtn b,.attackBtn b{display:block;font-size:10px;margin-top:2px}.modeBtn small,.attackBtn small{display:block;font-size:7.5px;line-height:1.3;margin-top:2px;color:#71828a}.modeBtn.selected,.attackBtn.selected{border-color:#5cb8d2;background:#eaf9fd;box-shadow:inset 0 0 0 1px #5cb8d2;color:#287992}.modeBtn[data-mode="battle"].selected{border-color:#e19b67;background:#fff5ec;box-shadow:inset 0 0 0 1px #e19b67;color:#a45e2d}
+.attackBox{margin-top:7px;padding-top:7px;border-top:1px dashed #d8e7eb}.attackBox.hidden{display:none}.attackRow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.attackBtn{padding:6px 3px}.attackBtn span{font-size:19px}.attackBtn b{font-size:8.5px}.attackBtn small{font-size:6.5px;min-height:17px}
+.rankModeTabs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:-4px 0 9px}.rankModeTab{border:1px solid #dbe8ec;border-radius:10px;background:#fff;color:#667d87;padding:6px 3px;font:inherit;font-size:8.5px;font-weight:1000;cursor:pointer}.rankModeTab.selected{background:#edf9fc;border-color:#6dbbd1;color:#2b7892}.rankModeTab[data-rank-mode="battle"].selected{background:#fff4eb;border-color:#dfa071;color:#9e5f34}
+.enemyHp{pointer-events:none}.resultMode{display:inline-block;margin:0 4px 4px;padding:3px 8px;border-radius:999px;background:#f0f8fb;color:#3e7185;font-size:9px;font-weight:1000}
+@media(max-width:520px){.attackRow{grid-template-columns:repeat(2,minmax(0,1fr))}.modeBtn{padding:7px 4px}.attackBtn{padding:6px 4px}.modeBtn small{font-size:7px}}
+@media(orientation:landscape) and (max-height:620px){.modeBox{padding:6px;margin-bottom:6px}.modeBtn{padding:5px 4px}.modeBtn span{font-size:17px}.modeBtn small{display:none}.attackBox{margin-top:5px;padding-top:5px}.attackBtn{padding:4px 3px}.attackBtn span{font-size:16px}.attackBtn small{display:none}}
 </style>
 </head>
 <body>
@@ -254,11 +264,11 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
       <div class="startBadge">📱 縦・横どちらでも遊べます</div>
       <h1>メンダコ・<br>ディープサバイバル</h1>
       <img class="heroImg" id="heroImg" alt="メンダコ">
-      <div class="lead">約3分でラスボスを目指すショートラン。<br>食べる・避ける・育てるをテンポよく楽しもう。</div>
+      <div class="lead">約3分でラスボスを目指すショートラン。<br>食べる・避ける・戦う・育てるをテンポよく楽しもう。</div>
       <div class="rules">
         <div><b>💨</b>ダッシュで<br>ギリギリ回避</div>
         <div><b>🐟</b>魚群やイベントで<br>毎回ちがう展開</div>
-        <div><b>🦈</b>ボスの攻撃を<br>見切って回避</div>
+        <div><b>🦈</b>ボスの攻撃を<br>見切って攻略</div>
       </div>
     </section>
 
@@ -280,6 +290,23 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
         </div>
         <div class="autosaveNote">💾 プレイ中は約1.5秒ごとに自動保存します</div>
       </div>
+      <div class="modeBox">
+        <div class="modeTitle"><span>🎮 あそびかた</span><small>既存モードもそのまま遊べます</small></div>
+        <div class="modeRow">
+          <button class="modeBtn selected" type="button" data-mode="survival"><span>🌊</span><b>サバイバル</b><small>食べて育って、攻撃を避けて深海クリア</small></button>
+          <button class="modeBtn" type="button" data-mode="battle"><span>⚔️</span><b>バトル</b><small>自動攻撃で敵とボスを倒して進む</small></button>
+        </div>
+        <div class="attackBox hidden" id="attackBox">
+          <div class="modeTitle"><span>⚔️ 攻撃タイプ</span><small>攻撃は自動照準・自動発射</small></div>
+          <div class="attackRow">
+            <button class="attackBtn selected" type="button" data-attack="bubble"><span>🫧</span><b>あわショット</b><small>連射が速い万能型</small></button>
+            <button class="attackBtn" type="button" data-attack="star"><span>✨</span><b>スターショット</b><small>3方向へ広がる</small></button>
+            <button class="attackBtn" type="button" data-attack="ink"><span>🦑</span><b>すみボム</b><small>遅いが範囲攻撃</small></button>
+            <button class="attackBtn" type="button" data-attack="whirl"><span>🌀</span><b>うずしお</b><small>近くをまとめて攻撃</small></button>
+          </div>
+        </div>
+      </div>
+
       <div class="difficultyBox">
         <div class="difficultyTitle"><span>🎚️ ゲームレベル</span><small>いつでも開始前に変更できます</small></div>
         <div class="difficultyRow">
@@ -349,7 +376,7 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
       </details>
 
       <button class="btn" id="startBtn">海へもぐる！</button>
-      <div class="note">スマホは画面をなぞって移動。素早く2回タップでダッシュ。PCは Shift / D でもダッシュできます。</div>
+      <div class="note">スマホは画面をなぞって移動、素早く2回タップでダッシュ。バトルでは攻撃は自動。PCは Shift / D でもダッシュできます。</div>
     </section>
   </div>
 </div>
@@ -398,6 +425,7 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
   <div class="bookPanel">
     <div class="bookHead"><h2>🏆 家族ランキング</h2><button class="closeBtn" id="rankingClose" type="button" aria-label="閉じる">×</button></div>
     <div class="rankTabs"><button class="rankTab selected" type="button" data-rank-period="today">今日</button><button class="rankTab" type="button" data-rank-period="week">1週間</button><button class="rankTab" type="button" data-rank-period="all">総合</button></div>
+    <div class="rankModeTabs"><button class="rankModeTab selected" type="button" data-rank-mode="all">すべて</button><button class="rankModeTab" type="button" data-rank-mode="survival">🌊 サバイバル</button><button class="rankModeTab" type="button" data-rank-mode="battle">⚔️ バトル</button></div>
     <div class="rankSummary" id="rankSummary">各プレイヤーの期間内ベストスコアで順位を決めます。</div>
     <div class="rankList" id="rankList"></div>
   </div>
@@ -420,14 +448,14 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
     <img class="heroImg" id="resultImg" alt="メンダコ" style="width:115px;margin-top:0">
     <h1 id="resultTitle" style="font-size:32px">深海チャレンジ終了！</h1>
     <div id="record"></div>
-    <div class="resultPlayer" id="resultPlayer">👤 プレイヤー1</div>
+    <div class="resultPlayer" id="resultPlayer">👤 プレイヤー1</div><span class="resultMode" id="resultMode">🌊 サバイバル</span>
     <div class="resultScore" id="finalScore">0</div>
     <div style="font-weight:900;line-height:1.7;margin-bottom:18px">
       到達：<span id="finalStage"></span><br>
       深度：<span id="finalZone"></span><br>
       ベスト：<span id="best">0</span> 点<br>プレイ時間：<span id="resultTime">0:00</span>
     </div>
-    <div class="resultMeta">最大コンボ：<span id="resultCombo">0</span> ／ ニアミス：<span id="resultNearMiss">0</span><br>図鑑：<span id="resultDex">0/0</span> ／ ボス撃退：<span id="resultBosses">0</span> ／ 無傷ボス：<span id="resultPerfectBosses">0</span><br>🦪 しんじゅ獲得：<span id="resultPearls">0</span> <span id="resultRoutes"></span><span class="resultRank" id="resultRank"></span></div>
+    <div class="resultMeta">最大コンボ：<span id="resultCombo">0</span> ／ ニアミス：<span id="resultNearMiss">0</span><br>敵撃破：<span id="resultKills">0</span> ／ 図鑑：<span id="resultDex">0/0</span> ／ ボス撃退：<span id="resultBosses">0</span> ／ 無傷ボス：<span id="resultPerfectBosses">0</span><br>🦪 しんじゅ獲得：<span id="resultPearls">0</span> <span id="resultRoutes"></span><span class="resultRank" id="resultRank"></span></div>
     <div class="resultActions">
       <button class="btn" id="retryBtn">🔄 もう一度あそぶ！</button>
       <button class="btn secondaryBtn" id="resultHomeBtn" type="button">🏠 タイトルへ戻る</button>
@@ -476,8 +504,9 @@ const discardBtn=document.getElementById("discardBtn");
 const startPanel=document.querySelector(".startPanel");
 const profileBtn=document.getElementById("profileBtn"),rankingBtn=document.getElementById("rankingBtn"),activeProfileNameEl=document.getElementById("activeProfileName"),activeProfileStatsEl=document.getElementById("activeProfileStats");
 const profileOverlay=document.getElementById("profileOverlay"),profileList=document.getElementById("profileList"),profileClose=document.getElementById("profileClose"),profileAddBtn=document.getElementById("profileAddBtn"),profileRenameBtn=document.getElementById("profileRenameBtn");
-const rankingOverlay=document.getElementById("rankingOverlay"),rankingClose=document.getElementById("rankingClose"),rankList=document.getElementById("rankList"),rankSummary=document.getElementById("rankSummary"),resultRank=document.getElementById("resultRank"),resultPlayer=document.getElementById("resultPlayer");
-let rankingPeriod="today";
+const rankingOverlay=document.getElementById("rankingOverlay"),rankingClose=document.getElementById("rankingClose"),rankList=document.getElementById("rankList"),rankSummary=document.getElementById("rankSummary"),resultRank=document.getElementById("resultRank"),resultPlayer=document.getElementById("resultPlayer"),resultMode=document.getElementById("resultMode"),resultKills=document.getElementById("resultKills");
+const attackBox=document.getElementById("attackBox");
+let rankingPeriod="today",rankingModeFilter="all";
 const RUN_SAVE_KEY="mendako_current_run_v12";
 const RUN_SAVE_VERSION=12;
 const RUN_SAVE_MAX_AGE=24*60*60*1000;
@@ -524,6 +553,17 @@ let activeProfileId=profileStore.activeId;
 function activeProfile(){return profileStore.profiles.find(p=>p.id===activeProfileId)||profileStore.profiles[0]}
 function activeProfileName(){return activeProfile()?.name||"プレイヤー"}
 
+const GAME_MODE_INFO={
+ survival:{icon:"🌊",name:"サバイバル",desc:"食べて育ち、ボスの攻撃を避けて突破"},
+ battle:{icon:"⚔️",name:"バトル",desc:"自動攻撃で危険な敵とボスを撃破"}
+};
+const ATTACK_INFO={
+ bubble:{icon:"🫧",name:"あわショット",rate:.34,damage:14,speed:390,size:5},
+ star:{icon:"✨",name:"スターショット",rate:.75,damage:9,speed:350,size:5,count:3,spread:.20,pierce:1},
+ ink:{icon:"🦑",name:"すみボム",rate:.92,damage:34,speed:255,size:8,splash:68},
+ whirl:{icon:"🌀",name:"うずしお",rate:.74,damage:26,range:145}
+};
+
 const STAGES=[
  {name:"ちびメンダコ",need:0,size:22,zone:0},
  {name:"こどもメンダコ",need:7,size:26,zone:0},
@@ -541,7 +581,7 @@ const ZONES=[
 let W=0,H=0,dpr=1,playing=false,raf=0,last=0,spawnAcc=0,worldScale=1;
 let score=0,eaten=0,stageIdx=0,lives=3,started=0;
 let audio=null,toastTimer=0;
-let creatures=[],particles=[],bubbles=[],ambient=[],pickups=[];
+let creatures=[],particles=[],bubbles=[],ambient=[],pickups=[],projectiles=[];
 let boss=null,bossTriggered=false,bossCooldown=0,bossCount=0,perfectBosses=0,nextBossIndex=0,runTime=0,runCleared=false;
 let hazards=[];
 let combo=0,maxCombo=0,comboTimer=0,fever=0,magnet=0,shield=0;
@@ -550,6 +590,7 @@ let pausedForUpgrade=false,pausedForRoute=false,upgradeMilestones=new Set(),sess
 let mission=null,missionId=0,missionNoDamage=0,lastMissionType="",missionsCompleted=0;
 let upgrades={speed:0,appetite:0,lucky:0,treasure:0,agility:0,rhythm:0};
 let dashCooldown=0,dashActive=0,nearMisses=0,chestsOpened=0,lastTouchTapAt=0,lastTouchTapX=0,lastTouchTapY=0;
+let attackCooldown=0,killCount=0,attackEntitySeq=0;
 let currentRoute=null,routeHistory=[],routeMods={smallBias:0,rareBonus:0,dangerBias:0,itemBonus:0,chestBonus:0,speedBonus:0,comboBonus:0},pendingUpgradeReason=null;
 const SPECIES_INFO={
  shrimp:{name:"エビ",icon:"🦐",rarity:1,desc:"ちょこちょこ泳ぐ小さなエビ。"},clownfish:{name:"クマノミ",icon:"🐠",rarity:1,desc:"しま模様がかわいいサンゴ礁の魚。"},bluefish:{name:"青い魚",icon:"🐟",rarity:1,desc:"すばやく泳ぐ青い小魚。"},jelly:{name:"クラゲ",icon:"🪼",rarity:1,desc:"ぷかぷか漂うやさしいクラゲ。"},crab:{name:"カニ",icon:"🦀",rarity:1,desc:"海底を元気に横歩きするカニ。"},seahorse:{name:"タツノオトシゴ",icon:"🌊",rarity:2,desc:"くるんとした尾がかわいい海の生き物。"},angelfish:{name:"エンゼルフィッシュ",icon:"🐠",rarity:2,desc:"ひらひら泳ぐおしゃれな魚。"},lantern:{name:"ヒカリ魚",icon:"✨",rarity:2,desc:"暗い海で淡く光る小さな魚。"},puffer:{name:"フグ",icon:"🐡",rarity:2,desc:"まんまるな体がチャームポイント。"},fireflySquid:{name:"ホタルイカ",icon:"🦑",rarity:3,desc:"青白くきらめきながら泳ぐ小さなイカ。"},nautilus:{name:"オウムガイ",icon:"🐚",rarity:3,desc:"くるくるの殻で深海をゆっくり進む不思議な仲間。"},anglerSmall:{name:"チョウチンアンコウ",icon:"💡",rarity:3,desc:"光るちょうちんで深海を照らす魚。"},squid:{name:"イカ",icon:"🦑",rarity:2,desc:"すいすい泳ぐ小さなイカ。"},seaAngel:{name:"クリオネ",icon:"🪽",rarity:3,desc:"透明な翼のような腕で泳ぐ海の天使。"},starJelly:{name:"ほしクラゲ",icon:"⭐",rarity:5,desc:"きらきら光る、とても珍しいクラゲ。"},barracuda:{name:"カマス",icon:"🐟",rarity:2,desc:"細長い体で素早く泳ぐハンター。"},shark:{name:"サメ",icon:"🦈",rarity:3,desc:"迫力はあるけど、どこかかわいいサメ。"},orca:{name:"シャチ",icon:"🐋",rarity:4,desc:"白黒模様のパワフルな海の王者。"},giantSquid:{name:"ダイオウイカ",icon:"🦑",rarity:4,desc:"深海にひそむ巨大なイカ。"}
@@ -568,6 +609,13 @@ const UPGRADE_POOL=[
  {id:"agility",icon:"🌀",name:"くるりヒレ",desc:"ダッシュのクールタイム -12%"},
  {id:"rhythm",icon:"🎵",name:"もぐもぐリズム",desc:"コンボ猶予 +0.35秒"},
 ];
+const ATTACK_UPGRADE_POOL=[
+ {id:"attackPower",icon:"💥",name:"パワーあわ",desc:"攻撃ダメージ +22%"},
+ {id:"attackRate",icon:"⚡",name:"はやうち",desc:"攻撃間隔 -14%"},
+ {id:"attackMulti",icon:"🌟",name:"ふたご弾",desc:"発射数・うずしお範囲UP"},
+ {id:"attackPierce",icon:"🎯",name:"つらぬき",desc:"弾が敵を1体多く貫通"},
+ {id:"attackBlast",icon:"💫",name:"はじける泡",desc:"範囲攻撃と弾サイズUP"}
+];
 const MISSION_POOL=[
  {type:"eat",target:10,label:"生き物を10匹食べる"},
  {type:"combo",target:10,label:"10コンボを達成"},
@@ -575,7 +623,8 @@ const MISSION_POOL=[
  {type:"rare",target:2,label:"レア生物を2匹食べる"},
  {type:"survive",target:14,label:"14秒ノーダメージ"},
  {type:"dash",target:3,label:"ダッシュを3回使う"},
- {type:"near",target:2,label:"ニアミスを2回決める"}
+ {type:"near",target:2,label:"ニアミスを2回決める"},
+ {type:"kill",target:6,label:"危険な敵を6体たおす",battleOnly:true}
 ];
 const RUN_MOODS=[
  {id:"school",icon:"🐠",name:"にぎやか潮",short:"群れ",desc:"小さい生き物が少し多い",spawnMult:.90,smallBias:.09,rareMult:1,itemInterval:1,itemBonus:0,playerSpeed:1,creatureSpeed:1,scoreMult:1},
@@ -621,7 +670,7 @@ const RESEARCH_INFO={
  fins:{icon:"💨",name:"ヒレ研究",max:20,desc:"移動速度"},dash:{icon:"🌀",name:"ダッシュ研究",max:20,desc:"ダッシュ回復"},
  combo:{icon:"🎵",name:"コンボ研究",max:20,desc:"コンボ猶予"},rare:{icon:"✨",name:"発見研究",max:20,desc:"レア率"}
 };
-function defaultMeta(){return {pearls:0,charms:{bubble:false,current:false,star:false,rhythm:false,treasure:false,gourmet:false,coral:false},research:{fins:0,dash:0,combo:0,rare:0},selectedStyle:"swift",selectedEquip:"none",selectedDifficulty:"normal",speciesCounts:{},achievements:[],stats:{runs:0,clears:0,bosses:0,totalEaten:0,maxCombo:0,nearMisses:0,missions:0,bestScore:0}}}
+function defaultMeta(){return {pearls:0,charms:{bubble:false,current:false,star:false,rhythm:false,treasure:false,gourmet:false,coral:false},research:{fins:0,dash:0,combo:0,rare:0},selectedStyle:"swift",selectedEquip:"none",selectedDifficulty:"normal",selectedGameMode:"survival",selectedAttack:"bubble",speciesCounts:{},achievements:[],stats:{runs:0,clears:0,bosses:0,totalEaten:0,kills:0,maxCombo:0,nearMisses:0,missions:0,bestScore:0,bestSurvival:0,bestBattle:0}}}
 function normalizeMeta(m){
  let base=defaultMeta();
  if(m&&typeof m==="object")base={...base,...m,charms:{...base.charms,...(m.charms||{})},research:{...base.research,...(m.research||{})},speciesCounts:{...(m.speciesCounts||{})},achievements:[...(m.achievements||[])],stats:{...base.stats,...(m.stats||{})}};
@@ -629,11 +678,14 @@ function normalizeMeta(m){
  if(!STYLE_INFO[base.selectedStyle])base.selectedStyle="swift";
  if(base.selectedEquip!=="none"&&!base.charms[base.selectedEquip])base.selectedEquip="none";
  if(!DIFFICULTY_INFO[base.selectedDifficulty])base.selectedDifficulty="normal";
+ if(!GAME_MODE_INFO[base.selectedGameMode])base.selectedGameMode="survival";
+ if(!ATTACK_INFO[base.selectedAttack])base.selectedAttack="bubble";
+ if(m?.stats?.bestSurvival==null&&Number(base.stats.bestScore)>0)base.stats.bestSurvival=Number(base.stats.bestScore)||0;
  return base;
 }
 function loadProfileMeta(id=activeProfileId){try{return normalizeMeta(JSON.parse(localStorage.getItem(profileScopedKey(META_KEY,id))||"null"))}catch{return normalizeMeta(null)}}
 let meta=loadProfileMeta();
-let selectedStyle=meta.selectedStyle,selectedEquip=meta.selectedEquip,selectedDifficulty=meta.selectedDifficulty;
+let selectedStyle=meta.selectedStyle,selectedEquip=meta.selectedEquip,selectedDifficulty=meta.selectedDifficulty,selectedGameMode=meta.selectedGameMode,selectedAttack=meta.selectedAttack;
 function difficulty(){return DIFFICULTY_INFO[selectedDifficulty]||DIFFICULTY_INFO.normal}
 function maxLife(){return difficulty().maxLife}
 function compactViewport(){return W<=600||(W>H&&H<620)}
@@ -776,7 +828,8 @@ function resumeSummary(s){
  const idx=clamp(Number(s.stageIdx)||0,0,STAGES.length-1),zone=ZONES[STAGES[idx].zone]?.short||"海";
  const remain=Math.max(0,RUN_SECONDS-(Number(s.runTime)||0));
  const diff=DIFFICULTY_INFO[s.selectedDifficulty]||DIFFICULTY_INFO.normal;
- return `${diff.icon} ${diff.name} ・ ${zone} ・ ${STAGES[idx].name} Lv.${idx+1}<br>★ ${(Number(s.score)||0).toLocaleString("ja-JP")} ・ 残り約 ${fmtTime(remain)} ・ LIFE ${Math.max(0,Number(s.lives)||0)}`;
+ const mode=GAME_MODE_INFO[s.selectedGameMode]||GAME_MODE_INFO.survival;
+ return `${mode.icon} ${mode.name} ／ ${diff.icon} ${diff.name} ・ ${zone} ・ ${STAGES[idx].name} Lv.${idx+1}<br>★ ${(Number(s.score)||0).toLocaleString("ja-JP")} ・ 残り約 ${fmtTime(remain)} ・ LIFE ${Math.max(0,Number(s.lives)||0)}`;
 }
 function refreshResumeBox(s=getRunSave()){
  cachedRunSave=s||null;
@@ -792,12 +845,12 @@ function saveRunState(reason="auto"){
  const decision=pausedForRoute?"route":pausedForUpgrade?"upgrade":"none";
  const state={
   version:RUN_SAVE_VERSION,savedAt:Date.now(),reason,finished:false,view:{w:Math.max(1,W),h:Math.max(1,H),scale:Math.max(.01,worldScale)},
-  selectedStyle,selectedEquip,selectedDifficulty,score,eaten,stageIdx,lives,spawnAcc,combo,maxCombo,comboTimer,fever,magnet,shield,
+  selectedStyle,selectedEquip,selectedDifficulty,selectedGameMode,selectedAttack,score,eaten,stageIdx,lives,spawnAcc,combo,maxCombo,comboTimer,fever,magnet,shield,
   itemTimer,eventTimer,eventState:cloneData(eventState),eventElapsed,sessionDiscoveries,decision,pendingUpgradeReason,
   upgradeMilestones:[...upgradeMilestones],mission:cloneData(mission),missionId,missionNoDamage,lastMissionType,missionsCompleted,
-  upgrades:cloneData(upgrades),dashCooldown,dashActive,nearMisses,chestsOpened,currentRoute:cloneData(currentRoute),routeHistory:cloneData(routeHistory),routeMods:cloneData(routeMods),
+  upgrades:cloneData(upgrades),dashCooldown,dashActive,nearMisses,chestsOpened,attackCooldown,killCount,currentRoute:cloneData(currentRoute),routeHistory:cloneData(routeHistory),routeMods:cloneData(routeMods),
   boss:cloneData(boss),bossTriggered,bossCooldown,bossCount,perfectBosses,nextBossIndex,runTime,runCleared,runMoodId:runMood?.id||null,
-  player:cloneData(player),creatures:cloneData(creatures),pickups:cloneData(pickups),hazards:cloneData(hazards),ambient:cloneData(ambient)
+  player:cloneData(player),creatures:cloneData(creatures),pickups:cloneData(pickups),projectiles:cloneData(projectiles),hazards:cloneData(hazards),ambient:cloneData(ambient)
  };
  try{localStorage.setItem(profileScopedKey(RUN_SAVE_KEY,activeProfileId),JSON.stringify(state));cachedRunSave=state;saveMeta();saveDex();return true}catch{return false}
 }
@@ -809,17 +862,19 @@ function restoreRunState(s){
  selectedStyle=STYLE_INFO[s.selectedStyle]?s.selectedStyle:selectedStyle;
  selectedEquip=(s.selectedEquip==="none"||meta.charms[s.selectedEquip])?s.selectedEquip:selectedEquip;
  selectedDifficulty=DIFFICULTY_INFO[s.selectedDifficulty]?s.selectedDifficulty:selectedDifficulty;
+ selectedGameMode=GAME_MODE_INFO[s.selectedGameMode]?s.selectedGameMode:"survival";selectedAttack=ATTACK_INFO[s.selectedAttack]?s.selectedAttack:selectedAttack;meta.selectedGameMode=selectedGameMode;meta.selectedAttack=selectedAttack;
  score=Math.max(0,Number(s.score)||0);eaten=Math.max(0,Number(s.eaten)||0);stageIdx=clamp(Number(s.stageIdx)||0,0,STAGES.length-1);lives=clamp(Number(s.lives)||maxLife(),1,maxLife());
  spawnAcc=Math.max(0,Number(s.spawnAcc)||0);combo=Math.max(0,Number(s.combo)||0);maxCombo=Math.max(combo,Number(s.maxCombo)||0);comboTimer=Math.max(0,Number(s.comboTimer)||0);
  fever=Math.max(0,Number(s.fever)||0);magnet=Math.max(0,Number(s.magnet)||0);shield=clamp(Number(s.shield)||0,0,2);
  itemTimer=Math.max(.1,Number(s.itemTimer)||8);eventTimer=Math.max(.1,Number(s.eventTimer)||12);eventState=cloneData(s.eventState);eventElapsed=Math.max(0,Number(s.eventElapsed)||0);sessionDiscoveries=Math.max(0,Number(s.sessionDiscoveries)||0);
  upgradeMilestones=new Set(Array.isArray(s.upgradeMilestones)?s.upgradeMilestones:[]);mission=cloneData(s.mission);missionId=Math.max(0,Number(s.missionId)||0);missionNoDamage=Math.max(0,Number(s.missionNoDamage)||0);lastMissionType=String(s.lastMissionType||"");missionsCompleted=Math.max(0,Number(s.missionsCompleted)||0);
- upgrades={speed:0,appetite:0,lucky:0,treasure:0,agility:0,rhythm:0,...(s.upgrades||{})};dashCooldown=Math.max(0,Number(s.dashCooldown)||0);dashActive=0;nearMisses=Math.max(0,Number(s.nearMisses)||0);chestsOpened=Math.max(0,Number(s.chestsOpened)||0);
+ upgrades={speed:0,appetite:0,lucky:0,treasure:0,agility:0,rhythm:0,attackPower:0,attackRate:0,attackMulti:0,attackPierce:0,attackBlast:0,...(s.upgrades||{})};dashCooldown=Math.max(0,Number(s.dashCooldown)||0);dashActive=0;nearMisses=Math.max(0,Number(s.nearMisses)||0);chestsOpened=Math.max(0,Number(s.chestsOpened)||0);attackCooldown=Math.max(0,Number(s.attackCooldown)||0);killCount=Math.max(0,Number(s.killCount)||0);
  currentRoute=null;routeHistory=[];routeMods={smallBias:0,rareBonus:0,dangerBias:0,itemBonus:0,chestBonus:0,speedBonus:0,comboBonus:0};pendingUpgradeReason=s.pendingUpgradeReason||null;
  boss=transformEntity(s.boss,sx,sy,sr);if(boss&&typeof boss.hitTaken!=="boolean")boss.hitTaken=true;bossTriggered=!!s.bossTriggered||!!boss;bossCooldown=Math.max(0,Number(s.bossCooldown)||0);bossCount=Math.max(0,Number(s.bossCount)||0);perfectBosses=Math.max(0,Number(s.perfectBosses)||0);nextBossIndex=clamp(Number(s.nextBossIndex)||0,0,BOSS_SCHEDULE.length);runTime=clamp(Number(s.runTime)||0,0,RUN_SECONDS+60);runCleared=false;runMood=moodById(s.runMoodId||runMood?.id);
  Object.assign(player,transformEntity(s.player,sx,sy,sr)||{});player.r=playerRadiusForStage(stageIdx);player.x=clamp(Number(player.x)||W*.5,player.r,W-player.r);player.y=clamp(Number(player.y)||H*.6,gameTop()+player.r,gameBottom()-player.r);player.inv=Math.max(Number(player.inv)||0,1.8);
  creatures=(Array.isArray(s.creatures)?s.creatures:[]).map(e=>{const c=transformEntity(e,sx,sy,sr);if(c&&Number.isFinite(c.ratio))c.r=player.r*c.ratio;return c}).filter(Boolean).slice(0,40);
  pickups=(Array.isArray(s.pickups)?s.pickups:[]).map(e=>transformEntity(e,sx,sy,sr)).filter(Boolean).slice(0,6);
+ projectiles=(Array.isArray(s.projectiles)?s.projectiles:[]).map(e=>transformEntity(e,sx,sy,sr)).filter(Boolean).slice(0,60);
  hazards=(Array.isArray(s.hazards)?s.hazards:[]).map(e=>transformEntity(e,sx,sy,sr)).filter(Boolean).slice(0,12);
  ambient=(Array.isArray(s.ambient)?s.ambient:[]).map(e=>transformEntity(e,sx,sy,sr)).filter(Boolean).slice(0,6);if(!ambient.length)for(let i=0;i<ambientTarget();i++)ambient.push(makeAmbient(true));
  particles=[];pausedForUpgrade=false;pausedForRoute=false;manualPaused=false;pointer.x=player.x;pointer.y=player.y;pointer.active=false;pointer.kind="touch";
@@ -827,7 +882,7 @@ function restoreRunState(s){
  ui.start.classList.add("hidden");ui.result.classList.add("hidden");pauseOverlay.classList.add("hidden");
  ui.upgradeOverlay.classList.add("hidden");ui.routeOverlay.classList.add("hidden");
  if(eventState&&Number(eventState.time)>0){ui.eventBanner.textContent=`${eventState.icon||"🌊"} ${eventState.name||"海のイベント"}`;ui.eventBanner.classList.add("show")}else{eventState=null;ui.eventBanner.classList.remove("show")}
- if(boss){ui.bossbar.classList.add("show");const info=BOSS_SCHEDULE[Math.min(nextBossIndex,BOSS_SCHEDULE.length-1)];ui.bossLabel.textContent=`${info?.icon||"👑"} ${boss.name||info?.name||"ボス"}${boss.final?"：ラスボス！":""}`;ui.bossTime.textContent=Math.max(0,Number(boss.time)||0).toFixed(1)+"s";ui.bossMeter.style.width=clamp((Number(boss.time)||0)/Math.max(.1,Number(boss.total)||1)*100,0,100)+"%"}else ui.bossbar.classList.remove("show");
+ if(boss){ui.bossbar.classList.add("show");const info=BOSS_SCHEDULE[Math.min(nextBossIndex,BOSS_SCHEDULE.length-1)];ui.bossLabel.textContent=`${info?.icon||"👑"} ${boss.name||info?.name||"ボス"}${boss.final?"：ラスボス！":""}${selectedGameMode==="battle"?" を倒せ！":""}`;if(selectedGameMode==="battle"&&Number(boss.maxHp)>0){ui.bossTime.textContent=`HP ${Math.max(0,Math.ceil(boss.hp))}/${Math.ceil(boss.maxHp)}`;ui.bossMeter.style.width=clamp((Number(boss.hp)||0)/Math.max(1,Number(boss.maxHp)||1)*100,0,100)+"%"}else{ui.bossTime.textContent=Math.max(0,Number(boss.time)||0).toFixed(1)+"s";ui.bossMeter.style.width=clamp((Number(boss.time)||0)/Math.max(.1,Number(boss.total)||1)*100,0,100)+"%"}}else ui.bossbar.classList.remove("show");
  if(!mission)newMission();updateUI();updateMissionUI();updateComboUI();updateBuffUI();updateDashUI();updateRunTimer();refreshLoadoutUI();
  initAudio();if(musicEnabled)startAmbientMusic();armBackGuard();
  showToast(`💾 続きから再開：${runMood.icon} ${runMood.name} ／ 2秒間は安全です`,1900);
@@ -876,7 +931,7 @@ function closeProfiles(){profileOverlay.classList.add("hidden")}
 function switchProfile(id){
  if(playing||id===activeProfileId||!profileStore.profiles.some(p=>p.id===id))return;
  saveMeta();saveDex();activeProfileId=id;profileStore.activeId=id;writeProfileStore();
- meta=loadProfileMeta(id);discovered=loadProfileDex(id);selectedStyle=meta.selectedStyle;selectedEquip=meta.selectedEquip;selectedDifficulty=meta.selectedDifficulty;lives=maxLife();cachedRunSave=null;
+ meta=loadProfileMeta(id);discovered=loadProfileDex(id);selectedStyle=meta.selectedStyle;selectedEquip=meta.selectedEquip;selectedDifficulty=meta.selectedDifficulty;selectedGameMode=meta.selectedGameMode;selectedAttack=meta.selectedAttack;lives=maxLife();cachedRunSave=null;
  refreshMetaUI();refreshLoadoutUI();refreshProfileHeader();refreshResumeBox();renderProfileList();closeProfiles();render(performance.now());showToast(`👤 ${activeProfileName()} に切り替えました`,1100);
 }
 function createProfile(){
@@ -893,35 +948,36 @@ function deleteProfile(id){
  if(!confirm(`「${p.name}」を削除しますか？\nしんじゅ・研究・図鑑・実績・途中保存・ランキング記録も削除されます。`))return;
  for(const base of [META_KEY,"mendako_dex_v8",RUN_SAVE_KEY,"mendako_deep_best_v3"])try{localStorage.removeItem(profileScopedKey(base,id))}catch{}
  saveRankingEntries(loadRankingEntries().filter(r=>r.profileId!==id));profileStore.profiles=profileStore.profiles.filter(x=>x.id!==id);
- if(id===activeProfileId){activeProfileId=profileStore.profiles[0].id;profileStore.activeId=activeProfileId;meta=loadProfileMeta();discovered=loadProfileDex();selectedStyle=meta.selectedStyle;selectedEquip=meta.selectedEquip;selectedDifficulty=meta.selectedDifficulty;lives=maxLife();cachedRunSave=null}
+ if(id===activeProfileId){activeProfileId=profileStore.profiles[0].id;profileStore.activeId=activeProfileId;meta=loadProfileMeta();discovered=loadProfileDex();selectedStyle=meta.selectedStyle;selectedEquip=meta.selectedEquip;selectedDifficulty=meta.selectedDifficulty;selectedGameMode=meta.selectedGameMode;selectedAttack=meta.selectedAttack;lives=maxLife();cachedRunSave=null}
  writeProfileStore();refreshMetaUI();refreshLoadoutUI();refreshProfileHeader();refreshResumeBox();renderProfileList();renderRanking(rankingPeriod);
 }
 function rankPeriodStart(period){const d=new Date(),today=new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime();if(period==="today")return today;if(period==="week")return new Date(d.getFullYear(),d.getMonth(),d.getDate()-6).getTime();return -Infinity}
-function leaderboard(period="all"){
+function leaderboard(period="all",modeFilter=rankingModeFilter){
  const start=rankPeriodStart(period),validIds=new Set(profileStore.profiles.map(p=>p.id)),best=new Map();
  for(const r of loadRankingEntries()){
   if(!r||!validIds.has(r.profileId)||!Number.isFinite(Number(r.score))||Number(r.score)<=0)continue;
+  const mode=r.gameMode||"survival";if(modeFilter!=="all"&&mode!==modeFilter)continue;
   const ts=Number(r.playedAt)||0;if(period!=="all"&&ts<start)continue;
-  const prev=best.get(r.profileId);if(!prev||Number(r.score)>Number(prev.score)||(Number(r.score)===Number(prev.score)&&ts>Number(prev.playedAt||0)))best.set(r.profileId,r);
+  const prev=best.get(r.profileId);if(!prev||Number(r.score)>Number(prev.score)||(Number(r.score)===Number(prev.score)&&ts>Number(prev.playedAt||0)))best.set(r.profileId,{...r,gameMode:mode});
  }
- if(period==="all")for(const p of profileStore.profiles){try{const m=normalizeMeta(JSON.parse(localStorage.getItem(profileScopedKey(META_KEY,p.id))||"null")),s=Number(m.stats?.bestScore)||0,prev=best.get(p.id);if(s>0&&(!prev||s>Number(prev.score)))best.set(p.id,{id:`best_${p.id}`,profileId:p.id,score:s,cleared:Number(m.stats?.clears||0)>0,playedAt:0,legacy:true})}catch{}}
+ if(period==="all")for(const p of profileStore.profiles){try{const m=normalizeMeta(JSON.parse(localStorage.getItem(profileScopedKey(META_KEY,p.id))||"null"));const candidates=modeFilter==="battle"?[["battle",Number(m.stats?.bestBattle)||0]]:modeFilter==="survival"?[["survival",Number(m.stats?.bestSurvival)||0]]:[["survival",Number(m.stats?.bestSurvival)||0],["battle",Number(m.stats?.bestBattle)||0]];for(const [mode,sc] of candidates){const prev=best.get(p.id);if(sc>0&&(!prev||sc>Number(prev.score)))best.set(p.id,{id:`best_${mode}_${p.id}`,profileId:p.id,score:sc,cleared:Number(m.stats?.clears||0)>0,playedAt:0,legacy:true,gameMode:mode})}}catch{}}
  return [...best.values()].sort((a,b)=>Number(b.score)-Number(a.score)||Number(!!b.cleared)-Number(!!a.cleared)||Number(b.playedAt||0)-Number(a.playedAt||0));
 }
-function renderRanking(period=rankingPeriod){
- rankingPeriod=period;document.querySelectorAll(".rankTab").forEach(b=>b.classList.toggle("selected",b.dataset.rankPeriod===period));
- const labels={today:"今日",week:"過去7日",all:"総合"},rows=leaderboard(period);if(rankSummary)rankSummary.textContent=`${labels[period]}：各プレイヤーの期間内ベストスコアで順位を決めます。`;
+function renderRanking(period=rankingPeriod,modeFilter=rankingModeFilter){
+ rankingPeriod=period;rankingModeFilter=modeFilter;document.querySelectorAll(".rankTab").forEach(b=>b.classList.toggle("selected",b.dataset.rankPeriod===period));document.querySelectorAll(".rankModeTab").forEach(b=>b.classList.toggle("selected",b.dataset.rankMode===modeFilter));
+ const labels={today:"今日",week:"過去7日",all:"総合"},modeLabels={all:"全モード",survival:"サバイバル",battle:"バトル"},rows=leaderboard(period,modeFilter);if(rankSummary)rankSummary.textContent=`${labels[period]}・${modeLabels[modeFilter]}：各プレイヤーの期間内ベストスコアで順位を決めます。`;
  if(!rankList)return;rankList.innerHTML="";if(!rows.length){rankList.innerHTML='<div class="rankEmpty">まだランキング記録がありません。<br>ゲームを1回遊ぶとここに記録されます。</div>';return}
- rows.slice(0,10).forEach((r,i)=>{const p=profileStore.profiles.find(x=>x.id===r.profileId),d=document.createElement("div"),medal=i===0?"🥇":i===1?"🥈":i===2?"🥉":`${i+1}`;d.className=`rankRow ${r.profileId===activeProfileId?"me":""}`;const when=r.legacy?"以前のベスト":r.playedAt?new Date(r.playedAt).toLocaleString("ja-JP",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}):"";d.innerHTML=`<div class="rankPos">${medal}</div><div class="rankWho"><strong>${escapeHtml(p?.name||"プレイヤー")}${r.profileId===activeProfileId?"（あなた）":""}</strong><small>${r.cleared?"🏆 CLEAR ・ ":""}${when}</small></div><div class="rankScore">${Number(r.score).toLocaleString("ja-JP")}<small style="display:block;font-size:7px;color:#7a898f">pt</small></div>`;rankList.appendChild(d)});
+ rows.slice(0,10).forEach((r,i)=>{const p=profileStore.profiles.find(x=>x.id===r.profileId),d=document.createElement("div"),medal=i===0?"🥇":i===1?"🥈":i===2?"🥉":`${i+1}`,mode=GAME_MODE_INFO[r.gameMode||"survival"]||GAME_MODE_INFO.survival;d.className=`rankRow ${r.profileId===activeProfileId?"me":""}`;const when=r.legacy?"以前のベスト":r.playedAt?new Date(r.playedAt).toLocaleString("ja-JP",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}):"";d.innerHTML=`<div class="rankPos">${medal}</div><div class="rankWho"><strong>${escapeHtml(p?.name||"プレイヤー")}${r.profileId===activeProfileId?"（あなた）":""}</strong><small>${mode.icon}${mode.name} ・ ${r.cleared?"🏆 CLEAR ・ ":""}${when}</small></div><div class="rankScore">${Number(r.score).toLocaleString("ja-JP")}<small style="display:block;font-size:7px;color:#7a898f">pt</small></div>`;rankList.appendChild(d)});
 }
-function openRanking(){if(playing)return;renderRanking(rankingPeriod);rankingOverlay.classList.remove("hidden")}
+function openRanking(){if(playing)return;renderRanking(rankingPeriod,rankingModeFilter);rankingOverlay.classList.remove("hidden")}
 function closeRanking(){rankingOverlay.classList.add("hidden")}
 function recordRankingScore(cleared){
- if(score<=0)return;let rows=loadRankingEntries();rows.push({id:`r_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,7)}`,profileId:activeProfileId,score:Math.round(score),cleared:!!cleared,playedAt:Date.now(),difficulty:selectedDifficulty,maxCombo,perfectBosses});
- if(rows.length>1500){const preserve=new Map();for(const r of rows){const p=preserve.get(r.profileId);if(!p||Number(r.score)>Number(p.score))preserve.set(r.profileId,r)}const recent=[...rows].sort((a,b)=>Number(b.playedAt||0)-Number(a.playedAt||0)).slice(0,1200);rows=[...new Map([...preserve.values(),...recent].map(r=>[r.id,r])).values()]}
+ if(score<=0)return;let rows=loadRankingEntries();rows.push({id:`r_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,7)}`,profileId:activeProfileId,score:Math.round(score),cleared:!!cleared,playedAt:Date.now(),difficulty:selectedDifficulty,gameMode:selectedGameMode,attack:selectedGameMode==="battle"?selectedAttack:null,maxCombo,perfectBosses});
+ if(rows.length>1500){const preserve=new Map();for(const r of rows){const k=`${r.profileId}_${r.gameMode||"survival"}`,q=preserve.get(k);if(!q||Number(r.score)>Number(q.score))preserve.set(k,r)}const recent=[...rows].sort((a,b)=>Number(b.playedAt||0)-Number(a.playedAt||0)).slice(0,1200);rows=[...new Map([...preserve.values(),...recent].map(r=>[r.id,r])).values()]}
  saveRankingEntries(rows);
 }
-function profileRank(period,id=activeProfileId){const a=leaderboard(period),i=a.findIndex(r=>r.profileId===id);return i<0?"-":`${i+1}位`}
-function updateResultRank(){if(resultRank)resultRank.textContent=`🏆 今日 ${profileRank("today")} ／ 1週間 ${profileRank("week")} ／ 総合 ${profileRank("all")}`}
+function profileRank(period,id=activeProfileId,mode=selectedGameMode){const a=leaderboard(period,mode),i=a.findIndex(r=>r.profileId===id);return i<0?"-":`${i+1}位`}
+function updateResultRank(){if(resultRank){const m=GAME_MODE_INFO[selectedGameMode];resultRank.textContent=`🏆 ${m.icon}${m.name}：今日 ${profileRank("today")} ／ 1週間 ${profileRank("week")} ／ 総合 ${profileRank("all")}`}}
 
 function saveMeta(){try{localStorage.setItem(profileScopedKey(META_KEY,activeProfileId),JSON.stringify(meta))}catch{}}
 function researchLevel(id){return clamp(Number(meta.research?.[id])||0,0,RESEARCH_INFO[id]?.max||0)}
@@ -956,10 +1012,15 @@ function refreshMetaUI(){
 }
 
 function refreshLoadoutUI(){
+ document.querySelectorAll(".modeBtn").forEach(b=>b.classList.toggle("selected",b.dataset.mode===selectedGameMode));
+ document.querySelectorAll(".attackBtn").forEach(b=>b.classList.toggle("selected",b.dataset.attack===selectedAttack));
+ if(attackBox)attackBox.classList.toggle("hidden",selectedGameMode!=="battle");
  document.querySelectorAll(".difficultyBtn").forEach(b=>b.classList.toggle("selected",b.dataset.difficulty===selectedDifficulty));
  document.querySelectorAll(".styleBtn").forEach(b=>b.classList.toggle("selected",b.dataset.style===selectedStyle));
  document.querySelectorAll(".equipBtn").forEach(b=>{const id=b.dataset.equip,owned=id==="none"||!!meta.charms[id];b.classList.toggle("selected",id===selectedEquip);b.classList.toggle("locked",!owned);b.disabled=!owned});
 }
+function selectGameMode(id){if(playing||!GAME_MODE_INFO[id])return;selectedGameMode=id;meta.selectedGameMode=id;saveMeta();refreshLoadoutUI();const m=GAME_MODE_INFO[id];showToast(`${m.icon} ${m.name}：${m.desc}`,1250)}
+function selectAttack(id){if(playing||!ATTACK_INFO[id])return;selectedAttack=id;meta.selectedAttack=id;saveMeta();refreshLoadoutUI();const a=ATTACK_INFO[id];showToast(`${a.icon} ${a.name}をセット`,900)}
 function selectDifficulty(id){if(playing||!DIFFICULTY_INFO[id])return;selectedDifficulty=id;meta.selectedDifficulty=id;lives=maxLife();saveMeta();refreshLoadoutUI();updateUI();const d=difficulty();showToast(`${d.icon} ${d.name}モード：ライフ${d.maxLife}`,1000)}
 function selectStyle(id){if(playing||!STYLE_INFO[id])return;selectedStyle=id;meta.selectedStyle=id;saveMeta();refreshLoadoutUI();showToast(`${STYLE_INFO[id].icon} ${STYLE_INFO[id].name}メンダコで出発！`,900)}
 function selectEquip(id){if(playing)return;if(id!=="none"&&!meta.charms[id]){showToast("先にしんじゅ交換所で解放しよう",1100);return}selectedEquip=id;meta.selectedEquip=id;saveMeta();refreshMetaUI();const info=CHARM_INFO[id];showToast(id==="none"?"🐚 装備なし":`🎒 ${info?.name||"お守り"}を装備`,900)}
@@ -1042,7 +1103,7 @@ function missionProgress(type,value,absolute=false){
  if(mission.progress>=mission.target)completeMission();
 }
 function newMission(){
- const choices=MISSION_POOL.filter(m=>m.type!==lastMissionType);
+ const choices=MISSION_POOL.filter(m=>m.type!==lastMissionType&&(!m.battleOnly||selectedGameMode==="battle"));
  const base=choices[Math.floor(Math.random()*choices.length)];
  mission={...base,progress:0,id:++missionId};lastMissionType=mission.type;missionNoDamage=0;updateMissionUI();
 }
@@ -1062,7 +1123,7 @@ function updateComboUI(){
  else ui.comboHud.classList.remove("show");
 }
 function updateBuffUI(){
- const parts=[];if(playing&&runMood)parts.push(`${runMood.icon}${runMood.short}`);if(playing)parts.push(dashCooldown>0?`💨${dashCooldown.toFixed(1)}s`:`💨OK`);if(shield>0)parts.push(`🫧${shield}`);if(magnet>0)parts.push(`🧲${Math.ceil(magnet)}s`);if(fever>0)parts.push(`🔥${Math.ceil(fever)}s`);
+ const parts=[];if(playing&&runMood)parts.push(`${runMood.icon}${runMood.short}`);if(playing&&selectedGameMode==="battle")parts.push(`${ATTACK_INFO[selectedAttack].icon}AUTO`);if(playing)parts.push(dashCooldown>0?`💨${dashCooldown.toFixed(1)}s`:`💨OK`);if(shield>0)parts.push(`🫧${shield}`);if(magnet>0)parts.push(`🧲${Math.ceil(magnet)}s`);if(fever>0)parts.push(`🔥${Math.ceil(fever)}s`);
  if(eventState)parts.push(`${eventState.icon}${Math.ceil(eventState.time)}s`);
  ui.buffHud.textContent=parts.join("  ");ui.buffHud.style.display=parts.length?"block":"none";
 }
@@ -1117,7 +1178,7 @@ function endRandomEvent(){eventState=null;ui.eventBanner.classList.remove("show"
 function offerUpgrade(reason="成長ボーナス"){
  if(pausedForUpgrade||pausedForRoute||!playing)return;
  pausedForUpgrade=true;player.vx=player.vy=0;
- const eligible=UPGRADE_POOL.filter(up=>!(up.id==="heart"&&lives>=maxLife())&&!(up.id==="shield"&&shield>=2));const pool=[...(eligible.length>=3?eligible:UPGRADE_POOL)].sort(()=>Math.random()-.5).slice(0,3);
+ const source=selectedGameMode==="battle"?[...UPGRADE_POOL,...ATTACK_UPGRADE_POOL]:UPGRADE_POOL;const eligible=source.filter(up=>!(up.id==="heart"&&lives>=maxLife())&&!(up.id==="shield"&&shield>=2));const pool=[...(eligible.length>=3?eligible:source)].sort(()=>Math.random()-.5).slice(0,3);
  ui.upgradeChoices.innerHTML="";
  for(const up of pool){
   const b=document.createElement("button");b.type="button";b.className="upgradeChoice";
@@ -1150,10 +1211,10 @@ function seedBubbles(){
  for(let i=0;i<ambientTarget();i++)ambient.push(makeAmbient(true));
 }
 function reset(){
- cancelAnimationFrame(raf);creatures=[];particles=[];pickups=[];hazards=[];boss=null;bossTriggered=false;bossCooldown=0;bossCount=0;perfectBosses=0;nextBossIndex=0;runTime=0;runCleared=false;runMood=RUN_MOODS[Math.floor(Math.random()*RUN_MOODS.length)];
+ cancelAnimationFrame(raf);creatures=[];particles=[];pickups=[];projectiles=[];hazards=[];boss=null;bossTriggered=false;bossCooldown=0;bossCount=0;perfectBosses=0;nextBossIndex=0;runTime=0;runCleared=false;runMood=RUN_MOODS[Math.floor(Math.random()*RUN_MOODS.length)];
  score=0;eaten=0;stageIdx=0;lives=maxLife();spawnAcc=0;combo=0;maxCombo=0;comboTimer=0;fever=0;magnet=0;shield=selectedEquip==="bubble"?1:0;
  itemTimer=rand(10,15)*(runMood?.itemInterval||1);eventTimer=rand(11,16);eventState=null;eventElapsed=0;lastEventKind="";sessionDiscoveries=0;pausedForUpgrade=false;pausedForRoute=false;upgradeMilestones=new Set();
- upgrades={speed:0,appetite:0,lucky:0,treasure:0,agility:0,rhythm:0};mission=null;missionNoDamage=0;missionsCompleted=0;dashCooldown=0;dashActive=0;nearMisses=0;chestsOpened=0;lastTouchTapAt=0;currentRoute=null;routeHistory=[];routeMods={smallBias:0,rareBonus:0,dangerBias:0,itemBonus:0,chestBonus:0,speedBonus:0,comboBonus:0};pendingUpgradeReason=null;
+ upgrades={speed:0,appetite:0,lucky:0,treasure:0,agility:0,rhythm:0,attackPower:0,attackRate:0,attackMulti:0,attackPierce:0,attackBlast:0};mission=null;missionNoDamage=0;missionsCompleted=0;dashCooldown=0;dashActive=0;nearMisses=0;chestsOpened=0;attackCooldown=.25;killCount=0;lastTouchTapAt=0;currentRoute=null;routeHistory=[];routeMods={smallBias:0,rareBonus:0,dangerBias:0,itemBonus:0,chestBonus:0,speedBonus:0,comboBonus:0};pendingUpgradeReason=null;
  player.x=W*.5;player.y=Math.max(gameTop()+60,H*.60);player.vx=player.vy=0;player.r=playerRadiusForStage(0);player.inv=0;
  pointer.x=W*.63;pointer.y=player.y;pointer.active=false;pointer.kind="mouse";
  ui.bossbar.classList.remove("show");ui.upgradeOverlay.classList.add("hidden");ui.routeOverlay.classList.add("hidden");ui.eventBanner.classList.remove("show");seedBubbles();updateUI();updateComboUI();updateBuffUI();updateDashUI();newMission();
@@ -1204,19 +1265,20 @@ function spawnCreature(){
  const danger=z===0?["barracuda","shark"]:z===1?["shark","orca"]:["shark","orca","giantSquid"];
  const type=rare?"starJelly":(ratio<1.06?small[Math.floor(rand(0,small.length))]:danger[Math.floor(rand(0,danger.length))]);
  const motion=ratio<1.06?["drift","weave","dart"][Math.floor(rand(0,3))]:"chase";
- creatures.push({x,y,r,ratio,rare,type,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,phase:rand(0,6.28),motion,motionTimer:rand(.7,1.8),dead:false,nearMiss:false});
+ const c={x,y,r,ratio,rare,type,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,phase:rand(0,6.28),motion,motionTimer:rand(.7,1.8),dead:false,nearMiss:false,aid:`e${++attackEntitySeq}`};if(selectedGameMode==="battle"&&ratio>=1.06){c.maxHp=enemyMaxHp(c);c.hp=c.maxHp}creatures.push(c);
 }
 
 function startBoss(info=BOSS_SCHEDULE[nextBossIndex]){
  if(boss||!info)return;
- bossTriggered=true;eventState=null;ui.eventBanner.classList.remove("show");hazards=[];
+ bossTriggered=true;eventState=null;ui.eventBanner.classList.remove("show");hazards=[];if(selectedGameMode==="battle")creatures=creatures.filter(c=>!isDangerous(c));
  const y=clamp(H*.48,gameTop()+80,gameBottom()-80),r=(info.kind==="squid"?76:info.kind==="orca"?88:92)*worldScale;
+ const battle=selectedGameMode==="battle",battleTime=battle?info.total*(selectedDifficulty==="easy"?1.35:1.25):info.total,battleHp=battle?Math.round(({shark:420,squid:540,orca:760}[info.kind]||480)*(selectedDifficulty==="easy"?.82:1)):0;
  const patternChoices=info.kind==="shark"?(selectedDifficulty==="easy"?["standard","calm"]:["standard","calm","burst"]):info.kind==="squid"?["focus","scatter"]:(selectedDifficulty==="easy"?["standard","calm"]:["standard","calm","rhythm"]);
  const pattern=patternChoices[Math.floor(rand(0,patternChoices.length))];
- boss={x:W+130*worldScale,y,r,vx:-55,vy:0,time:info.total,total:info.total,mode:"chase",hitTaken:false,modeTimer:info.kind==="orca"?1.25:1.8,chargeAngle:0,nearMissReady:true,kind:info.kind,final:!!info.final,name:info.name,reward:info.reward,pattern,alpha:1,type:info.kind==="squid"?"giantSquid":info.kind};
+ boss={x:W+130*worldScale,y,r,vx:-55,vy:0,time:battleTime,total:battleTime,hp:battleHp,maxHp:battleHp,mode:"chase",hitTaken:false,modeTimer:info.kind==="orca"?1.25:1.8,chargeAngle:0,nearMissReady:true,kind:info.kind,final:!!info.final,name:info.name,reward:info.reward,pattern,alpha:1,type:info.kind==="squid"?"giantSquid":info.kind,aid:"boss"};
  if(info.kind==="squid"){boss.x=W*.78;boss.y=gameTop()+90*worldScale;boss.vx=-20;boss.vy=25}
  const patternName={standard:"いつもの型",calm:"ゆったり型",burst:"連続型",focus:"ねらいうち型",scatter:"ばらまき型",rhythm:"リズム型"}[pattern]||"変化型";
- ui.bossbar.classList.add("show");ui.bossLabel.textContent=`${info.icon} ${info.name}${info.final?"：ラスボス！":""}`;ui.bossMeter.style.width="100%";
+ ui.bossbar.classList.add("show");ui.bossLabel.textContent=`${info.icon} ${info.name}${info.final?"：ラスボス！":""}${battle?" を倒せ！":""}`;ui.bossMeter.style.width="100%";if(battle)ui.bossTime.textContent=`HP ${battleHp}/${battleHp}`;
  showToast(`${info.icon} ${info.name} 出現！ ${patternName}`,1800);beep(info.final?75:110,.26,"sawtooth",.055);updateRunTimer();
 }
 function spawnInkHazards(){
@@ -1237,9 +1299,12 @@ function updateHazards(dt){
 function finishBoss(){
  if(!boss)return;const b=boss,perfect=!b.hitTaken,perfectBonus=perfect?(b.final?2200:1200):0;bossCount++;if(perfect)perfectBosses++;meta.stats.bosses++;score+=b.reward+perfectBonus;boss=null;hazards=[];bossTriggered=false;ui.bossbar.classList.remove("show");nextBossIndex++;
  burst(player.x,player.y,perfect?"💎":b.final?"🏆":"✨",perfect?22:16);beep(perfect?1080:800,.12,"sine",.07);setTimeout(()=>beep(1040,.14,"sine",.06),80);checkAchievements();updateUI();updateRunTimer();
- const perfectText=perfect?`  💎ノーダメ +${perfectBonus}`:"";
- if(b.final){runCleared=true;showToast(`🏆 ${b.name}を突破！ 深海クリア！ +${b.reward}${perfectText}`,2400);setTimeout(()=>{if(playing)endGame(true)},1300)}
- else{showToast(`${b.name}を突破！ +${b.reward}${perfectText}`,1800);setTimeout(()=>{if(playing)offerUpgrade("ボス撃退ボーナス")},750)}
+ const perfectText=perfect?`  💎ノーダメ +${perfectBonus}`:"",verb=selectedGameMode==="battle"?"撃破":"突破";
+ if(b.final){runCleared=true;showToast(`🏆 ${b.name}を${verb}！ 深海クリア！ +${b.reward}${perfectText}`,2400);setTimeout(()=>{if(playing)endGame(true)},1300)}
+ else{showToast(`${b.name}を${verb}！ +${b.reward}${perfectText}`,1800);setTimeout(()=>{if(playing)offerUpgrade("ボス撃退ボーナス")},750)}
+}
+function bossEscaped(){
+ if(!boss)return;const b=boss;boss=null;hazards=[];bossTriggered=false;ui.bossbar.classList.remove("show");nextBossIndex++;updateRunTimer();if(b.final){showToast(`💨 ${b.name}に逃げ切られた…`,1600);setTimeout(()=>{if(playing)endGame(false)},900)}else{showToast(`💨 ${b.name}に逃げられた！ 次は倒そう`,1500);setTimeout(()=>{if(playing)offerUpgrade("戦闘経験ボーナス")},650)}
 }
 function updateBoss(dt){
  if(!boss)return;boss.time-=dt;boss.modeTimer-=dt;
@@ -1271,8 +1336,43 @@ function updateBoss(dt){
  const d=Math.hypot(player.x-boss.x,player.y-boss.y),contact=playerHitRadius()+boss.r*.66;
  if(boss.mode==="charge"&&dashActive>0&&boss.nearMissReady&&d<contact+38*worldScale&&d>contact+4*worldScale){boss.nearMissReady=false;registerNearMiss(player.x,player.y-20)}
  if(d<contact&&player.inv<=0){hurtFrom(boss.x,boss.y);boss.vx*=-.25;boss.vy*=-.25;if(!playing)return}
- ui.bossTime.textContent=Math.max(0,boss.time).toFixed(1)+"s";ui.bossMeter.style.width=clamp((boss.time/boss.total)*100,0,100)+"%";
- if(boss.time<=0)finishBoss();
+ if(selectedGameMode==="battle"&&boss.maxHp>0){ui.bossTime.textContent=`HP ${Math.max(0,Math.ceil(boss.hp))}/${Math.ceil(boss.maxHp)}`;ui.bossMeter.style.width=clamp(boss.hp/boss.maxHp*100,0,100)+"%"}else{ui.bossTime.textContent=Math.max(0,boss.time).toFixed(1)+"s";ui.bossMeter.style.width=clamp((boss.time/boss.total)*100,0,100)+"%"}
+ if(boss&&boss.time<=0){if(selectedGameMode==="battle")bossEscaped();else finishBoss()}
+}
+
+function enemyMaxHp(c){
+ const ratio=Math.max(1.06,Number(c.ratio)||c.r/Math.max(1,player.r)),heavy=c.type==="orca"||c.type==="giantSquid"||c.type==="shark"?1.18:1;
+ return Math.round((18+ratio*21+stageIdx*4)*heavy*(selectedDifficulty==="easy"?.86:1));
+}
+function ensureAttackId(c){if(!c.aid)c.aid=`e${++attackEntitySeq}`;return c.aid}
+function ensureEnemyHp(c){if(!Number.isFinite(c.maxHp)||c.maxHp<=0)c.maxHp=enemyMaxHp(c);if(!Number.isFinite(c.hp)||c.hp<=0)c.hp=c.maxHp;return c.hp}
+function attackPower(){return 1+(upgrades.attackPower||0)*.22}
+function attackInterval(){const a=ATTACK_INFO[selectedAttack]||ATTACK_INFO.bubble;return Math.max(.16,a.rate*Math.pow(.86,upgrades.attackRate||0))}
+function nearestAttackTarget(){
+ if(boss)return boss;let best=null,bd=Infinity;for(const c of creatures){if(c.dead||!isDangerous(c))continue;const d=Math.hypot(c.x-player.x,c.y-player.y);if(d<bd){bd=d;best=c}}return bd<Math.max(W,H)*1.15?best:null;
+}
+function damageBoss(amount,x,y){if(!boss||selectedGameMode!=="battle")return false;boss.hp=Math.max(0,(Number(boss.hp)||0)-amount);if(Math.random()<.28)burst(x,y,"✨",2);if(boss.hp<=0){finishBoss();return true}return false}
+function defeatEnemy(c){
+ if(!c||c.dead)return;c.dead=true;killCount++;meta.stats.kills=(Number(meta.stats.kills)||0)+1;missionProgress("kill",1);discoverType(c.type);const reward=Math.round((220+c.r*5+stageIdx*65)*(runMood?.scoreMult||1));score+=reward;eaten+=c.r>player.r*1.45?2:1;showFloatText(c.x,c.y-c.r*.5,`撃破 +${reward}`);burst(c.x,c.y,"💥",8);beep(520+Math.min(280,killCount*7),.055,"sine",.035);if(Math.random()<.07)spawnPickup();checkGrowth();updateUI();checkAchievements()
+}
+function damageEnemy(c,amount,x,y){if(!c||c.dead||!isDangerous(c))return false;ensureEnemyHp(c);c.hp=Math.max(0,c.hp-amount);if(Math.random()<.35)particles.push({x,y,vx:rand(-18,18),vy:rand(-28,-8),life:.35,symbol:"✦",size:10});if(c.hp<=0){defeatEnemy(c);return true}return false}
+function projectileHitsEntity(p,e,isBoss=false){const id=isBoss?"boss":ensureAttackId(e);p.hitIds=p.hitIds||[];if(p.hitIds.includes(id))return false;const rr=(p.r||4)+(isBoss?e.r*.62:e.r*.65);if(Math.hypot(p.x-e.x,p.y-e.y)>rr)return false;p.hitIds.push(id);return true}
+function explodeAttack(p,x,y){
+ const range=(p.splash||55)*(1+(upgrades.attackBlast||0)*.22)*worldScale,damage=p.damage;if(boss&&Math.hypot(x-boss.x,y-boss.y)<range+boss.r*.45)damageBoss(damage*.82,x,y);for(const c of creatures){if(c.dead||!isDangerous(c))continue;if(Math.hypot(x-c.x,y-c.y)<range+c.r*.35)damageEnemy(c,damage,c.x,c.y)}burst(x,y,"💫",6)
+}
+function fireAutoAttack(){
+ if(selectedGameMode!=="battle"||!playing||pausedForUpgrade||pausedForRoute||manualPaused)return;const a=ATTACK_INFO[selectedAttack]||ATTACK_INFO.bubble,target=nearestAttackTarget();if(!target){attackCooldown=.08;return}const dx=target.x-player.x,dy=target.y-player.y,baseAngle=Math.atan2(dy,dx),power=attackPower();
+ if(selectedAttack==="whirl"){
+  const range=a.range*(1+(upgrades.attackMulti||0)*.14)*worldScale,damage=a.damage*power;let hit=0;if(boss&&Math.hypot(player.x-boss.x,player.y-boss.y)<range+boss.r*.45){damageBoss(damage,player.x,player.y);hit++}for(const c of creatures){if(c.dead||!isDangerous(c))continue;if(Math.hypot(player.x-c.x,player.y-c.y)<range+c.r*.35){damageEnemy(c,damage,c.x,c.y);hit++}}if(hit){particles.push({kind:"ring",x:player.x,y:player.y,r:10,maxR:range,life:.34,size:3})}else{attackCooldown=.12;return}
+ }else{
+  let count=a.count||1;if(selectedAttack==="bubble")count+=Math.min(2,upgrades.attackMulti||0);else if(selectedAttack==="star")count+=Math.min(4,(upgrades.attackMulti||0)*2);const spread=a.spread||.14;for(let i=0;i<count;i++){const off=count===1?0:(i-(count-1)/2)*spread,ang=baseAngle+off,spd=a.speed*worldScale,rad=(a.size+(upgrades.attackBlast||0)*1.1)*worldScale;projectiles.push({type:selectedAttack,x:player.x+Math.cos(ang)*player.r*.58,y:player.y+Math.sin(ang)*player.r*.58,vx:Math.cos(ang)*spd,vy:Math.sin(ang)*spd,r:rad,damage:a.damage*power,life:selectedAttack==="ink"?2.2:1.7,pierce:(a.pierce||0)+(upgrades.attackPierce||0),splash:a.splash||0,hitIds:[]})}
+ }
+ attackCooldown=attackInterval();beep(selectedAttack==="ink"?260:selectedAttack==="star"?820:selectedAttack==="whirl"?430:650,.025,"sine",.012)
+}
+function updateAttacks(dt){
+ if(selectedGameMode!=="battle"){projectiles=[];return}attackCooldown=Math.max(0,attackCooldown-dt);if(attackCooldown<=0)fireAutoAttack();
+ for(const p of projectiles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt;if(p.life<=0)continue;let consumed=false;if(boss&&projectileHitsEntity(p,boss,true)){if(p.splash)explodeAttack(p,p.x,p.y);else damageBoss(p.damage,p.x,p.y);if(p.pierce>0)p.pierce--;else consumed=true}if(consumed){p.life=0;continue}for(const c of creatures){if(c.dead||!isDangerous(c)||!projectileHitsEntity(p,c,false))continue;if(p.splash)explodeAttack(p,p.x,p.y);else damageEnemy(c,p.damage,p.x,p.y);if(p.pierce>0){p.pierce--;continue}p.life=0;break}}
+ projectiles=projectiles.filter(p=>p.life>0&&p.x>-80&&p.x<W+80&&p.y>gameTop()-80&&p.y<gameBottom()+80);
 }
 
 function isEdible(c){
@@ -1361,6 +1461,7 @@ function update(dt){
    }
   }
  }
+ updateAttacks(dt);
  creatures=creatures.filter(c=>!c.dead&&c.x>-190&&c.x<W+190&&c.y>-190&&c.y<H+190);
 
  for(const p of pickups){
@@ -1379,7 +1480,7 @@ function update(dt){
  if(boss)updateBoss(dt);
  updateHazards(dt);if(!playing)return;
 
- for(const p of particles){if(p.kind==="swimBubble"){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy-=4*dt;p.life-=dt}else{p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=14*dt;p.life-=dt}}
+ for(const p of particles){if(p.kind==="ring"){p.life-=dt}else if(p.kind==="swimBubble"){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy-=4*dt;p.life-=dt}else{p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=14*dt;p.life-=dt}}
  particles=particles.filter(p=>p.life>0);
  for(const b of bubbles){b.y-=b.s*dt;b.x+=Math.sin((b.y+b.r)*.02)*2.5*dt;if(b.y<-10){b.y=H+10;b.x=rand(0,W)}}
 }
@@ -1634,6 +1735,7 @@ function drawStatusCue(c,t){
  }else{
   const y=c.y-c.r*.95-9+bob;ctx.globalAlpha=.96;ctx.fillStyle="#fff0f2";ctx.strokeStyle="#e56f7b";ctx.lineWidth=1.5;ctx.beginPath();ctx.roundRect(c.x-9,y-9,18,18,9);ctx.fill();ctx.stroke();ctx.fillStyle="#d95061";ctx.font="bold 14px sans-serif";ctx.fillText("!",c.x,y+.5);
  }
+ if(selectedGameMode==="battle"&&isDangerous(c)){ensureEnemyHp(c);const bw=Math.max(22,c.r*1.2),bh=4,yy=c.y+c.r*.82+7;ctx.globalAlpha=.88;ctx.fillStyle="rgba(30,45,55,.35)";ctx.fillRect(c.x-bw/2,yy,bw,bh);ctx.fillStyle="#74d6b2";ctx.fillRect(c.x-bw/2,yy,bw*clamp(c.hp/c.maxHp,0,1),bh)}
  ctx.restore();
 }
 function drawMendakoFlippers(w,h,t,speed){
@@ -1642,6 +1744,10 @@ function drawMendakoFlippers(w,h,t,speed){
  for(const side of [-1,1]){
   ctx.save();ctx.translate(side*w*.34,-h*.28);ctx.rotate(side*(.18+flap));ctx.scale(side,1);lineStyle(Math.max(1.2,w*.018),outline);ctx.fillStyle=orange;ctx.beginPath();ctx.moveTo(0,0);ctx.bezierCurveTo(w*.16,-h*.15,w*.26,-h*.08,w*.24,h*.02);ctx.bezierCurveTo(w*.18,h*.08,w*.08,h*.06,0,0);ctx.fill();ctx.stroke();ctx.restore();
  }
+}
+function drawProjectiles(t){
+ for(const p of projectiles){ctx.save();ctx.translate(p.x,p.y);if(p.type==="bubble"){ctx.fillStyle="rgba(218,250,255,.92)";ctx.strokeStyle="#79cfe5";ctx.lineWidth=1.3;ctx.beginPath();ctx.arc(0,0,p.r,0,Math.PI*2);ctx.fill();ctx.stroke()}else if(p.type==="star"){ctx.fillStyle="#fff3a5";ctx.font=`bold ${Math.max(12,p.r*2.6)}px sans-serif`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("✦",0,0)}else{ctx.fillStyle="rgba(94,79,133,.82)";ctx.strokeStyle="#615070";ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(0,0,p.r,0,Math.PI*2);ctx.fill();ctx.stroke()}ctx.restore()}
+ for(const q of particles){if(q.kind!=="ring")continue;const progress=1-clamp(q.life/.34,0,1),r=q.maxR*progress;ctx.save();ctx.globalAlpha=clamp(q.life/.34,0,.7);ctx.strokeStyle="rgba(125,221,238,.9)";ctx.lineWidth=Math.max(2,q.size||3);ctx.beginPath();ctx.arc(q.x,q.y,r,0,Math.PI*2);ctx.stroke();ctx.restore()}
 }
 function drawPlayer(){
  const blink=player.inv>0&&Math.floor(player.inv*10)%2===0;if(blink||!mendakoImg.complete)return;
@@ -1666,9 +1772,10 @@ function render(t){
  for(const a of ambient)drawAmbient(a);
  const sorted=[...creatures].sort((a,b)=>a.r-b.r);
  for(const c of sorted){drawCreature(c);drawStatusCue(c,t)}
- drawPickups(t);drawHazards();drawBossWarning();drawBoss();drawPlayer();
+ drawPickups(t);drawHazards();drawBossWarning();drawBoss();drawProjectiles(t);drawPlayer();
 
  for(const p of particles){
+  if(p.kind==="ring")continue;
   if(p.kind==="swimBubble"){ctx.globalAlpha=clamp(p.life*1.6,0,.7);ctx.strokeStyle="rgba(255,255,255,.92)";ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.stroke();continue}
   ctx.globalAlpha=clamp(p.life*1.5,0,1);ctx.font=`${p.text?"bold ":""}${p.size}px sans-serif`;ctx.textAlign="center";if(p.text){ctx.lineWidth=3;ctx.strokeStyle="rgba(255,255,255,.9)";ctx.strokeText(p.symbol,p.x,p.y);ctx.fillStyle="#d95f7e"}ctx.fillText(p.symbol,p.x,p.y);
  }
@@ -1682,7 +1789,7 @@ function loop(t){
 function startGame(){
  clearRunSave();initAudio();if(musicEnabled)startAmbientMusic();manualPaused=false;pauseOverlay.classList.add("hidden");reset();playing=true;started=performance.now();last=started;
  ui.start.classList.add("hidden");ui.result.classList.add("hidden");ui.tip.classList.remove("hide");
- showToast(`${difficulty().icon} ${difficulty().name} ／ ${STYLE_INFO[selectedStyle].icon} ${STYLE_INFO[selectedStyle].name}メンダコで出発！`,1350);
+ const mode=GAME_MODE_INFO[selectedGameMode];ui.tip.textContent=selectedGameMode==="battle"?`${ATTACK_INFO[selectedAttack].icon} 攻撃は自動！ 移動しながら敵を倒そう　素早く2回タップでダッシュ`:`♥ 食べられる　! にげて　スマホ：素早く2回タップでダッシュ`;showToast(`${mode.icon} ${mode.name} ／ ${difficulty().icon} ${difficulty().name} ／ ${STYLE_INFO[selectedStyle].icon} ${STYLE_INFO[selectedStyle].name}`,1550);
  setTimeout(()=>{if(playing&&!manualPaused)showToast(`${runMood.icon} 今回の潮「${runMood.name}」：${runMood.desc}`,1850)},1150);
  setTimeout(()=>ui.tip.classList.add("hide"),4200);armBackGuard();saveRunState("start");
  raf=requestAnimationFrame(loop);
@@ -1694,11 +1801,10 @@ function startFreshGame(){
 }
 function endGame(cleared=false){
  if(!playing)return;playing=false;manualPaused=false;backGuardArmed=false;pauseOverlay.classList.add("hidden");runCleared=!!cleared;cancelAnimationFrame(raf);ui.bossbar.classList.remove("show");hazards=[];clearRunSave();
- meta.stats.runs++;if(cleared)meta.stats.clears++;meta.stats.bestScore=Math.max(meta.stats.bestScore,score);meta.stats.maxCombo=Math.max(meta.stats.maxCombo,maxCombo);checkAchievements();
- const old=bestScore(),isNew=score>old,best=Math.max(old,score);if(isNew)saveBest(score);
+ meta.stats.runs++;if(cleared)meta.stats.clears++;const bestField=selectedGameMode==="battle"?"bestBattle":"bestSurvival",oldModeBest=Number(meta.stats[bestField])||0,isNew=score>oldModeBest,best=Math.max(oldModeBest,score);meta.stats[bestField]=best;meta.stats.bestScore=Math.max(meta.stats.bestScore,score);meta.stats.maxCombo=Math.max(meta.stats.maxCombo,maxCombo);saveBest(meta.stats.bestScore);checkAchievements();
  ui.finalScore.textContent=score.toLocaleString("ja-JP");ui.finalStage.textContent=`${STAGES[stageIdx].name} Lv.${stageIdx+1}`;ui.finalZone.textContent=ZONES[currentZone()].short;ui.best.textContent=best.toLocaleString("ja-JP");ui.resultTime.textContent=fmtTime(runTime);
- const earnedPearls=Math.max(0,Math.floor(score/4500)+bossCount*2+perfectBosses+missionsCompleted+Math.floor(nearMisses/5)+(cleared?8:0));meta.pearls+=earnedPearls;saveMeta();recordRankingScore(cleared);refreshMetaUI();updateResultRank();
- ui.resultCombo.textContent=maxCombo;ui.resultNearMiss.textContent=nearMisses;ui.resultDex.textContent=`${discovered.size}/${DEX_TYPES.length}`;ui.resultBosses.textContent=bossCount;ui.resultPerfectBosses.textContent=perfectBosses;ui.resultPearls.textContent=earnedPearls;ui.resultTitle.textContent=cleared?`🎉 深海クリア！ (${difficulty().name})`:`深海チャレンジ終了！ (${difficulty().name})`;
+ const earnedPearls=Math.max(0,Math.floor(score/4500)+bossCount*2+perfectBosses+missionsCompleted+Math.floor(nearMisses/5)+(selectedGameMode==="battle"?Math.floor(killCount/6):0)+(cleared?8:0));meta.pearls+=earnedPearls;saveMeta();recordRankingScore(cleared);refreshMetaUI();updateResultRank();
+ ui.resultCombo.textContent=maxCombo;ui.resultNearMiss.textContent=nearMisses;if(resultKills)resultKills.textContent=killCount;ui.resultDex.textContent=`${discovered.size}/${DEX_TYPES.length}`;ui.resultBosses.textContent=bossCount;ui.resultPerfectBosses.textContent=perfectBosses;ui.resultPearls.textContent=earnedPearls;const gm=GAME_MODE_INFO[selectedGameMode];if(resultMode)resultMode.textContent=`${gm.icon} ${gm.name}${selectedGameMode==="battle"?` ／ ${ATTACK_INFO[selectedAttack].icon}${ATTACK_INFO[selectedAttack].name}`:""}`;ui.resultTitle.textContent=cleared?`🎉 深海クリア！ (${gm.name}・${difficulty().name})`:`深海チャレンジ終了！ (${gm.name}・${difficulty().name})`;
  ui.resultRoutes.innerHTML="";
  ui.record.innerHTML=(cleared?'<div class="clearBadge">🏆 ラスボス突破！ CLEAR</div>':"")+(isNew&&score>0?'<div class="badge">🏆 NEW RECORD!</div>':"");
  pausedForUpgrade=false;pausedForRoute=false;ui.upgradeOverlay.classList.add("hidden");ui.routeOverlay.classList.add("hidden");updateDashUI();updateRunTimer();
@@ -1723,10 +1829,12 @@ canvas.addEventListener("pointerup",()=>pointer.active=false);
 canvas.addEventListener("pointercancel",()=>pointer.active=false);
 canvas.addEventListener("pointerleave",e=>{if(e.pointerType!=="mouse")pointer.active=false});
 
+document.querySelectorAll(".modeBtn").forEach(b=>b.addEventListener("click",()=>selectGameMode(b.dataset.mode)));
+document.querySelectorAll(".attackBtn").forEach(b=>b.addEventListener("click",()=>selectAttack(b.dataset.attack)));
 document.querySelectorAll(".difficultyBtn").forEach(b=>b.addEventListener("click",()=>selectDifficulty(b.dataset.difficulty)));
 document.querySelectorAll(".styleBtn").forEach(b=>b.addEventListener("click",()=>selectStyle(b.dataset.style)));
 document.querySelectorAll(".equipBtn").forEach(b=>b.addEventListener("click",()=>selectEquip(b.dataset.equip)));
-profileBtn.addEventListener("click",openProfiles);rankingBtn.addEventListener("click",openRanking);profileClose.addEventListener("click",closeProfiles);rankingClose.addEventListener("click",closeRanking);profileAddBtn.addEventListener("click",createProfile);profileRenameBtn.addEventListener("click",renameActiveProfile);profileOverlay.addEventListener("click",e=>{if(e.target===profileOverlay)closeProfiles()});rankingOverlay.addEventListener("click",e=>{if(e.target===rankingOverlay)closeRanking()});document.querySelectorAll(".rankTab").forEach(b=>b.addEventListener("click",()=>renderRanking(b.dataset.rankPeriod)));
+profileBtn.addEventListener("click",openProfiles);rankingBtn.addEventListener("click",openRanking);profileClose.addEventListener("click",closeProfiles);rankingClose.addEventListener("click",closeRanking);profileAddBtn.addEventListener("click",createProfile);profileRenameBtn.addEventListener("click",renameActiveProfile);profileOverlay.addEventListener("click",e=>{if(e.target===profileOverlay)closeProfiles()});rankingOverlay.addEventListener("click",e=>{if(e.target===rankingOverlay)closeRanking()});document.querySelectorAll(".rankTab").forEach(b=>b.addEventListener("click",()=>renderRanking(b.dataset.rankPeriod,rankingModeFilter)));document.querySelectorAll(".rankModeTab").forEach(b=>b.addEventListener("click",()=>renderRanking(rankingPeriod,b.dataset.rankMode)));
 ui.dexBtn.addEventListener("click",()=>openBook("dex"));ui.achBtn.addEventListener("click",()=>openBook("ach"));
 document.getElementById("dexClose").addEventListener("click",closeBooks);document.getElementById("achClose").addEventListener("click",closeBooks);
 ui.dexOverlay.addEventListener("click",e=>{if(e.target===ui.dexOverlay)closeBooks()});ui.achOverlay.addEventListener("click",e=>{if(e.target===ui.achOverlay)closeBooks()});
