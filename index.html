@@ -13,7 +13,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="メンダコ">
 
-<title>メンダコ・ディープサバイバル v16 PWA</title>
+<title>メンダコ・ディープサバイバル v17 PWA</title>
 <style>
 :root{--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
@@ -81,7 +81,7 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
 @keyframes dashPulse{to{box-shadow:0 8px 20px rgba(0,0,0,.18),0 0 0 5px rgba(111,218,244,.18)}}
 .routeOverlay{position:absolute;z-index:25;inset:0;display:grid;place-items:center;padding:max(10px,var(--safe-top)) max(10px,var(--safe-right)) max(10px,var(--safe-bottom)) max(10px,var(--safe-left));background:rgba(7,28,44,.76);backdrop-filter:blur(8px);transition:.18s}.routeOverlay.hidden{opacity:0;pointer-events:none}
 .routePanel{width:min(94vw,500px);background:rgba(255,255,255,.97);border:2px solid #fff;border-radius:24px;padding:16px 14px;box-shadow:0 18px 46px rgba(0,0,0,.28);text-align:center}.routePanel h2{margin:0 0 4px;color:#287fa6;font-size:20px}.routePanel p{margin:0 0 12px;font-size:11px;font-weight:800;opacity:.72}.routeChoices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.routeChoice{min-height:128px;border:1.5px solid #d5e9f0;border-radius:17px;background:#f7fcfe;padding:12px 8px;color:#345064;font:inherit;cursor:pointer}.routeChoice:active{transform:translateY(2px)}.routeChoice .icon{display:block;font-size:32px;margin-bottom:5px}.routeChoice strong{display:block;font-size:13px}.routeChoice small{display:block;font-size:10px;line-height:1.35;margin-top:5px;opacity:.75}
-.metaBox{margin:8px auto 12px;padding:9px 10px;border-radius:15px;background:#f5fbfd;border:1px solid #d8eef4}.metaHead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:11px;font-weight:1000;margin-bottom:7px}.metaHead small{font-size:9px;opacity:.62}.charmRow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.charmBtn{min-width:0;border:1px solid #d5e7ed;border-radius:11px;background:#fff;padding:6px 3px;font:inherit;color:#345064;cursor:pointer;line-height:1.12}.charmBtn span{display:block;font-size:18px}.charmBtn b{display:block;font-size:9px;margin-top:2px}.charmBtn small{display:block;font-size:8px;margin-top:3px;color:#7b6570}.charmBtn.unlocked{background:#eafaf4;border-color:#9adbc5}.charmBtn:disabled{opacity:.58;cursor:default}
+.metaBox{margin:8px auto 12px;padding:9px 10px;border-radius:15px;background:#f5fbfd;border:1px solid #d8eef4}.metaHead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:11px;font-weight:1000;margin-bottom:7px}.metaHead small{font-size:9px;opacity:.62}.charmRow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.charmBtn{min-width:0;border:1px solid #d5e7ed;border-radius:11px;background:#fff;padding:6px 3px;font:inherit;color:#345064;cursor:pointer;line-height:1.12}.charmBtn span{display:block;font-size:18px}.charmBtn b{display:block;font-size:9px;margin-top:2px}.charmBtn small{display:block;font-size:8px;margin-top:3px;color:#7b6570}.charmBtn.unlocked{background:#eafaf4;border-color:#9adbc5}.charmBtn.selected{box-shadow:inset 0 0 0 2px #62bfd9;background:#eaf9fd}.charmBtn:disabled{opacity:.58;cursor:default}
 .routeTag{display:inline-block;margin:2px 2px 0;padding:3px 7px;border-radius:999px;background:#eef8fb;font-size:9px;font-weight:900;color:#3d7187}
 
 @media(max-width:600px){
@@ -150,6 +150,11 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
  .dashBtn{right:calc(max(14px,var(--safe-right)) + 10px);top:58%;bottom:auto;width:68px;height:68px}
  .dashBtn:active{transform:translateY(-50%) scale(.92)}
 }
+
+/* v17: expanded pearl shop + long-term research */
+.shopSection{padding:9px 0 2px;border-top:1px dashed #cfe4eb}.shopSection:first-child{border-top:0;padding-top:0}.shopSectionTitle{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 2px 7px;font-size:11px;font-weight:1000;color:#345064}.shopSectionTitle small{font-size:9px;opacity:.62}.charmRow{grid-template-columns:repeat(4,minmax(0,1fr))}.researchRow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.researchBtn{min-width:0;border:1px solid #d5e7ed;border-radius:12px;background:#fff;padding:7px 5px;font:inherit;color:#345064;cursor:pointer;text-align:left;line-height:1.2}.researchBtn span{font-size:18px;margin-right:4px}.researchBtn b{font-size:10px}.researchBtn small{display:block;font-size:8px;margin-top:4px;color:#71818a}.researchBtn.maxed{background:#eefaf5;border-color:#9adbc5}.researchBtn:disabled{opacity:.68;cursor:default}.shopHint{margin:6px 2px 1px;font-size:9px;line-height:1.4;color:#6b7e88;font-weight:800}
+@media(max-width:520px){.charmRow{grid-template-columns:repeat(2,minmax(0,1fr))}.researchRow{grid-template-columns:1fr 1fr}.equipRow{display:flex!important;overflow-x:auto;gap:7px;padding:1px 1px 5px;scroll-snap-type:x proximity}.equipBtn{flex:0 0 112px;scroll-snap-align:start}.equipRow::-webkit-scrollbar{display:none}.equipRow{scrollbar-width:none}}
+@media(orientation:landscape) and (max-height:620px){.charmRow{grid-template-columns:repeat(4,minmax(0,1fr))}.researchRow{grid-template-columns:repeat(4,minmax(0,1fr))}.researchBtn{padding:5px 4px}.researchBtn span{font-size:15px}.researchBtn b{font-size:9px}.researchBtn small{font-size:7px}.shopSection{padding-top:6px}.shopSectionTitle{margin-bottom:4px}}
 
 /* v15: selectable game level + compact mobile balancing */
 .difficultyBox{margin:0 0 9px;padding:9px;border-radius:15px;background:#f7fbff;border:1px solid #d6eaf3}
@@ -262,6 +267,10 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
           <button class="equipBtn" type="button" data-equip="bubble"><span>🫧</span><b>初期バリア</b><small>1回守る</small></button>
           <button class="equipBtn" type="button" data-equip="current"><span>🌊</span><b>潮のお守り</b><small>ダッシュ短縮</small></button>
           <button class="equipBtn" type="button" data-equip="star"><span>⭐</span><b>星のお守り</b><small>レア率UP</small></button>
+          <button class="equipBtn" type="button" data-equip="rhythm"><span>🎵</span><b>リズム貝</b><small>コンボ長持ち</small></button>
+          <button class="equipBtn" type="button" data-equip="treasure"><span>🎁</span><b>宝さがし貝</b><small>アイテムUP</small></button>
+          <button class="equipBtn" type="button" data-equip="gourmet"><span>🍽️</span><b>ぱくぱく貝</b><small>捕食しやすい</small></button>
+          <button class="equipBtn" type="button" data-equip="coral"><span>🪸</span><b>サンゴのお守り</b><small>ボス予告長め</small></button>
         </div>
       </div>
 
@@ -275,11 +284,27 @@ h1{margin:0;color:#287fa6;font-size:clamp(28px,7.4vw,46px);line-height:1.04;text
       <details class="metaDetails">
         <summary>🦪 しんじゅ交換所 <span>現在 <b id="pearlCount">0</b>個</span></summary>
         <div class="metaBox">
-          <div class="metaHead"><strong>お守り交換所</strong><small>しんじゅで永久解放</small></div>
-          <div class="charmRow">
-            <button class="charmBtn" type="button" data-charm="bubble"><span>🫧</span><b>初期バリア</b><small>8個</small></button>
-            <button class="charmBtn" type="button" data-charm="current"><span>🌊</span><b>潮のお守り</b><small>12個</small></button>
-            <button class="charmBtn" type="button" data-charm="star"><span>⭐</span><b>星のお守り</b><small>16個</small></button>
+          <div class="shopSection">
+            <div class="shopSectionTitle"><strong>🎒 お守り</strong><small>永久解放・1つ装備</small></div>
+            <div class="charmRow">
+              <button class="charmBtn" type="button" data-charm="bubble"><span>🫧</span><b>初期バリア</b><small>8個</small></button>
+              <button class="charmBtn" type="button" data-charm="current"><span>🌊</span><b>潮のお守り</b><small>12個</small></button>
+              <button class="charmBtn" type="button" data-charm="star"><span>⭐</span><b>星のお守り</b><small>16個</small></button>
+              <button class="charmBtn" type="button" data-charm="rhythm"><span>🎵</span><b>リズム貝</b><small>22個</small></button>
+              <button class="charmBtn" type="button" data-charm="treasure"><span>🎁</span><b>宝さがし貝</b><small>26個</small></button>
+              <button class="charmBtn" type="button" data-charm="gourmet"><span>🍽️</span><b>ぱくぱく貝</b><small>30個</small></button>
+              <button class="charmBtn" type="button" data-charm="coral"><span>🪸</span><b>サンゴのお守り</b><small>36個</small></button>
+            </div>
+          </div>
+          <div class="shopSection">
+            <div class="shopSectionTitle"><strong>🔬 海の研究</strong><small>各Lv.20まで永久強化</small></div>
+            <div class="researchRow">
+              <button class="researchBtn" type="button" data-research="fins"><span>💨</span><b>ヒレ研究</b><small>Lv.0/20</small></button>
+              <button class="researchBtn" type="button" data-research="dash"><span>🌀</span><b>ダッシュ研究</b><small>Lv.0/20</small></button>
+              <button class="researchBtn" type="button" data-research="combo"><span>🎵</span><b>コンボ研究</b><small>Lv.0/20</small></button>
+              <button class="researchBtn" type="button" data-research="rare"><span>✨</span><b>発見研究</b><small>Lv.0/20</small></button>
+            </div>
+            <div class="shopHint">研究は1段階ずつ小さく強化。4系統をLv.20まで育てると合計2,920個のしんじゅを使えます。</div>
           </div>
         </div>
       </details>
@@ -420,7 +445,7 @@ let upgrades={speed:0,appetite:0,lucky:0,treasure:0,agility:0,rhythm:0};
 let dashCooldown=0,dashActive=0,nearMisses=0,chestsOpened=0,lastTouchTapAt=0,lastTouchTapX=0,lastTouchTapY=0;
 let currentRoute=null,routeHistory=[],routeMods={smallBias:0,rareBonus:0,dangerBias:0,itemBonus:0,chestBonus:0,speedBonus:0,comboBonus:0},pendingUpgradeReason=null;
 const SPECIES_INFO={
- shrimp:{name:"エビ",icon:"🦐",rarity:1,desc:"ちょこちょこ泳ぐ小さなエビ。"},clownfish:{name:"クマノミ",icon:"🐠",rarity:1,desc:"しま模様がかわいいサンゴ礁の魚。"},bluefish:{name:"青い魚",icon:"🐟",rarity:1,desc:"すばやく泳ぐ青い小魚。"},jelly:{name:"クラゲ",icon:"🪼",rarity:1,desc:"ぷかぷか漂うやさしいクラゲ。"},crab:{name:"カニ",icon:"🦀",rarity:1,desc:"海底を元気に横歩きするカニ。"},seahorse:{name:"タツノオトシゴ",icon:"🌊",rarity:2,desc:"くるんとした尾がかわいい海の生き物。"},angelfish:{name:"エンゼルフィッシュ",icon:"🐠",rarity:2,desc:"ひらひら泳ぐおしゃれな魚。"},lantern:{name:"ヒカリ魚",icon:"✨",rarity:2,desc:"暗い海で淡く光る小さな魚。"},puffer:{name:"フグ",icon:"🐡",rarity:2,desc:"まんまるな体がチャームポイント。"},anglerSmall:{name:"チョウチンアンコウ",icon:"💡",rarity:3,desc:"光るちょうちんで深海を照らす魚。"},squid:{name:"イカ",icon:"🦑",rarity:2,desc:"すいすい泳ぐ小さなイカ。"},seaAngel:{name:"クリオネ",icon:"🪽",rarity:3,desc:"透明な翼のような腕で泳ぐ海の天使。"},starJelly:{name:"ほしクラゲ",icon:"⭐",rarity:5,desc:"きらきら光る、とても珍しいクラゲ。"},barracuda:{name:"カマス",icon:"🐟",rarity:2,desc:"細長い体で素早く泳ぐハンター。"},shark:{name:"サメ",icon:"🦈",rarity:3,desc:"迫力はあるけど、どこかかわいいサメ。"},orca:{name:"シャチ",icon:"🐋",rarity:4,desc:"白黒模様のパワフルな海の王者。"},giantSquid:{name:"ダイオウイカ",icon:"🦑",rarity:4,desc:"深海にひそむ巨大なイカ。"}
+ shrimp:{name:"エビ",icon:"🦐",rarity:1,desc:"ちょこちょこ泳ぐ小さなエビ。"},clownfish:{name:"クマノミ",icon:"🐠",rarity:1,desc:"しま模様がかわいいサンゴ礁の魚。"},bluefish:{name:"青い魚",icon:"🐟",rarity:1,desc:"すばやく泳ぐ青い小魚。"},jelly:{name:"クラゲ",icon:"🪼",rarity:1,desc:"ぷかぷか漂うやさしいクラゲ。"},crab:{name:"カニ",icon:"🦀",rarity:1,desc:"海底を元気に横歩きするカニ。"},seahorse:{name:"タツノオトシゴ",icon:"🌊",rarity:2,desc:"くるんとした尾がかわいい海の生き物。"},angelfish:{name:"エンゼルフィッシュ",icon:"🐠",rarity:2,desc:"ひらひら泳ぐおしゃれな魚。"},lantern:{name:"ヒカリ魚",icon:"✨",rarity:2,desc:"暗い海で淡く光る小さな魚。"},puffer:{name:"フグ",icon:"🐡",rarity:2,desc:"まんまるな体がチャームポイント。"},fireflySquid:{name:"ホタルイカ",icon:"🦑",rarity:3,desc:"青白くきらめきながら泳ぐ小さなイカ。"},nautilus:{name:"オウムガイ",icon:"🐚",rarity:3,desc:"くるくるの殻で深海をゆっくり進む不思議な仲間。"},anglerSmall:{name:"チョウチンアンコウ",icon:"💡",rarity:3,desc:"光るちょうちんで深海を照らす魚。"},squid:{name:"イカ",icon:"🦑",rarity:2,desc:"すいすい泳ぐ小さなイカ。"},seaAngel:{name:"クリオネ",icon:"🪽",rarity:3,desc:"透明な翼のような腕で泳ぐ海の天使。"},starJelly:{name:"ほしクラゲ",icon:"⭐",rarity:5,desc:"きらきら光る、とても珍しいクラゲ。"},barracuda:{name:"カマス",icon:"🐟",rarity:2,desc:"細長い体で素早く泳ぐハンター。"},shark:{name:"サメ",icon:"🦈",rarity:3,desc:"迫力はあるけど、どこかかわいいサメ。"},orca:{name:"シャチ",icon:"🐋",rarity:4,desc:"白黒模様のパワフルな海の王者。"},giantSquid:{name:"ダイオウイカ",icon:"🦑",rarity:4,desc:"深海にひそむ巨大なイカ。"}
 };
 const SPECIES_NAMES=Object.fromEntries(Object.entries(SPECIES_INFO).map(([k,v])=>[k,v.name]));
 const DEX_TYPES=Object.keys(SPECIES_INFO);
@@ -474,12 +499,20 @@ const ACHIEVEMENTS=[
 ];
 
 const META_KEY="mendako_meta_v9";
-const CHARM_INFO={bubble:{cost:8},current:{cost:12},star:{cost:16}};
-let meta={pearls:0,charms:{bubble:false,current:false,star:false},selectedStyle:"swift",selectedEquip:"none",selectedDifficulty:"normal",speciesCounts:{},achievements:[],stats:{runs:0,clears:0,bosses:0,totalEaten:0,maxCombo:0,nearMisses:0,missions:0,bestScore:0}};
+const CHARM_INFO={
+ bubble:{cost:8,icon:"🫧",name:"初期バリア",desc:"開始時バリア1"},current:{cost:12,icon:"🌊",name:"潮のお守り",desc:"ダッシュCT -18%"},star:{cost:16,icon:"⭐",name:"星のお守り",desc:"レア率 +1.8%"},
+ rhythm:{cost:22,icon:"🎵",name:"リズム貝",desc:"コンボ猶予 +0.45秒"},treasure:{cost:26,icon:"🎁",name:"宝さがし貝",desc:"アイテム出現UP"},gourmet:{cost:30,icon:"🍽️",name:"ぱくぱく貝",desc:"捕食しやすくなる"},coral:{cost:36,icon:"🪸",name:"サンゴのお守り",desc:"ボス予告 +0.16秒"}
+};
+const RESEARCH_INFO={
+ fins:{icon:"💨",name:"ヒレ研究",max:20,desc:"移動速度"},dash:{icon:"🌀",name:"ダッシュ研究",max:20,desc:"ダッシュ回復"},
+ combo:{icon:"🎵",name:"コンボ研究",max:20,desc:"コンボ猶予"},rare:{icon:"✨",name:"発見研究",max:20,desc:"レア率"}
+};
+let meta={pearls:0,charms:{bubble:false,current:false,star:false,rhythm:false,treasure:false,gourmet:false,coral:false},research:{fins:0,dash:0,combo:0,rare:0},selectedStyle:"swift",selectedEquip:"none",selectedDifficulty:"normal",speciesCounts:{},achievements:[],stats:{runs:0,clears:0,bosses:0,totalEaten:0,maxCombo:0,nearMisses:0,missions:0,bestScore:0}};
 try{
  const raw=localStorage.getItem(META_KEY)||localStorage.getItem("mendako_meta_v8")||"null",m=JSON.parse(raw);
- if(m&&typeof m==="object")meta={...meta,...m,charms:{...meta.charms,...(m.charms||{})},speciesCounts:{...(m.speciesCounts||{})},achievements:[...(m.achievements||[])],stats:{...meta.stats,...(m.stats||{})}};
+ if(m&&typeof m==="object")meta={...meta,...m,charms:{...meta.charms,...(m.charms||{})},research:{...meta.research,...(m.research||{})},speciesCounts:{...(m.speciesCounts||{})},achievements:[...(m.achievements||[])],stats:{...meta.stats,...(m.stats||{})}};
 }catch{}
+for(const id of Object.keys(RESEARCH_INFO))meta.research[id]=clamp(Number(meta.research[id])||0,0,RESEARCH_INFO[id].max);
 if(!STYLE_INFO[meta.selectedStyle])meta.selectedStyle="swift";
 if(meta.selectedEquip!=="none"&&!meta.charms[meta.selectedEquip])meta.selectedEquip="none";
 if(!DIFFICULTY_INFO[meta.selectedDifficulty])meta.selectedDifficulty="normal";
@@ -498,7 +531,7 @@ function touchFingerOffset(){
  return Math.min(84,Math.min(72,Math.max(44,H*.075))+Math.min(12,stageIdx*2.4));
 }
 function moveViewportFactor(){return compactViewport()?(boss?1.04:.97):1}
-function bossWarningDuration(final){return (final?.42:.64)+(selectedDifficulty==="easy"?.12:0)+(compactViewport()?.08:0)}
+function bossWarningDuration(final){return (final?.42:.64)+(selectedDifficulty==="easy"?.12:0)+(compactViewport()?.08:0)+(selectedEquip==="coral"?.16:0)}
 
 const pointer={x:0,y:0,active:false,kind:"mouse"};
 const player={x:0,y:0,vx:0,vy:0,r:22,angle:0,inv:0};
@@ -696,12 +729,26 @@ function showToast(text,ms=1100){
 }
 
 function saveMeta(){try{localStorage.setItem(META_KEY,JSON.stringify(meta))}catch{}}
+function researchLevel(id){return clamp(Number(meta.research?.[id])||0,0,RESEARCH_INFO[id]?.max||0)}
+function researchCost(id){const lv=researchLevel(id);return 8+lv*3}
+function researchEffectText(id,lv=researchLevel(id)){
+ if(id==="fins")return `速度 +${(lv*.5).toFixed(1)}%`;
+ if(id==="dash")return `CT -${(lv*.4).toFixed(1)}%`;
+ if(id==="combo")return `猶予 +${(lv*.015).toFixed(2)}秒`;
+ if(id==="rare")return `レア +${(lv*.1).toFixed(1)}%`;
+ return "強化";
+}
 function refreshMetaUI(){
  ui.pearlCount.textContent=meta.pearls;
  document.querySelectorAll(".charmBtn").forEach(btn=>{
   const id=btn.dataset.charm,info=CHARM_INFO[id],owned=!!meta.charms[id];
-  btn.classList.toggle("unlocked",owned);btn.disabled=owned;
-  const small=btn.querySelector("small");small.textContent=owned?"解放済":`${info.cost}個`;
+  btn.classList.toggle("unlocked",owned);btn.classList.toggle("selected",owned&&selectedEquip===id);btn.disabled=false;
+  const small=btn.querySelector("small");small.textContent=owned?(selectedEquip===id?`装備中 ・ ${info.desc}`:`${info.desc} ・ 装備する`):`${info.desc} ・ ${info.cost}個`;
+ });
+ document.querySelectorAll(".researchBtn").forEach(btn=>{
+  const id=btn.dataset.research,info=RESEARCH_INFO[id],lv=researchLevel(id),maxed=lv>=info.max,cost=researchCost(id);
+  btn.classList.toggle("maxed",maxed);btn.disabled=maxed;
+  const small=btn.querySelector("small"),effect=researchEffectText(id,lv);small.textContent=maxed?`${effect} ・ Lv.${lv} MAX`:`${effect} ・ Lv.${lv}/${info.max} ・ 次${cost}個`;
  });
  refreshLoadoutUI();
 }
@@ -713,7 +760,7 @@ function refreshLoadoutUI(){
 }
 function selectDifficulty(id){if(playing||!DIFFICULTY_INFO[id])return;selectedDifficulty=id;meta.selectedDifficulty=id;lives=maxLife();saveMeta();refreshLoadoutUI();updateUI();const d=difficulty();showToast(`${d.icon} ${d.name}モード：ライフ${d.maxLife}`,1000)}
 function selectStyle(id){if(playing||!STYLE_INFO[id])return;selectedStyle=id;meta.selectedStyle=id;saveMeta();refreshLoadoutUI();showToast(`${STYLE_INFO[id].icon} ${STYLE_INFO[id].name}メンダコで出発！`,900)}
-function selectEquip(id){if(playing)return;if(id!=="none"&&!meta.charms[id]){showToast("先にしんじゅ交換所で解放しよう",1100);return}selectedEquip=id;meta.selectedEquip=id;saveMeta();refreshLoadoutUI();showToast(id==="none"?"🐚 装備なし":`🎒 ${id==="bubble"?"初期バリア":id==="current"?"潮のお守り":"星のお守り"}を装備`,900)}
+function selectEquip(id){if(playing)return;if(id!=="none"&&!meta.charms[id]){showToast("先にしんじゅ交換所で解放しよう",1100);return}selectedEquip=id;meta.selectedEquip=id;saveMeta();refreshMetaUI();const info=CHARM_INFO[id];showToast(id==="none"?"🐚 装備なし":`🎒 ${info?.name||"お守り"}を装備`,900)}
 function formatStars(n){return "★".repeat(n)+"☆".repeat(Math.max(0,5-n))}
 function renderDex(){
  ui.dexGrid.innerHTML="";let known=0;
@@ -734,12 +781,18 @@ function updateRunTimer(){const remain=Math.max(0,RUN_SECONDS-runTime),m=Math.fl
 function fmtTime(sec){const m=Math.floor(sec/60),s=Math.floor(sec%60);return `${m}:${String(s).padStart(2,"0")}`}
 
 function buyCharm(id){
- if(playing||!CHARM_INFO[id]||meta.charms[id])return;
+ if(playing||!CHARM_INFO[id])return;
+ if(meta.charms[id]){selectEquip(id);return}
  const cost=CHARM_INFO[id].cost;
  if(meta.pearls<cost){showToast(`🦪 しんじゅがあと${cost-meta.pearls}個必要`,1200);return}
- meta.pearls-=cost;meta.charms[id]=true;saveMeta();refreshMetaUI();showToast("✨ お守りを解放した！",1200);beep(880,.08,"sine",.05);
+ meta.pearls-=cost;meta.charms[id]=true;selectedEquip=id;meta.selectedEquip=id;saveMeta();refreshMetaUI();showToast(`✨ ${CHARM_INFO[id].name}を解放して装備！`,1300);beep(880,.08,"sine",.05);
 }
-function dashCooldownMax(){return 4.9*(selectedEquip==="current"?.82:1)*(STYLE_INFO[selectedStyle].dashCd||1)*Math.pow(.88,upgrades.agility||0)}
+function buyResearch(id){
+ if(playing||!RESEARCH_INFO[id])return;const info=RESEARCH_INFO[id],lv=researchLevel(id);if(lv>=info.max)return;const cost=researchCost(id);
+ if(meta.pearls<cost){showToast(`🦪 しんじゅがあと${cost-meta.pearls}個必要`,1200);return}
+ meta.pearls-=cost;meta.research[id]=lv+1;saveMeta();refreshMetaUI();showToast(`${info.icon} ${info.name} Lv.${lv+1}！`,1100);beep(920+lv*6,.07,"sine",.045);
+}
+function dashCooldownMax(){return 4.9*(selectedEquip==="current"?.82:1)*(STYLE_INFO[selectedStyle].dashCd||1)*Math.pow(.88,upgrades.agility||0)*(1-researchLevel("dash")*.004)}
 function updateDashUI(){
  const ready=dashCooldown<=0&&!pausedForUpgrade&&!pausedForRoute&&!manualPaused&&playing;
  ui.dashBtn.classList.toggle("ready",ready);ui.dashBtn.classList.toggle("cooling",!ready);
@@ -773,7 +826,7 @@ function discoverType(type){
 }
 function comboMultiplier(){return 1+Math.min(2,Math.floor(Math.max(0,combo-1)/5)*.25)}
 function registerEat(c,basePts){
- combo=comboTimer>0?combo+1:1;comboTimer=1.95+(upgrades.rhythm||0)*.35;maxCombo=Math.max(maxCombo,combo);
+ combo=comboTimer>0?combo+1:1;comboTimer=1.95+(upgrades.rhythm||0)*.35+researchLevel("combo")*.015+(selectedEquip==="rhythm"?.45:0);maxCombo=Math.max(maxCombo,combo);
  let mult=comboMultiplier();if(fever>0)mult*=2;if(eventState?.kind==="sparkle")mult*=1.25;
  const gained=Math.round(basePts*mult);score+=gained;
  if(combo>1)showFloatText(c.x,c.y-c.r*.9,`+${gained}  x${mult.toFixed(mult%1?2:0)}`);
@@ -838,7 +891,7 @@ function spawnBonusCreature(){
  const z=currentZone(),small=z===0?["shrimp","clownfish","bluefish","jelly","seahorse"]:z===1?["angelfish","bluefish","jelly","lantern","puffer"]:["lantern","jelly","anglerSmall","squid","seaAngel"];
  const type=small[Math.floor(rand(0,small.length))],ratio=.40,r=player.r*ratio,fromLeft=Math.random()<.5;
  const x=fromLeft?-r-18:W+r+18,y=rand(gameTop()+55,gameBottom()-55),a=Math.atan2(H*.52-y,W*.5-x)+rand(-.25,.25),speed=rand(42,62);
- creatures.push({x,y,r,ratio,rare:false,bonus:true,type,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,phase:rand(0,6.28),dead:false,nearMiss:false});
+ creatures.push({x,y,r,ratio,rare:false,bonus:true,type,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,phase:rand(0,6.28),motion:"dart",motionTimer:rand(.45,1.0),dead:false,nearMiss:false});
 }
 function spawnSchool(count=6){for(let i=0;i<count;i++)spawnCreature()}
 function startRandomEvent(){
@@ -850,7 +903,8 @@ function startRandomEvent(){
   {kind:"current",icon:"🌊",name:"追い潮フィーバー",time:7},
   {kind:"parade",icon:"🐟",name:"おさかなパレード",time:7},
   {kind:"school",icon:"🐠",name:"おさかなの群れ",time:7},
-  {kind:"bonus",icon:"🌟",name:"ラッキー生物を追え！",time:9}
+  {kind:"bonus",icon:"🌟",name:"ラッキー生物を追え！",time:9},
+  {kind:"migration",icon:"💫",name:"きらきら回遊",time:8}
  ];
  if(currentZone()>=1)events.push({kind:"chest",icon:"🧰",name:"海底のお宝",time:12});
  const choices=events.filter(e=>e.kind!==lastEventKind),picked=choices[Math.floor(Math.random()*choices.length)];
@@ -858,6 +912,7 @@ function startRandomEvent(){
  if(eventState.kind==="chest")spawnPickup("chest");
  if(eventState.kind==="school")spawnSchool(compactViewport()?5:7);
  if(eventState.kind==="bonus")spawnBonusCreature();
+ if(eventState.kind==="migration"){spawnSchool(compactViewport()?4:6);for(const c of creatures.slice(-(compactViewport()?4:6))){c.motion="weave";c.rare=c.rare||Math.random()<.18}}
  ui.eventBanner.textContent=`${eventState.icon} ${eventState.name}`;ui.eventBanner.classList.add("show");
  showToast(`${eventState.icon} ${eventState.name}！`,1300);
 }
@@ -933,7 +988,7 @@ function spawnCreature(){
  }
  if((performance.now()-started)<4000&&ratio>1.35)ratio=rand(.3,.9);
 
- const rare=Math.random()<(.045+upgrades.lucky*.025+(selectedEquip==="star"?.018:0)+STYLE_INFO[selectedStyle].rare)*(eventState?.kind==="sparkle"?3:1);
+ const rare=Math.random()<(.045+upgrades.lucky*.025+(selectedEquip==="star"?.018:0)+STYLE_INFO[selectedStyle].rare+researchLevel("rare")*.001)*(eventState?.kind==="sparkle"?3:1);
  if(rare)ratio=.42;
  // やさしいモードは危険な敵を同時に複数出さず、挟み撃ちを防ぐ。
  if(difficulty().noPincer&&ratio>=1.06&&creatures.some(c=>!c.dead&&isDangerous(c)))ratio=rand(.28,.72);
@@ -947,21 +1002,25 @@ function spawnCreature(){
 
  const a=Math.atan2(H*.55-y,W*.5-x)+rand(-.7,.7),speed=rand(26,58)*(1+pressure*.16)*(ratio>=1.06?difficulty().dangerSpeed:1);
  const small=z===0?["shrimp","clownfish","bluefish","jelly","crab","seahorse"]
-                  :z===1?["shrimp","angelfish","bluefish","jelly","lantern","puffer"]
-                        :["shrimp","lantern","jelly","anglerSmall","squid","seaAngel"];
+                  :z===1?["shrimp","angelfish","bluefish","jelly","lantern","puffer","fireflySquid"]
+                        :["shrimp","lantern","jelly","anglerSmall","squid","seaAngel","nautilus","fireflySquid"];
  const danger=z===0?["barracuda","shark"]:z===1?["shark","orca"]:["shark","orca","giantSquid"];
  const type=rare?"starJelly":(ratio<1.06?small[Math.floor(rand(0,small.length))]:danger[Math.floor(rand(0,danger.length))]);
- creatures.push({x,y,r,ratio,rare,type,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,phase:rand(0,6.28),dead:false,nearMiss:false});
+ const motion=ratio<1.06?["drift","weave","dart"][Math.floor(rand(0,3))]:"chase";
+ creatures.push({x,y,r,ratio,rare,type,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,phase:rand(0,6.28),motion,motionTimer:rand(.7,1.8),dead:false,nearMiss:false});
 }
 
 function startBoss(info=BOSS_SCHEDULE[nextBossIndex]){
  if(boss||!info)return;
  bossTriggered=true;eventState=null;ui.eventBanner.classList.remove("show");hazards=[];
  const y=clamp(H*.48,gameTop()+80,gameBottom()-80),r=(info.kind==="squid"?76:info.kind==="orca"?88:92)*worldScale;
- boss={x:W+130*worldScale,y,r,vx:-55,vy:0,time:info.total,total:info.total,mode:"chase",modeTimer:info.kind==="orca"?1.25:1.8,chargeAngle:0,nearMissReady:true,kind:info.kind,final:!!info.final,name:info.name,reward:info.reward,alpha:1,type:info.kind==="squid"?"giantSquid":info.kind};
+ const patternChoices=info.kind==="shark"?(selectedDifficulty==="easy"?["standard","calm"]:["standard","calm","burst"]):info.kind==="squid"?["focus","scatter"]:(selectedDifficulty==="easy"?["standard","calm"]:["standard","calm","rhythm"]);
+ const pattern=patternChoices[Math.floor(rand(0,patternChoices.length))];
+ boss={x:W+130*worldScale,y,r,vx:-55,vy:0,time:info.total,total:info.total,mode:"chase",modeTimer:info.kind==="orca"?1.25:1.8,chargeAngle:0,nearMissReady:true,kind:info.kind,final:!!info.final,name:info.name,reward:info.reward,pattern,alpha:1,type:info.kind==="squid"?"giantSquid":info.kind};
  if(info.kind==="squid"){boss.x=W*.78;boss.y=gameTop()+90*worldScale;boss.vx=-20;boss.vy=25}
+ const patternName={standard:"いつもの型",calm:"ゆったり型",burst:"連続型",focus:"ねらいうち型",scatter:"ばらまき型",rhythm:"リズム型"}[pattern]||"変化型";
  ui.bossbar.classList.add("show");ui.bossLabel.textContent=`${info.icon} ${info.name}${info.final?"：ラスボス！":""}`;ui.bossMeter.style.width="100%";
- showToast(`${info.icon} ${info.name} 出現！`,1700);beep(info.final?75:110,.26,"sawtooth",.055);updateRunTimer();
+ showToast(`${info.icon} ${info.name} 出現！ ${patternName}`,1800);beep(info.final?75:110,.26,"sawtooth",.055);updateRunTimer();
 }
 function spawnInkHazards(){
  const fallback=[
@@ -991,7 +1050,7 @@ function updateBoss(dt){
    const a=Math.atan2(player.y-boss.y,player.x-boss.x),chase=32*difficulty().dangerChase;boss.vx+=Math.cos(a)*chase*dt;boss.vy+=Math.sin(a)*chase*dt;
    if(boss.modeTimer<=0){
     boss.mode="inkWarning";boss.modeTimer=difficulty().squidWarning;
-    const pool=[{x:player.x,y:player.y},{x:clamp(player.x+rand(-130,130)*worldScale,50,W-50),y:clamp(player.y+rand(-110,110)*worldScale,gameTop()+50,gameBottom()-50)},{x:rand(50,W-50),y:rand(gameTop()+50,gameBottom()-50)},{x:rand(50,W-50),y:rand(gameTop()+50,gameBottom()-50)}];
+    const pool=boss.pattern==="scatter"?[{x:rand(50,W-50),y:rand(gameTop()+50,gameBottom()-50)},{x:rand(50,W-50),y:rand(gameTop()+50,gameBottom()-50)},{x:rand(50,W-50),y:rand(gameTop()+50,gameBottom()-50)},{x:player.x,y:player.y}]:[{x:player.x,y:player.y},{x:clamp(player.x+rand(-130,130)*worldScale,50,W-50),y:clamp(player.y+rand(-110,110)*worldScale,gameTop()+50,gameBottom()-50)},{x:rand(50,W-50),y:rand(gameTop()+50,gameBottom()-50)},{x:rand(50,W-50),y:rand(gameTop()+50,gameBottom()-50)}];
     boss.targets=pool.slice(0,difficulty().inkTargets);beep(180,.12,"sawtooth",.035)
    }
   }else if(boss.mode==="inkWarning"){
@@ -1001,13 +1060,13 @@ function updateBoss(dt){
  }else{
   const final=boss.kind==="orca";
   if(boss.mode==="chase"){
-   const a=Math.atan2(player.y-boss.y,player.x-boss.x);boss.vx+=Math.cos(a)*(final?90:64)*dt;boss.vy+=Math.sin(a)*(final?90:64)*dt;
-   if(boss.modeTimer<=0){boss.mode="warning";boss.modeTimer=bossWarningDuration(final);boss.chargeAngle=Math.atan2(player.y-boss.y,player.x-boss.x);boss.vx*=.22;boss.vy*=.22;boss.nearMissReady=true;beep(185,.12,"sawtooth",.035)}
+   const a=Math.atan2(player.y-boss.y,player.x-boss.x),patternAccel=boss.pattern==="calm"?.90:boss.pattern==="burst"?1.08:1;boss.vx+=Math.cos(a)*(final?90:64)*patternAccel*dt;boss.vy+=Math.sin(a)*(final?90:64)*patternAccel*dt;
+   if(boss.modeTimer<=0){boss.mode="warning";boss.modeTimer=bossWarningDuration(final)+(boss.pattern==="calm"?.10:boss.pattern==="burst"&&selectedDifficulty!=="easy"?-.04:0);boss.chargeAngle=Math.atan2(player.y-boss.y,player.x-boss.x);boss.vx*=.22;boss.vy*=.22;boss.nearMissReady=true;beep(185,.12,"sawtooth",.035)}
   }else if(boss.mode==="warning"){
    boss.vx*=Math.pow(.08,dt);boss.vy*=Math.pow(.08,dt);if(boss.modeTimer<=0){boss.mode="charge";boss.modeTimer=final?.44:.55;const spd=(compactViewport()?(final?390:320):(final?460:380));boss.vx=Math.cos(boss.chargeAngle)*spd;boss.vy=Math.sin(boss.chargeAngle)*spd;beep(90,.11,"square",.045)}
   }else if(boss.mode==="charge"){
-   if(boss.modeTimer<=0){if(final)spawnWave(boss.x,boss.y);boss.mode="rest";boss.modeTimer=final?.32:.55;boss.vx*=.25;boss.vy*=.25}
-  }else{boss.vx*=Math.pow(.18,dt);boss.vy*=Math.pow(.18,dt);if(boss.modeTimer<=0){boss.mode="chase";boss.modeTimer=final?.72:rand(1.2,1.65)}}
+   if(boss.modeTimer<=0){if(final)spawnWave(boss.x,boss.y);boss.mode="rest";boss.modeTimer=(final?.32:.55)+(boss.pattern==="calm"?.20:boss.pattern==="burst"?-.14:boss.pattern==="rhythm"?-.08:0);boss.vx*=.25;boss.vy*=.25}
+  }else{boss.vx*=Math.pow(.18,dt);boss.vy*=Math.pow(.18,dt);if(boss.modeTimer<=0){boss.mode="chase";boss.modeTimer=(final?.72:rand(1.2,1.65))+(boss.pattern==="calm"?.18:boss.pattern==="rhythm"?-.06:0)}}
   const cap=boss.mode==="charge"?500:(compactViewport()?(final?165:135):(final?195:155)),sp=Math.hypot(boss.vx,boss.vy);if(sp>cap){boss.vx=boss.vx/sp*cap;boss.vy=boss.vy/sp*cap}
  }
  boss.x=clamp(boss.x+boss.vx*dt,-boss.r,W+boss.r);boss.y=clamp(boss.y+boss.vy*dt,gameTop()+boss.r*.55,gameBottom()-boss.r*.55);
@@ -1019,7 +1078,7 @@ function updateBoss(dt){
 }
 
 function isEdible(c){
- return !!c.rare || player.r >= c.r*(1.06-upgrades.appetite*.055-STYLE_INFO[selectedStyle].appetite);
+ return !!c.rare || player.r >= c.r*(1.06-upgrades.appetite*.055-STYLE_INFO[selectedStyle].appetite-(selectedEquip==="gourmet"?.045:0));
 }
 function isDangerous(c){
  return !isEdible(c);
@@ -1038,14 +1097,14 @@ function update(dt){
  if(mission?.type==="survive"){mission.progress+=dt;updateMissionUI();if(mission.progress>=mission.target)completeMission()}
  eventTimer-=dt;if(!eventState&&eventTimer<=0&&!boss)startRandomEvent();
  if(eventState){eventState.time-=dt;eventElapsed+=dt;if(eventState.kind==="treasure"&&eventElapsed>2.2){eventElapsed=0;spawnPickup()}else if(eventState.kind==="school"&&eventElapsed>2.35){eventElapsed=0;spawnSchool(compactViewport()?2:3)}if(eventState.time<=0)endRandomEvent()}
- itemTimer-=dt;if(itemTimer<=0){if(Math.random()<clamp(.58+upgrades.treasure*.12+STYLE_INFO[selectedStyle].treasure,.18,.95))spawnPickup();itemTimer=rand(12,18)/(1+upgrades.treasure*.25)}
+ itemTimer-=dt;if(itemTimer<=0){if(Math.random()<clamp(.58+upgrades.treasure*.12+STYLE_INFO[selectedStyle].treasure+(selectedEquip==="treasure"?.16:0),.18,.95))spawnPickup();itemTimer=rand(12,18)/(1+upgrades.treasure*.25+(selectedEquip==="treasure"?.18:0))}
  updateComboUI();updateBuffUI();
 
  const targetX=pointer.x;
  const fingerOffset=touchFingerOffset();
  const targetY=clamp(pointer.y-fingerOffset,gameTop()+player.r,gameBottom()-player.r);
  const dx=targetX-player.x,dy=targetY-player.y,dd=Math.hypot(dx,dy);
- const maxSpeed=(195+stageIdx*8)*moveViewportFactor()*(1+upgrades.speed*.15)*(1+STYLE_INFO[selectedStyle].speed)*(fever>0?1.12:1)*(eventState?.kind==="current"?1.10:1);
+ const maxSpeed=(195+stageIdx*8)*moveViewportFactor()*(1+upgrades.speed*.15)*(1+STYLE_INFO[selectedStyle].speed)*(1+researchLevel("fins")*.005)*(fever>0?1.12:1)*(eventState?.kind==="current"?1.10:1);
  if(dashActive<=0){
   if(dd>4){
    const desired=Math.min(maxSpeed,dd*3.3);
@@ -1063,13 +1122,18 @@ function update(dt){
 
  if(!boss){
   spawnAcc+=dt;
-  const every=Math.max(.23,.54-(now-started)/1000*.0040)*(compactViewport()?1.10:1)*(eventState?.kind==="plankton"?.55:eventState?.kind==="parade"?.72:eventState?.kind==="school"?.62:1);
+  const every=Math.max(.23,.54-(now-started)/1000*.0040)*(compactViewport()?1.10:1)*(eventState?.kind==="plankton"?.55:eventState?.kind==="parade"?.72:eventState?.kind==="school"?.62:eventState?.kind==="migration"?.70:1);
   while(spawnAcc>every){spawnAcc-=every;spawnCreature()}
  }
 
  for(const c of creatures){
   c.phase+=dt*2.2;
   const d=dist(c,player);
+  if(!isDangerous(c)){
+   const motion=c.motion||"drift";
+   if(motion==="weave"){const sp=Math.max(1,Math.hypot(c.vx,c.vy)),px=-c.vy/sp,py=c.vx/sp,wave=Math.sin(c.phase*2.1)*22;c.vx+=px*wave*dt;c.vy+=py*wave*dt}
+   else if(motion==="dart"){c.motionTimer=(Number(c.motionTimer)||.8)-dt;if(c.motionTimer<=0){const sp=Math.max(1,Math.hypot(c.vx,c.vy));c.vx+=c.vx/sp*rand(22,38);c.vy+=c.vy/sp*rand(22,38);c.motionTimer=rand(1.0,2.0)}}
+  }
   if(isDangerous(c)&&d<Math.max(220,c.r*5.2)){
    const a=Math.atan2(player.y-c.y,player.x-c.x);
    const pressure=clamp(runTime/RUN_SECONDS,0,1);const chase=(26+pressure*12)*difficulty().dangerChase;c.vx+=Math.cos(a)*chase*dt;c.vy+=Math.sin(a)*chase*dt;
@@ -1089,8 +1153,8 @@ function update(dt){
     c.dead=true;
     const pts=c.rare?850:Math.round(100*(.7+c.r/player.r)*10);
     registerEat(c,pts);eaten+=c.rare?3:1;
-    burst(c.x,c.y,c.rare?"⭐":"✨",c.rare?11:6);
-    beep(c.rare?930:640+stageIdx*30,.07,"sine",c.rare?.07:.04);
+    burst(c.x,c.y,c.type==="fireflySquid"?"💫":c.type==="nautilus"?"🐚":c.rare?"⭐":"✨",c.rare?11:6);
+    beep(c.rare?930:640+stageIdx*30+Math.min(combo,20)*6,.07,"sine",c.rare?.07:.04);
     if(c.rare&&Math.random()<.15)spawnPickup();
     checkGrowth();
    }else if(player.inv<=0){
@@ -1252,10 +1316,12 @@ function cuteCrab(c){
  tinyHighlight(-r*.2,-r*.25,r*.16);eye(-r*.2,-r*.08,Math.max(1.2,r*.055));eye(r*.2,-r*.08,Math.max(1.2,r*.055));blush(-r*.38,r*.08,Math.max(1.4,r*.075));blush(r*.38,r*.08,Math.max(1.4,r*.075));smile(0,r*.08,Math.max(1.8,r*.08));ctx.restore();
 }
 function cuteSquid(c){
- const r=c.r;ctx.save();ctx.translate(c.x,c.y);lineStyle(Math.max(1.05,r*.05),"#685d65");ctx.fillStyle=c.type==="giantSquid"?"#c8a6dc":"#fff0dd";
+ const r=c.r;ctx.save();ctx.translate(c.x,c.y);lineStyle(Math.max(1.05,r*.05),"#685d65");ctx.fillStyle=c.type==="giantSquid"?"#c8a6dc":c.type==="fireflySquid"?"#b9f3f0":"#fff0dd";
  ctx.beginPath();ctx.moveTo(0,-r*.9);ctx.quadraticCurveTo(r*.6,-r*.35,r*.58,r*.38);ctx.quadraticCurveTo(0,r*.64,-r*.58,r*.38);ctx.quadraticCurveTo(-r*.6,-r*.35,0,-r*.9);ctx.fill();ctx.stroke();
  for(let i=-2;i<=2;i++){ctx.beginPath();ctx.moveTo(i*r*.17,r*.4);ctx.bezierCurveTo(i*r*.1,r*.68,(i+.22)*r*.13,r*.82,(i+.1)*r*.15,r*1.0);ctx.stroke()}
- tinyHighlight(-r*.18,-r*.5,r*.18);eye(-r*.18,r*.02,Math.max(1.2,r*.055));eye(r*.18,r*.02,Math.max(1.2,r*.055));blush(-r*.34,r*.18,Math.max(1.3,r*.07));blush(r*.34,r*.18,Math.max(1.3,r*.07));smile(0,r*.2,Math.max(1.8,r*.08));ctx.restore();
+ tinyHighlight(-r*.18,-r*.5,r*.18);eye(-r*.18,r*.02,Math.max(1.2,r*.055));eye(r*.18,r*.02,Math.max(1.2,r*.055));blush(-r*.34,r*.18,Math.max(1.3,r*.07));blush(r*.34,r*.18,Math.max(1.3,r*.07));smile(0,r*.2,Math.max(1.8,r*.08));
+ if(c.type==="fireflySquid"){ctx.fillStyle="rgba(255,255,190,.95)";for(const [gx,gy] of [[-.28,-.2],[.3,-.18],[0,.35]]){ctx.beginPath();ctx.arc(gx*r,gy*r,Math.max(1.4,r*.055),0,Math.PI*2);ctx.fill()}}
+ ctx.restore();
 }
 function cuteSeahorse(c){
  const r=c.r;ctx.save();ctx.translate(c.x,c.y);lineStyle(Math.max(1.05,r*.05),"#735b4e");ctx.fillStyle="#ffd36e";
@@ -1270,6 +1336,14 @@ function cutePuffer(c){
 function cuteSeaAngel(c){
  const r=c.r;ctx.save();ctx.translate(c.x,c.y);lineStyle(Math.max(1.0,r*.045),"#6a6578");ctx.fillStyle="#eaf7ff";ctx.beginPath();ctx.ellipse(0,0,r*.32,r*.7,0,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillStyle="#b7ddff";
  for(const s of [-1,1]){ctx.beginPath();ctx.ellipse(s*r*.38,-r*.02,r*.3,r*.5,s*.45,0,Math.PI*2);ctx.fill();ctx.stroke()}eye(-r*.09,-r*.16,Math.max(1,r*.04));eye(r*.09,-r*.16,Math.max(1,r*.04));blush(-r*.18,r*.0,Math.max(1.2,r*.055));blush(r*.18,0,Math.max(1.2,r*.055));ctx.restore();
+}
+function cuteNautilus(c){
+ const r=c.r;ctx.save();ctx.translate(c.x,c.y);ctx.rotate(Math.atan2(c.vy,c.vx));lineStyle(Math.max(1.05,r*.05),"#6f5d58");
+ ctx.fillStyle="#f6cfa9";ctx.beginPath();ctx.arc(-r*.12,0,r*.64,0,Math.PI*2);ctx.fill();ctx.stroke();
+ ctx.strokeStyle="#cf9c83";ctx.lineWidth=Math.max(1,r*.045);ctx.beginPath();ctx.arc(-r*.12,0,r*.38,.2,Math.PI*2.1);ctx.stroke();ctx.beginPath();ctx.arc(-r*.12,0,r*.18,.2,Math.PI*2.1);ctx.stroke();
+ ctx.fillStyle="#f3e5d6";ctx.beginPath();ctx.ellipse(r*.48,r*.05,r*.42,r*.35,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle="#6f5d58";ctx.stroke();
+ for(let i=-2;i<=2;i++){ctx.beginPath();ctx.moveTo(r*.66,i*r*.09);ctx.quadraticCurveTo(r*.92,i*r*.12+r*.08,r*.96,i*r*.1);ctx.stroke()}
+ eye(r*.48,-r*.08,Math.max(1.15,r*.05));blush(r*.56,r*.08,Math.max(1.3,r*.065));ctx.restore();
 }
 function cuteAngler(c){
  const r=c.r;orient(c.x,c.y,Math.atan2(c.vy,c.vx),()=>{
@@ -1317,7 +1391,8 @@ function drawCreature(c){
  if(c.type==="puffer")return cutePuffer(c);
  if(c.type==="seaAngel")return cuteSeaAngel(c);
  if(c.type==="lantern"||c.type==="anglerSmall")return cuteAngler(c);
- if(c.type==="squid"||c.type==="giantSquid")return cuteSquid(c);
+ if(c.type==="squid"||c.type==="giantSquid"||c.type==="fireflySquid")return cuteSquid(c);
+ if(c.type==="nautilus")return cuteNautilus(c);
  if(c.type==="shark"||c.type==="barracuda")return cuteShark(c,false);
  if(c.type==="orca")return cuteFish(c.x,c.y,c.r,Math.atan2(c.vy,c.vx),"#5d6872","#414c56","#fff");
  return cuteFish(c.x,c.y,c.r,Math.atan2(c.vy,c.vx));
@@ -1461,6 +1536,7 @@ musicGameBtn.addEventListener("click",e=>{e.preventDefault();e.stopPropagation()
 pauseBtn.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();pauseGame()});
 resumeBtn.addEventListener("click",resumeGame);
 document.querySelectorAll(".charmBtn").forEach(b=>b.addEventListener("click",()=>buyCharm(b.dataset.charm)));
+document.querySelectorAll(".researchBtn").forEach(b=>b.addEventListener("click",()=>buyResearch(b.dataset.research)));
 document.addEventListener("keydown",e=>{
  if((e.code==="Enter"||e.code==="Space")&&!playing){e.preventDefault();startGame();return}
  if(playing&&(e.code==="Escape"||e.code==="KeyP")){e.preventDefault();manualPaused?resumeGame():pauseGame();return}
